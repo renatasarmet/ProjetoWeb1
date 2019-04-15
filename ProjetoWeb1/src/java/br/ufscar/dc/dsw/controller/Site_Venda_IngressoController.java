@@ -8,6 +8,7 @@ package br.ufscar.dc.dsw.controller;
 import br.ufscar.dc.dsw.dao.Site_Venda_IngressoDAO;
 import br.ufscar.dc.dsw.model.Site_Venda_Ingresso;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,6 +47,9 @@ public class Site_Venda_IngressoController extends HttpServlet {
                 case "/site_insercao":
                     insere(request, response);
                     break;
+                case "/site_lista":
+                    lista(request, response);
+                    break;
                 default:
                     break;
             }
@@ -59,6 +63,7 @@ public class Site_Venda_IngressoController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("site_venda_ingresso/formulario.jsp");
         dispatcher.forward(request, response);
     }
+
     private void insere(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         request.setCharacterEncoding("UTF-8");
@@ -68,9 +73,17 @@ public class Site_Venda_IngressoController extends HttpServlet {
         String url = request.getParameter("url");
         String nome = request.getParameter("nome");
         String telefone = request.getParameter("telefone");
-        Site_Venda_Ingresso site = new Site_Venda_Ingresso(email,senha,url,nome,telefone);
+        Site_Venda_Ingresso site = new Site_Venda_Ingresso(email, senha, url, nome, telefone);
         dao.insert(site);
         response.sendRedirect("site_cadastro");
+    }
+
+    private void lista(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<Site_Venda_Ingresso> listaSites = dao.getAll();
+        request.setAttribute("listaSites", listaSites);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("site_venda_ingresso/lista.jsp");
+        dispatcher.forward(request, response);
     }
 
 }

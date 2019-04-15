@@ -9,7 +9,11 @@ import br.ufscar.dc.dsw.model.Site_Venda_Ingresso;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -45,6 +49,31 @@ public class Site_Venda_IngressoDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+        public List<Site_Venda_Ingresso> getAll() {
+        List<Site_Venda_Ingresso> listaSite = new ArrayList<>();
+        String sql = "SELECT * FROM Site_Venda_Ingresso";
+        try {
+            Connection conn = this.getConnection();
+            Statement statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String email = resultSet.getString("email");
+                String senha = resultSet.getString("senha");
+                String url = resultSet.getString("url");
+                String nome = resultSet.getString("nome");
+                String telefone = resultSet.getString("telefone");
+                Site_Venda_Ingresso site = new Site_Venda_Ingresso(id, email, senha, url, nome,telefone);
+                listaSite.add(site);
+            }
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaSite;
     }
 
 }

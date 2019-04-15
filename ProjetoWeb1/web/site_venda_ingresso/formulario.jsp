@@ -20,9 +20,6 @@
             <form action="insercao" method="post">
         </c:if>
         <table border="1" cellpadding="5">
-            <c:if test="${site != null}">
-                <input type="hidden" name="id" value="<c:out value='${site.id}' />" />
-            </c:if>
             <tr>
                 <th>Email: </th>
                 <td>

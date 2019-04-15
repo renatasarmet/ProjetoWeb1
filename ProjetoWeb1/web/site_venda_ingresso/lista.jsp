@@ -23,7 +23,8 @@
                 <th>Senha</th>
                 <th>Url</th>
                 <th>Nome</th>
-                <th>Telefone </th>
+                <th>Telefone</th>
+                <th>Opçoes</th>
             </tr>
             <c:forEach var="site" items="${listaSites}">
                 <tr>
@@ -33,6 +34,7 @@
                 <td><c:out value="${site.url}" /></td>
                 <td><c:out value="${site.nome}" /></td>
                 <td><c:out value="${site.telefone}" /></td>
+                <td><a href="site_edicao?id=<c:out value='${site.id}' />">Ediçao</a></td>
                 </tr>
             </c:forEach>
         </table>

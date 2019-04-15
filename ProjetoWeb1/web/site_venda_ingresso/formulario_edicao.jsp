@@ -13,13 +13,17 @@
     </head>
     <body>
     <center>
-        <h1>Cadastro de site de venda de ingresso</h1>
+        <h1>Ediiç�o de site de venda de ingresso</h1>
     </center>
     <div align="center">
-        <c:if test="${site == null}">
-            <form action="site_insercao" method="post">
+        <c:if test="${site != null}">
+            <form action="site_atualizacao" method="post">
         </c:if>
         <table border="1" cellpadding="5">
+            </caption>
+            <c:if test="${site != null}">
+                <input type="hidden" name="id" value="<c:out value='${site.id}' />" />
+            </c:if>
             <tr>
                 <th>Email: </th>
                 <td>

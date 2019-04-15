@@ -50,6 +50,12 @@ public class Site_Venda_IngressoController extends HttpServlet {
                 case "/site_lista":
                     lista(request, response);
                     break;
+                case "/site_edicao":
+                    apresentaFormEdicao(request, response);
+                    break;
+                case "/site_atualizacao":
+                    atualize(request, response);
+                    break;
                 default:
                     break;
             }
@@ -75,7 +81,7 @@ public class Site_Venda_IngressoController extends HttpServlet {
         String telefone = request.getParameter("telefone");
         Site_Venda_Ingresso site = new Site_Venda_Ingresso(email, senha, url, nome, telefone);
         dao.insert(site);
-        response.sendRedirect("site_cadastro");
+        response.sendRedirect("site_lista");
     }
 
     private void lista(HttpServletRequest request, HttpServletResponse response)
@@ -84,6 +90,29 @@ public class Site_Venda_IngressoController extends HttpServlet {
         request.setAttribute("listaSites", listaSites);
         RequestDispatcher dispatcher = request.getRequestDispatcher("site_venda_ingresso/lista.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Site_Venda_Ingresso site = dao.get(id);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("site_venda_ingresso/formulario_edicao.jsp");
+        request.setAttribute("site", site);
+        dispatcher.forward(request, response);
+    }
+
+    private void atualize(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        request.setCharacterEncoding("UTF-8");
+        int id = Integer.parseInt(request.getParameter("id"));
+        String email = request.getParameter("email");
+        String senha = request.getParameter("senha");
+        String url = request.getParameter("url");
+        String nome = request.getParameter("nome");
+        String telefone = request.getParameter("telefone");
+        Site_Venda_Ingresso site = new Site_Venda_Ingresso(id, email, senha, url, nome, telefone);
+        dao.update(site);
+        response.sendRedirect("site_lista");
     }
 
 }

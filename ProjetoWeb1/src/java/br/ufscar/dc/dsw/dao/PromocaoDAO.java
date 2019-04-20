@@ -120,8 +120,6 @@ public class PromocaoDAO {
             statement.setString(5, promo.getData_sessao());
             statement.setString(6, promo.getHorario_sessao());
             statement.setInt(7, promo.getId());
-            System.out.println("AAAAAAA");
-            System.out.println(promo.getId());
             statement.executeUpdate();
             statement.close();
             conn.close();

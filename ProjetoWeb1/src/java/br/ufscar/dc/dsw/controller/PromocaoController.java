@@ -151,8 +151,6 @@ public class PromocaoController extends HttpServlet {
     private void atualize(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ParseException {
         request.setCharacterEncoding("UTF-8");
-        log("entrei no atualize id");
-        log(request.getParameter("id"));
         int id = Integer.parseInt(request.getParameter("id"));
         String url = request.getParameter("url");
         String cnpj = request.getParameter("cnpj");
@@ -161,10 +159,7 @@ public class PromocaoController extends HttpServlet {
         String data_sessao =  request.getParameter("data_sessao");
         String horario_sessao =  request.getParameter("horario_sessao");
         Promocao promo = new Promocao(id,url,cnpj,nome,preco,data_sessao,horario_sessao);
-        log("sai no atualize url");
-        log(request.getParameter("url"));
         dao.update(promo);
-        log("sai msm");
         response.sendRedirect("lista");
     }
     

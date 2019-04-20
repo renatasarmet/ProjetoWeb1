@@ -36,8 +36,8 @@
                     <td><c:out value="${promo.nome}" /></td>
                     <td><c:out value="${promo.preco}" /></td>
                     <td><c:out value="${promo.data_sessao}" /></td>
-                    <td><a href="edicao?id=<c:out value='${promo.id}' />">Ediçao</a></td>
-                    <td><a href="remocao?id=<c:out value='${promo.id}' />"onclick="return confirm('Deseja excluir esse item?');">Remoçao</a></td>
+                    <td><a href="edicao?id=<c:out value='${promo.id}' />">Edição</a></td>
+                    <td><a href="remocao?id=<c:out value='${promo.id}' />"onclick="return confirm('Deseja excluir esse item?');">Remoção</a></td>
                 </tr>
             </c:forEach>
         </table>

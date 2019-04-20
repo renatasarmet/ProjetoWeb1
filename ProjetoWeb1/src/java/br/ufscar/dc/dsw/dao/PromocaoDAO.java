@@ -104,4 +104,18 @@ public class PromocaoDAO {
         }
         return promo;
     }
+    
+    public void delete(Promocao promo) {
+        String sql = "DELETE FROM Promocao where id = ?";
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, promo.getId());
+            statement.executeUpdate();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

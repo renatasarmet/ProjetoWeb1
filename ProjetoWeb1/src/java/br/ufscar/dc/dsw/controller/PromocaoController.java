@@ -59,6 +59,9 @@ public class PromocaoController extends HttpServlet {
                 case "lista":
                     lista(request, response);
                     break;
+                case "remocao":
+                    remove(request, response);
+                    break;
                 default:
                     break;
             }
@@ -132,6 +135,14 @@ public class PromocaoController extends HttpServlet {
         request.setAttribute("listaPromocao", listaPromocao);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/promocao_ingresso/lista.jsp");
         dispatcher.forward(request, response);
+    }
+    
+    private void remove(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Promocao promo = new Promocao(id);
+        dao.delete(promo);
+        response.sendRedirect("lista");
     }
     
     /**

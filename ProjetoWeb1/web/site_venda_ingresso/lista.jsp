@@ -16,7 +16,7 @@
     </center>
     <div align="center">
         <table border="1" cellpadding="5">
-            <caption><h2>Lista de Livros</h2></caption>
+            <caption><h2>Lista de sites de venda de ingresso</h2></caption>
             <tr>
                 <th>ID</th>
                 <th>Email</th>

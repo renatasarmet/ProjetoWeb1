@@ -8,7 +8,6 @@ package br.ufscar.dc.dsw.controller;
 import br.ufscar.dc.dsw.dao.PromocaoDAO;
 import br.ufscar.dc.dsw.model.Promocao;
 import java.io.IOException;
-import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -29,7 +28,6 @@ import javax.servlet.http.HttpServletResponse;
 public class PromocaoController extends HttpServlet {
 
     private PromocaoDAO dao;
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
     @Override
     public void init() {
         dao = new PromocaoDAO();
@@ -58,6 +56,12 @@ public class PromocaoController extends HttpServlet {
                     break;
                 case "lista":
                     lista(request, response);
+                    break;
+                case "edicao":
+                    apresentaFormEdicao(request, response);
+                    break;
+                case "atualizacao":
+                    atualize(request, response);
                     break;
                 case "remocao":
                     remove(request, response);
@@ -110,7 +114,6 @@ public class PromocaoController extends HttpServlet {
     private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/promocao_ingresso/formulario.jsp");
-        log("entrou funcao forms");
         dispatcher.forward(request, response);
     }
     
@@ -121,20 +124,48 @@ public class PromocaoController extends HttpServlet {
         String cnpj = request.getParameter("cnpj");
         String nome = request.getParameter("nome");
         Float preco = Float.parseFloat(request.getParameter("preco"));
-        Date data_sessao =  sdf.parse(request.getParameter("data_sessao"));
-        Promocao promocao = new Promocao(url,cnpj,nome,preco,data_sessao);
-        dao.insert(promocao);
+        String data_sessao =  request.getParameter("data_sessao");
+        String horario_sessao =  request.getParameter("horario_sessao");
+        Promocao promo = new Promocao(url,cnpj,nome,preco,data_sessao,horario_sessao);
+        dao.insert(promo);
         response.sendRedirect("lista");
     }
     
     private void lista(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Promocao> listaPromocao = dao.getAll();
-        log("PROMOCOES:");
-        log(listaPromocao.get(0).getUrl());
         request.setAttribute("listaPromocao", listaPromocao);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/promocao_ingresso/lista.jsp");
         dispatcher.forward(request, response);
+    }
+    
+    private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Promocao promo = dao.get(id);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/promocao_ingresso/formulario.jsp");
+        request.setAttribute("promocao", promo);
+        dispatcher.forward(request, response);
+    }
+
+    private void atualize(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ParseException {
+        request.setCharacterEncoding("UTF-8");
+        log("entrei no atualize id");
+        log(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("id"));
+        String url = request.getParameter("url");
+        String cnpj = request.getParameter("cnpj");
+        String nome = request.getParameter("nome");
+        Float preco = Float.parseFloat(request.getParameter("preco"));
+        String data_sessao =  request.getParameter("data_sessao");
+        String horario_sessao =  request.getParameter("horario_sessao");
+        Promocao promo = new Promocao(id,url,cnpj,nome,preco,data_sessao,horario_sessao);
+        log("sai no atualize url");
+        log(request.getParameter("url"));
+        dao.update(promo);
+        log("sai msm");
+        response.sendRedirect("lista");
     }
     
     private void remove(HttpServletRequest request, HttpServletResponse response)

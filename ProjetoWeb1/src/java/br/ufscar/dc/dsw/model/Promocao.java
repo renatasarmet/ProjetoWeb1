@@ -19,27 +19,30 @@ public class Promocao {
     private String cnpj;
     private String nome;
     private float preco;
-    private Date data_sessao;
+    private String data_sessao;
+    private String horario_sessao;
 
     public Promocao(int id) {
         this.id = id;
     }
 
-    public Promocao(String url, String cnpj, String nome, float preco, Date data_sessao) {
+    public Promocao(String url, String cnpj, String nome, float preco, String data_sessao, String horario_sessao) {
         this.url = url;
         this.cnpj = cnpj;
         this.nome = nome;
         this.preco = preco;
         this.data_sessao = data_sessao;
+        this.horario_sessao = horario_sessao;
     }
 
-    public Promocao(int id, String url, String cnpj, String nome, float preco, Date data_sessao) {
+    public Promocao(int id, String url, String cnpj, String nome, float preco, String data_sessao, String horario_sessao) {
         this.id = id;
         this.url = url;
         this.cnpj = cnpj;
         this.nome = nome;
         this.preco = preco;
         this.data_sessao = data_sessao;
+        this.horario_sessao = horario_sessao;
     }
     
     public int getId() {
@@ -62,10 +65,14 @@ public class Promocao {
         return preco;
     }
 
-    public Date getData_sessao() {
+    public String getData_sessao() {
         return data_sessao;
     }
     
+    public String getHorario_sessao() {
+        return horario_sessao;
+    }
+      
     public void setId(int id) {
         this.id = id;
     }
@@ -86,11 +93,13 @@ public class Promocao {
         this.preco = preco;
     }
 
-    public void setData_sessao(Date data_sessao) {
+    public void setData_sessao(String data_sessao) {
         this.data_sessao = data_sessao;
     }
 
-    
+    public void setHorario_sessao(String horario_sessao) {
+        this.horario_sessao = horario_sessao;
+    }
     
 }
 

@@ -7,7 +7,6 @@ package br.ufscar.dc.dsw.dao;
 
 import br.ufscar.dc.dsw.model.Promocao;
 import java.sql.Connection;
-import java.util.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,17 +33,18 @@ public class PromocaoDAO {
         return DriverManager.getConnection("jdbc:derby://localhost:1527/ProjetoWeb1", "root", "root");
     }
 
-    public void insert(Promocao promocao) {
-        String sql = "INSERT INTO Promocao (url,cnpj, nome, preco, data_sessao) VALUES (?, ?, ?, ?, ?)";
+    public void insert(Promocao promo) {
+        String sql = "INSERT INTO Promocao (url,cnpj, nome, preco, data_sessao, horario_sessao) VALUES (?, ?, ?, ?, ?, ?)";
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);;
             statement = conn.prepareStatement(sql);
-            statement.setString(1, promocao.getUrl());
-            statement.setString(2, promocao.getCnpj());
-            statement.setString(3, promocao.getNome());
-            statement.setFloat(4, promocao.getPreco());
-            statement.setDate(5, new java.sql.Date(promocao.getData_sessao().getTime()));
+            statement.setString(1, promo.getUrl());
+            statement.setString(2, promo.getCnpj());
+            statement.setString(3, promo.getNome());
+            statement.setFloat(4, promo.getPreco());
+            statement.setString(5, promo.getData_sessao());
+            statement.setString(6, promo.getHorario_sessao());
             statement.executeUpdate();
             statement.close();
             conn.close();
@@ -67,8 +67,9 @@ public class PromocaoDAO {
                 String cnpj = resultSet.getString("cnpj");
                 String nome = resultSet.getString("nome");
                 Float preco = resultSet.getFloat("preco");
-                Date data_sessao = resultSet.getDate("data_sessao");
-                Promocao promo = new Promocao(id, url, cnpj, nome, preco, data_sessao);
+                String data_sessao = resultSet.getString("data_sessao");
+                String horario_sessao = resultSet.getString("horario_sessao");
+                Promocao promo = new Promocao(id, url, cnpj, nome, preco, data_sessao, horario_sessao);
                 listaPromocao.add(promo);
             }
             resultSet.close();
@@ -93,8 +94,9 @@ public class PromocaoDAO {
                 String cnpj = resultSet.getString("cnpj");
                 String nome = resultSet.getString("nome");
                 Float preco = resultSet.getFloat("preco");
-                Date data_sessao = resultSet.getDate("data_sessao");
-                promo = new Promocao(id, url, cnpj, nome, preco, data_sessao);
+                String data_sessao = resultSet.getString("data_sessao");
+                String horario_sessao = resultSet.getString("horario_sessao");
+                promo = new Promocao(id, url, cnpj, nome, preco, data_sessao, horario_sessao);
             }
             resultSet.close();
             statement.close();
@@ -103,6 +105,29 @@ public class PromocaoDAO {
             throw new RuntimeException(e);
         }
         return promo;
+    }
+    
+    public void update(Promocao promo) {
+        String sql = "UPDATE Promocao SET url = ?, cnpj = ?, nome = ?, preco = ?,  data_sessao = ?,  horario_sessao = ?";
+        sql += " WHERE id = ?";
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, promo.getUrl());
+            statement.setString(2, promo.getCnpj());
+            statement.setString(3, promo.getNome());
+            statement.setFloat(4, promo.getPreco());
+            statement.setString(5, promo.getData_sessao());
+            statement.setString(6, promo.getHorario_sessao());
+            statement.setInt(7, promo.getId());
+            System.out.println("AAAAAAA");
+            System.out.println(promo.getId());
+            statement.executeUpdate();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
     
     public void delete(Promocao promo) {

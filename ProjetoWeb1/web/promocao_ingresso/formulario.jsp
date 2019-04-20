@@ -13,13 +13,19 @@
     </head>
     <body>
     <center>
-        <h1>Cadastro de promoções</h1>
+        <h1>Cadastro/Edicao de promoções</h1>
     </center>
     <div align="center">
         <c:if test="${promocao == null}">
             <form action="insercao" method="post">
         </c:if>
+        <c:if test="${promocao != null}">
+            <form action="atualizacao" method="post">
+        </c:if>
         <table border="1" cellpadding="5">
+            <c:if test="${promocao != null}">
+                <input type="hidden" name="id" value="<c:out value='${promocao.id}' />" />
+            </c:if>
             <tr>
                 <th>Url: </th>
                 <td>
@@ -49,10 +55,18 @@
                 </td>
             </tr>
             <tr>
-                <th>Data e horário: </th>
+                <th>Data: </th>
                 <td>
-                    <input type="date" name="data_sessao" size="45"
+                    <input type="text" name="data_sessao" size="45"
                            value="<c:out value='${promocao.data_sessao}' />"
+                           />
+                </td>
+            </tr>
+            <tr>
+                <th>Horário: </th>
+                <td>
+                    <input type="text" name="horario_sessao" size="45"
+                           value="<c:out value='${promocao.horario_sessao}' />"
                            />
                 </td>
             </tr>

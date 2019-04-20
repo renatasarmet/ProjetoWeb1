@@ -6,8 +6,11 @@
 package br.ufscar.dc.dsw.controller;
 
 import br.ufscar.dc.dsw.dao.TeatroDAO;
+import br.ufscar.dc.dsw.model.Teatro;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 // TODO: Organizar as rotas
-@WebServlet(urlPatterns = "/trabalho/*")
+@WebServlet(urlPatterns = "/teatro_crud/*")
 public class TeatroController extends HttpServlet {
     
     private TeatroDAO dao;
@@ -53,6 +56,14 @@ public class TeatroController extends HttpServlet {
                 case "insercao":
                     insere(request, response);
                     break;
+                case "lista":
+                    lista(request, response);
+                    break;
+                case "atualizacao":
+                    atualiza(request, response);
+                    break;
+                case "remocao":
+                    remove(request, response);
                 default:
                     break;
             }
@@ -102,12 +113,49 @@ public class TeatroController extends HttpServlet {
 
     private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("teatro/formulario.jsp");
+        Teatro t = dao.get(request.getParameter("cnpj"));
+        request.setAttribute("teatro", t);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/teatro/formulario.jsp");
         dispatcher.forward(request, response);
     }
 
-    private void insere(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void insere(HttpServletRequest request, HttpServletResponse response)
+            throws UnsupportedEncodingException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        String email = request.getParameter("email");
+        String senha = request.getParameter("senha");
+        String CNPJ = request.getParameter("CNPJ");
+        String nome = request.getParameter("nome");
+        String cidade = request.getParameter("cidade");
+        
+        Teatro t = new Teatro(email, senha, CNPJ, nome, cidade);
+        dao.insert(t);
+        response.sendRedirect("lista");
+    }
+
+    private void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        List<Teatro> listaTeatros = dao.getAll();
+        request.setAttribute("listaTeatros", listaTeatros);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/teatro/lista.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void atualiza(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        String email = request.getParameter("email");
+        String senha = request.getParameter("senha");
+        String CNPJ = request.getParameter("CNPJ");
+        String nome = request.getParameter("nome");
+        String cidade = request.getParameter("cidade");
+        
+        Teatro t = new Teatro(email, senha, CNPJ, nome, cidade);
+        dao.update(t);
+        response.sendRedirect("lista");
+    }
+
+    private void remove(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        dao.delete(request.getParameter("cnpj"));
+        response.sendRedirect("lista");
     }
 
 }

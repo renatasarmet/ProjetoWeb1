@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Leonardo
  */
-@WebServlet(urlPatterns = "/site_venda/*")
+@WebServlet(urlPatterns = "/site_venda_crud/*")
 public class Site_Venda_IngressoController extends HttpServlet {
 
     private Site_Venda_IngressoDAO dao;

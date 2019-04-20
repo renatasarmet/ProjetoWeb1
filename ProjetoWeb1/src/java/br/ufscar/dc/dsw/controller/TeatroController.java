@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 // TODO: Organizar as rotas
-@WebServlet(urlPatterns = "/Trabalho")
+@WebServlet(urlPatterns = "/trabalho/*")
 public class TeatroController extends HttpServlet {
     
     private TeatroDAO dao;
@@ -43,14 +43,14 @@ public class TeatroController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String action = request.getServletPath();
-        System.out.println(action);
+        String action = request.getRequestURI();
+        action = action.split("/")[action.split("/").length - 1];
         try {
             switch (action) {
-                case "/cadastro":
+                case "cadastro":
                     apresentaFormCadastro(request, response);
                     break;
-                case "/insercao":
+                case "insercao":
                     insere(request, response);
                     break;
                 default:

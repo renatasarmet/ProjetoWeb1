@@ -13,47 +13,36 @@
     </head>
     <body>
     <center>
-        <h1>Cadastro de site de venda de ingresso</h1>
+        <h1>Ediiçao de usuario</h1>
     </center>
     <div align="center">
-        <c:if test="${site == null}">
-            <form action="insercao" method="post">
+        <c:if test="${usuario != null}">
+            <form action="atualizacao" method="post">
         </c:if>
         <table border="1" cellpadding="5">
+            </caption>
+            <c:if test="${usuario != null}">
+                <input type="hidden" name="id" value="<c:out value='${usuario.id}' />" />
+            </c:if>
             <tr>
                 <th>Email: </th>
                 <td>
                     <input type="text" name="email" size="45"
-                           value="<c:out value='${site.email}' />"/>
+                           value="<c:out value='${usuario.email}' />"/>
                 </td>
             </tr>
             <tr>
                 <th>Senha: </th>
                 <td>
                     <input type="text" name="senha" size="45"
-                           value="<c:out value='${site.senha}' />"/>
+                           value="<c:out value='${usuario.senha}' />"/>
                 </td>
             </tr>
             <tr>
-                <th>Url: </th>
+                <th>Tipo: </th>
                 <td>
-                    <input type="text" name="url" size="45"
-                           value="<c:out value='${site.url}' />"/>
-                </td>
-            </tr>
-            <tr>
-                <th>Nome: </th>
-                <td>
-                    <input type="text" name="nome" size="45"
-                           value="<c:out value='${site.nome}' />"/>
-                </td>
-            </tr>
-            <tr>
-                <th>Telefone: </th>
-                <td>
-                    <input type="text" name="telefone" size="45"
-                           value="<c:out value='${site.telefone}' />"
-                           />
+                    <input type="text" name="tipo" size="45"
+                           value="<c:out value='${usuario.tipo}' />"/>
                 </td>
             </tr>
             <tr>

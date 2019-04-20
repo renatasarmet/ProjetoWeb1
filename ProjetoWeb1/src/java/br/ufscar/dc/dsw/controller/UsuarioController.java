@@ -5,8 +5,8 @@
  */
 package br.ufscar.dc.dsw.controller;
 
-import br.ufscar.dc.dsw.dao.Site_Venda_IngressoDAO;
-import br.ufscar.dc.dsw.model.Site_Venda_Ingresso;
+import br.ufscar.dc.dsw.dao.UsuarioDAO;
+import br.ufscar.dc.dsw.model.Usuario;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -18,16 +18,16 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Leonardo
+ * @author root
  */
-@WebServlet(urlPatterns = "/site_venda/*")
-public class Site_Venda_IngressoController extends HttpServlet {
-
-    private Site_Venda_IngressoDAO dao;
+@WebServlet(urlPatterns = "/usuario_crud/*")
+public class UsuarioController  extends HttpServlet {
+    
+    private UsuarioDAO dao;
 
     @Override
     public void init() {
-        dao = new Site_Venda_IngressoDAO();
+        dao = new UsuarioDAO();
     }
 
     @Override
@@ -70,9 +70,7 @@ public class Site_Venda_IngressoController extends HttpServlet {
 
     private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/site_venda_ingresso/formulario.jsp");
-
-        log("entrou");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/usuario/formulario.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -82,28 +80,26 @@ public class Site_Venda_IngressoController extends HttpServlet {
         String email = request.getParameter("email");
         System.out.print(email);
         String senha = request.getParameter("senha");
-        String url = request.getParameter("url");
-        String nome = request.getParameter("nome");
-        String telefone = request.getParameter("telefone");
-        Site_Venda_Ingresso site = new Site_Venda_Ingresso(email, senha, url, nome, telefone);
-        dao.insert(site);
+        String tipo = request.getParameter("tipo");
+        Usuario usuario = new Usuario(email, senha, tipo);
+        dao.insert(usuario);
         response.sendRedirect("lista");
     }
 
     private void lista(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Site_Venda_Ingresso> listaSites = dao.getAll();
-        request.setAttribute("listaSites", listaSites);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/site_venda_ingresso/lista.jsp");
+        List<Usuario> listaUsuarios = dao.getAll();
+        request.setAttribute("listaUsuarios", listaUsuarios);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/usuario/lista.jsp");
         dispatcher.forward(request, response);
     }
 
     private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        Site_Venda_Ingresso site = dao.get(id);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/site_venda_ingresso/formulario_edicao.jsp");
-        request.setAttribute("site", site);
+        Usuario usuario = dao.get(id);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/usuario/formulario_edicao.jsp");
+        request.setAttribute("usuario", usuario);
         dispatcher.forward(request, response);
     }
 
@@ -113,20 +109,18 @@ public class Site_Venda_IngressoController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
-        String url = request.getParameter("url");
-        String nome = request.getParameter("nome");
-        String telefone = request.getParameter("telefone");
-        Site_Venda_Ingresso site = new Site_Venda_Ingresso(id, email, senha, url, nome, telefone);
-        dao.update(site);
+        String tipo = request.getParameter("tipo");
+        Usuario usuario = new Usuario(id, email, senha, tipo);
+        dao.update(usuario);
         response.sendRedirect("lista");
     }
 
     private void remove(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        Site_Venda_Ingresso site = new Site_Venda_Ingresso(id);
-        dao.delete(site);
+        Usuario usuario = new Usuario(id);
+        dao.delete(usuario);
         response.sendRedirect("lista");
     }
-
+    
 }

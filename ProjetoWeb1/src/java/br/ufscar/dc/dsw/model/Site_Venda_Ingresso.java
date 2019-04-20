@@ -22,6 +22,15 @@ public class Site_Venda_Ingresso {
         this.id = id;
     }
 
+    public Site_Venda_Ingresso(int id, String email, String senha, String url, String nome, String telefone) {
+        this.id = id;
+        this.email = email;
+        this.senha = senha;
+        this.url = url;
+        this.nome = nome;
+        this.telefone = telefone;
+    }
+
     public Site_Venda_Ingresso(String email, String senha, String url, String nome, String telefone) {
         this.email = email;
         this.senha = senha;
@@ -52,10 +61,6 @@ public class Site_Venda_Ingresso {
 
     public String getTelefone() {
         return telefone;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void setEmail(String email) {

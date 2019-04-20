@@ -20,3 +20,4 @@ nbactions.xml
 nb-configuration.xml
 .nb-gradle/
 /ProjetoWeb1/nbproject/private/
+/ProjetoWeb1/dist/

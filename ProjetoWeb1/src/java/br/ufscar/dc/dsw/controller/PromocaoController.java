@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Renata
  */
-@WebServlet(name = "PromocaoController", urlPatterns = {"/promocao"})
+@WebServlet(urlPatterns = {"/promocao/*"})
 public class PromocaoController extends HttpServlet {
 
     private PromocaoDAO dao;
@@ -45,12 +45,21 @@ public class PromocaoController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
-        String path = request.getServletPath();
-        String action = request.getParameter("action");
-        if (action == null) {
-            apresentaFormCadastro(request, response);
-        } else  {   
-            insere(request, response);
+        String action = request.getRequestURI();
+        action = action.split("/")[action.split("/").length - 1];
+        try {
+            switch (action) {
+                case "cadastro":
+                    apresentaFormCadastro(request, response);
+                    break;
+                case "insercao":
+                    insere(request, response);
+                    break;
+                default:
+                    break;
+            }
+        } catch (RuntimeException | IOException | ServletException e) {
+            throw new ServletException(e);
         }
     }
 
@@ -93,7 +102,8 @@ public class PromocaoController extends HttpServlet {
 
     private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("promocao/formulario.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/promocao_ingresso/formulario.jsp");
+        log("entrou funcao forms");
         dispatcher.forward(request, response);
     }
     

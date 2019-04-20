@@ -17,13 +17,9 @@
     </center>
     <div align="center">
         <c:if test="${promocao == null}">
-            <form action="promocao" method="post">
-                <input type="hidden" name="action" value="insercao"/>
+            <form action="insercao" method="post">
         </c:if>
         <table border="1" cellpadding="5">
-            <c:if test="${promocao != null}">
-                <input type="hidden" name="id" value="<c:out value='${promocao.id}' />" />
-            </c:if>
             <tr>
                 <th>Url: </th>
                 <td>

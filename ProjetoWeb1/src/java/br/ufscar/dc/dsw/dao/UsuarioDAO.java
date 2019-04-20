@@ -5,7 +5,7 @@
  */
 package br.ufscar.dc.dsw.dao;
 
-import br.ufscar.dc.dsw.model.Site_Venda_Ingresso;
+import br.ufscar.dc.dsw.model.Usuario;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,11 +17,11 @@ import java.util.List;
 
 /**
  *
- * @author Leonardo
+ * @author root
  */
-public class Site_Venda_IngressoDAO {
-
-    public Site_Venda_IngressoDAO() {
+public class UsuarioDAO {
+    
+    public UsuarioDAO() {
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
         } catch (ClassNotFoundException e) {
@@ -33,17 +33,15 @@ public class Site_Venda_IngressoDAO {
         return DriverManager.getConnection("jdbc:derby://localhost:1527/ProjetoWeb1", "root", "root");
     }
 
-    public void insert(Site_Venda_Ingresso site) {
-        String sql = "INSERT INTO Site_Venda_Ingresso (email,senha, url, nome, telefone) VALUES (?, ?, ?, ?, ?)";
+    public void insert(Usuario usuario) {
+        String sql = "INSERT INTO Usuario (email,senha, tipo) VALUES (?, ?, ?)";
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);;
             statement = conn.prepareStatement(sql);
-            statement.setString(1, site.getEmail());
-            statement.setString(2, site.getSenha());
-            statement.setString(3, site.getUrl());
-            statement.setString(4, site.getNome());
-            statement.setString(5, site.getTelefone());
+            statement.setString(1, usuario.getEmail());
+            statement.setString(2, usuario.getSenha());
+            statement.setString(3, usuario.getTipo());
             statement.executeUpdate();
             statement.close();
             conn.close();
@@ -52,9 +50,9 @@ public class Site_Venda_IngressoDAO {
         }
     }
 
-    public List<Site_Venda_Ingresso> getAll() {
-        List<Site_Venda_Ingresso> listaSite = new ArrayList<>();
-        String sql = "SELECT * FROM Site_Venda_Ingresso";
+    public List<Usuario> getAll() {
+        List<Usuario> listaSite = new ArrayList<>();
+        String sql = "SELECT * FROM Usuario";
         try {
             Connection conn = this.getConnection();
             Statement statement = conn.createStatement();
@@ -63,11 +61,9 @@ public class Site_Venda_IngressoDAO {
                 int id = resultSet.getInt("id");
                 String email = resultSet.getString("email");
                 String senha = resultSet.getString("senha");
-                String url = resultSet.getString("url");
-                String nome = resultSet.getString("nome");
-                String telefone = resultSet.getString("telefone");
-                Site_Venda_Ingresso site = new Site_Venda_Ingresso(id, email, senha, url, nome, telefone);
-                listaSite.add(site);
+                String tipo = resultSet.getString("tipo");
+                Usuario usuario = new Usuario(id, email, senha, tipo);
+                listaSite.add(usuario);
             }
             resultSet.close();
             statement.close();
@@ -78,9 +74,9 @@ public class Site_Venda_IngressoDAO {
         return listaSite;
     }
 
-    public Site_Venda_Ingresso get(int id) {
-        Site_Venda_Ingresso site = null;
-        String sql = "SELECT * FROM Site_Venda_Ingresso WHERE id = ?";
+    public Usuario get(int id) {
+        Usuario usuario = null;
+        String sql = "SELECT * FROM Usuario WHERE id = ?";
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
@@ -89,10 +85,8 @@ public class Site_Venda_IngressoDAO {
             if (resultSet.next()) {
                 String email = resultSet.getString("email");
                 String senha = resultSet.getString("senha");
-                String url = resultSet.getString("url");
-                String nome = resultSet.getString("nome");
-                String telefone = resultSet.getString("telefone");
-                site = new Site_Venda_Ingresso(id, email, senha, url, nome, telefone);
+                String tipo = resultSet.getString("tipo");
+                usuario = new Usuario(id, email, senha, tipo);
             }
             resultSet.close();
             statement.close();
@@ -100,21 +94,19 @@ public class Site_Venda_IngressoDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return site;
+        return usuario;
     }
 
-    public void update(Site_Venda_Ingresso site) {
-        String sql = "UPDATE Site_Venda_Ingresso SET email = ?, senha = ?, url = ?, nome = ?, telefone = ?";
+    public void update(Usuario usuario) {
+        String sql = "UPDATE Usuario SET email = ?, senha = ?, tipo = ?";
         sql += " WHERE id = ?";
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, site.getEmail());
-            statement.setString(2, site.getSenha());
-            statement.setString(3, site.getUrl());
-            statement.setString(4, site.getNome());
-            statement.setString(5, site.getTelefone());
-            statement.setInt(6, site.getId());
+            statement.setString(1, usuario.getEmail());
+            statement.setString(2, usuario.getSenha());
+            statement.setString(3, usuario.getTipo());
+            statement.setInt(4, usuario.getId());
             statement.executeUpdate();
             statement.close();
             conn.close();
@@ -123,12 +115,12 @@ public class Site_Venda_IngressoDAO {
         }
     }
 
-    public void delete(Site_Venda_Ingresso site) {
-        String sql = "DELETE FROM Site_Venda_Ingresso where id = ?";
+    public void delete(Usuario usuario) {
+        String sql = "DELETE FROM Usuario where id = ?";
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setInt(1, site.getId());
+            statement.setInt(1, usuario.getId());
             statement.executeUpdate();
             statement.close();
             conn.close();
@@ -136,5 +128,4 @@ public class Site_Venda_IngressoDAO {
             throw new RuntimeException(e);
         }
     }
-
 }

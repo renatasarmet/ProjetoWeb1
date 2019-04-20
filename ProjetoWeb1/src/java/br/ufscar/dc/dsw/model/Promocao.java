@@ -32,6 +32,15 @@ public class Promocao {
         this.preco = preco;
         this.data_sessao = data_sessao;
     }
+
+    public Promocao(int id, String url, String cnpj, String nome, float preco, Date data_sessao) {
+        this.id = id;
+        this.url = url;
+        this.cnpj = cnpj;
+        this.nome = nome;
+        this.preco = preco;
+        this.data_sessao = data_sessao;
+    }
     
     public int getId() {
         return id;

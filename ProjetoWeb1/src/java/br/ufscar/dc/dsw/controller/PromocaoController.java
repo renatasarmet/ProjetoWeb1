@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -54,6 +55,9 @@ public class PromocaoController extends HttpServlet {
                     break;
                 case "insercao":
                     insere(request, response);
+                    break;
+                case "lista":
+                    lista(request, response);
                     break;
                 default:
                     break;
@@ -109,18 +113,25 @@ public class PromocaoController extends HttpServlet {
     
     private void insere(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ParseException {
-        log("to no insere");
         request.setCharacterEncoding("UTF-8");
         String url = request.getParameter("url");
         String cnpj = request.getParameter("cnpj");
         String nome = request.getParameter("nome");
-        log("preco:");
-        log(request.getParameter("preco"));
         Float preco = Float.parseFloat(request.getParameter("preco"));
         Date data_sessao =  sdf.parse(request.getParameter("data_sessao"));
         Promocao promocao = new Promocao(url,cnpj,nome,preco,data_sessao);
         dao.insert(promocao);
-        response.sendRedirect("promocao_ingresso/formulario.jsp");
+        response.sendRedirect("lista");
+    }
+    
+    private void lista(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<Promocao> listaPromocao = dao.getAll();
+        log("PROMOCOES:");
+        log(listaPromocao.get(0).getUrl());
+        request.setAttribute("listaPromocao", listaPromocao);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/promocao_ingresso/lista.jsp");
+        dispatcher.forward(request, response);
     }
     
     /**

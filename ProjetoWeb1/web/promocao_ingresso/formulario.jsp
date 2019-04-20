@@ -44,7 +44,7 @@
             <tr>
                 <th>Preço: </th>
                 <td>
-                    <input type="text" name="nome" size="45"
+                    <input type="text" name="preco" size="45"
                            value="<c:out value='${promocao.preco}' />"/>
                 </td>
             </tr>

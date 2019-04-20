@@ -5,7 +5,7 @@
  */
 package br.ufscar.dc.dsw.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 
 /**

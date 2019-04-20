@@ -7,10 +7,10 @@ package br.ufscar.dc.dsw.dao;
 
 import br.ufscar.dc.dsw.model.Promocao;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Date;
 
 /**
  *
@@ -33,6 +33,7 @@ public class PromocaoDAO {
     public void insert(Promocao promocao) {
         String sql = "INSERT INTO Promocao (url,cnpj, nome, preco, data_sessao) VALUES (?, ?, ?, ?, ?)";
         try {
+            System.out.println("to no DAO");
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);;
             statement = conn.prepareStatement(sql);
@@ -40,10 +41,11 @@ public class PromocaoDAO {
             statement.setString(2, promocao.getCnpj());
             statement.setString(3, promocao.getNome());
             statement.setFloat(4, promocao.getPreco());
-            statement.setDate(5, promocao.getData_sessao());
+            statement.setDate(5, new java.sql.Date(promocao.getData_sessao().getTime()));
             statement.executeUpdate();
             statement.close();
             conn.close();
+            System.out.println("terminei o DAO");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

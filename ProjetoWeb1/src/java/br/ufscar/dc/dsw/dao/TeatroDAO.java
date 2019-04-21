@@ -33,7 +33,7 @@ public class TeatroDAO {
     }
 
     protected Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:derby://localhost:1527/ProjetoWeb1", "APP", "admin");
+        return DriverManager.getConnection("jdbc:derby://localhost:1527/ProjetoWeb1", "root", "root");
     }
 
     public void insert(Teatro teatro) {

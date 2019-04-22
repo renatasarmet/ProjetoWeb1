@@ -20,7 +20,7 @@
     <center>
         <h1><fmt:message key="lista_de_teatros"/></h1>
         <c:if test="${empty listaTeatros}">
-            <h2><fmt:message key="nao_ha"/></h2>
+            <h2><fmt:message key="nao_ha_teatro"/></h2>
             <a href="cadastro"><fmt:message key="inserir"/></a>
         </c:if>
         <c:if test="${!empty listaTeatros}">

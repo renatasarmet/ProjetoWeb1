@@ -13,24 +13,30 @@ public class Usuario {
     private int id;
     private String email;
     private String senha;
-    private String tipo;
+    private int ativo;
 
     public Usuario(int id) {
         this.id = id;
     }
 
-    public Usuario(int id, String email, String senha, String tipo) {
+    public Usuario(int id, String email, String senha, int ativo) {
         this.id = id;
         this.email = email;
         this.senha = senha;
-        this.tipo = tipo;
+        this.ativo = ativo;
     }
 
-    public Usuario(String email, String senha, String tipo) {
+    public Usuario(String email, String senha, int ativo) {
         this.email = email;
         this.senha = senha;
-        this.tipo = tipo;
+        this.ativo = ativo;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
 
     public int getId() {
         return id;
@@ -44,8 +50,8 @@ public class Usuario {
         return senha;
     }
 
-    public String getTipo() {
-        return tipo;
+    public int getAtivo() {
+        return ativo;
     }
 
     public void setEmail(String email) {
@@ -56,9 +62,8 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setAtivo(int ativo) {
+        this.ativo = ativo;
     }
-    
     
 }

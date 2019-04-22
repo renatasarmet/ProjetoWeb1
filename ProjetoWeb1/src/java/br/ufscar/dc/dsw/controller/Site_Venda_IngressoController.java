@@ -6,7 +6,9 @@
 package br.ufscar.dc.dsw.controller;
 
 import br.ufscar.dc.dsw.dao.Site_Venda_IngressoDAO;
+import br.ufscar.dc.dsw.dao.UsuarioDAO;
 import br.ufscar.dc.dsw.model.Site_Venda_Ingresso;
+import br.ufscar.dc.dsw.model.Usuario;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -20,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Leonardo
  */
-@WebServlet(urlPatterns = "/site_venda/*")
+@WebServlet(urlPatterns = "/site_venda_crud/*")
 public class Site_Venda_IngressoController extends HttpServlet {
 
     private Site_Venda_IngressoDAO dao;
@@ -71,8 +73,6 @@ public class Site_Venda_IngressoController extends HttpServlet {
     private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/site_venda_ingresso/formulario.jsp");
-
-        log("entrou");
         dispatcher.forward(request, response);
     }
 
@@ -80,12 +80,11 @@ public class Site_Venda_IngressoController extends HttpServlet {
             throws IOException {
         request.setCharacterEncoding("UTF-8");
         String email = request.getParameter("email");
-        System.out.print(email);
         String senha = request.getParameter("senha");
         String url = request.getParameter("url");
         String nome = request.getParameter("nome");
         String telefone = request.getParameter("telefone");
-        Site_Venda_Ingresso site = new Site_Venda_Ingresso(email, senha, url, nome, telefone);
+        Site_Venda_Ingresso site = new Site_Venda_Ingresso(email,senha,url,nome,telefone);
         dao.insert(site);
         response.sendRedirect("lista");
     }
@@ -102,7 +101,7 @@ public class Site_Venda_IngressoController extends HttpServlet {
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         Site_Venda_Ingresso site = dao.get(id);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/site_venda_ingresso/formulario_edicao.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/site_venda_ingresso/formulario.jsp");
         request.setAttribute("site", site);
         dispatcher.forward(request, response);
     }
@@ -110,13 +109,13 @@ public class Site_Venda_IngressoController extends HttpServlet {
     private void atualize(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         request.setCharacterEncoding("UTF-8");
-        int id = Integer.parseInt(request.getParameter("id"));
-        String email = request.getParameter("email");
-        String senha = request.getParameter("senha");
+        int id_usuario = Integer.parseInt(request.getParameter("id"));
         String url = request.getParameter("url");
         String nome = request.getParameter("nome");
         String telefone = request.getParameter("telefone");
-        Site_Venda_Ingresso site = new Site_Venda_Ingresso(id, email, senha, url, nome, telefone);
+        String senha = request.getParameter("senha");
+        String email = request.getParameter("email");
+        Site_Venda_Ingresso site = new Site_Venda_Ingresso(id_usuario, email, senha, url, nome, telefone);
         dao.update(site);
         response.sendRedirect("lista");
     }

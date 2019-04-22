@@ -33,21 +33,28 @@ public class UsuarioDAO {
         return DriverManager.getConnection("jdbc:derby://localhost:1527/ProjetoWeb1", "root", "root");
     }
 
-    public void insert(Usuario usuario) {
-        String sql = "INSERT INTO Usuario (email,senha, tipo) VALUES (?, ?, ?)";
+    public int insert(Usuario usuario) {
+        String sql = "INSERT INTO Usuario (email,senha, ativo) VALUES (?, ?, ?)";
+        int id=0;
         try {
             Connection conn = this.getConnection();
-            PreparedStatement statement = conn.prepareStatement(sql);;
-            statement = conn.prepareStatement(sql);
+            PreparedStatement statement;
+            statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, usuario.getEmail());
             statement.setString(2, usuario.getSenha());
-            statement.setString(3, usuario.getTipo());
+            statement.setInt(3, usuario.getAtivo());
             statement.executeUpdate();
+            ResultSet resultSet = statement.getGeneratedKeys();
+            if(resultSet.next()){
+                id = resultSet.getInt(1);
+            }
+            resultSet.close();
             statement.close();
             conn.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return id;
     }
 
     public List<Usuario> getAll() {
@@ -61,8 +68,8 @@ public class UsuarioDAO {
                 int id = resultSet.getInt("id");
                 String email = resultSet.getString("email");
                 String senha = resultSet.getString("senha");
-                String tipo = resultSet.getString("tipo");
-                Usuario usuario = new Usuario(id, email, senha, tipo);
+                int ativo = resultSet.getInt("ativo");
+                Usuario usuario = new Usuario(id, email, senha, ativo);
                 listaSite.add(usuario);
             }
             resultSet.close();
@@ -85,8 +92,8 @@ public class UsuarioDAO {
             if (resultSet.next()) {
                 String email = resultSet.getString("email");
                 String senha = resultSet.getString("senha");
-                String tipo = resultSet.getString("tipo");
-                usuario = new Usuario(id, email, senha, tipo);
+                int ativo = resultSet.getInt("ativo");
+                usuario = new Usuario(id, email, senha, ativo);
             }
             resultSet.close();
             statement.close();
@@ -98,14 +105,14 @@ public class UsuarioDAO {
     }
 
     public void update(Usuario usuario) {
-        String sql = "UPDATE Usuario SET email = ?, senha = ?, tipo = ?";
+        String sql = "UPDATE Usuario SET email = ?, senha = ?, ativo = ?";
         sql += " WHERE id = ?";
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, usuario.getEmail());
             statement.setString(2, usuario.getSenha());
-            statement.setString(3, usuario.getTipo());
+            statement.setInt(3, usuario.getAtivo());
             statement.setInt(4, usuario.getId());
             statement.executeUpdate();
             statement.close();
@@ -115,12 +122,12 @@ public class UsuarioDAO {
         }
     }
 
-    public void delete(Usuario usuario) {
+    public void delete(int id) {
         String sql = "DELETE FROM Usuario where id = ?";
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setInt(1, usuario.getId());
+            statement.setInt(1, id);
             statement.executeUpdate();
             statement.close();
             conn.close();

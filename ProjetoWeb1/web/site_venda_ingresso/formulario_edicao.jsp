@@ -13,7 +13,7 @@
     </head>
     <body>
     <center>
-        <h1>Ediiç�o de site de venda de ingresso</h1>
+        <h1>Edição de site de venda de ingresso</h1>
     </center>
     <div align="center">
         <c:if test="${site != null}">

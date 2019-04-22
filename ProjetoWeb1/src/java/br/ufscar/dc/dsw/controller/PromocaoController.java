@@ -66,6 +66,12 @@ public class PromocaoController extends HttpServlet {
                 case "remocao":
                     remove(request, response);
                     break;
+                case "filtrar_url":
+                    filtra_url(request, response);
+                    break;
+                case "filtrar_cnpj":
+                    filtra_cnpj(request, response);
+                    break;
                 default:
                     break;
             }
@@ -134,6 +140,22 @@ public class PromocaoController extends HttpServlet {
     private void lista(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Promocao> listaPromocao = dao.getAll();
+        request.setAttribute("listaPromocao", listaPromocao);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/promocao_ingresso/lista.jsp");
+        dispatcher.forward(request, response);
+    }
+    
+    private void filtra_url(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<Promocao> listaPromocao = dao.getPromocaoSite(request.getParameter("url_desejada"));
+        request.setAttribute("listaPromocao", listaPromocao);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/promocao_ingresso/lista.jsp");
+        dispatcher.forward(request, response);
+    }
+    
+     private void filtra_cnpj(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<Promocao> listaPromocao = dao.getPromocaoTeatro(request.getParameter("cnpj_desejado"));
         request.setAttribute("listaPromocao", listaPromocao);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/promocao_ingresso/lista.jsp");
         dispatcher.forward(request, response);

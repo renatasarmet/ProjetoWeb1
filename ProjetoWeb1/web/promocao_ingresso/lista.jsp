@@ -19,6 +19,17 @@
     <div align="center">
         <table border="1" cellpadding="5">
             <caption><h2>Lista de Promoções</h2></caption>
+            <form action="filtrar_url" method="post">
+                <label>Filtre por uma url: </label>
+                <input type="text" name="url_desejada" size="45" />
+                <input type="submit" value="Pesquisar" />
+            </form>
+            <br>
+            <form action="filtrar_cnpj" method="post">
+                <label>Filtre por um cnpj </label>
+                <input type="text" name="cnpj_desejado" size="45" />
+                <input type="submit" value="Pesquisar" />
+            </form>
             <tr>
                 <th>ID</th>
                 <th>Url</th>

@@ -11,15 +11,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Teatro</title>
-    </head>
-    <body>
-    <center>
-        <h1>Cadastro de Teatro</h1>
+        <jsp:include page="/helpers/common_head_include.jsp"></jsp:include>
+        <script type="text/javascript" src="../js/form_teatro.js"></script>
+        </head>
+        <body>
+        <center>
+            <h1>Cadastro de Teatro</h1>
         <c:if test="${teatro != null}">
-            <form action="atualizacao">
+            <form action="atualizacao" onsubmit="return validaForm()">
             </c:if>
             <c:if test="${teatro == null}">
-                <form action="insercao">
+                <form action="insercao" onsubmit="return validaForm()">
                 </c:if>
                 <table border="1" cellpadding="5">
                     <h2>
@@ -33,44 +35,45 @@
                     <tr>
                         <th>E-mail: </th>
                         <td>
-                            <input type="text" name="email" size="45"
-                                   value="<c:out value='${teatro.email}' />" />
+                            <input type="text" name="email" size="45" id="emailTeatro"
+                                   value="<c:out value='${teatro.email}' />"/>
                         </td>
                     </tr>
                     <tr>
                         <th>Senha: </th>
                         <td>
-                            <input type="password" name="senha" size="45"
-                                   value="<c:out value='${teatro.senha}' />" />
+                            <input type="password" name="senha" size="45" id="senhaTeatro"
+                                   value="<c:out value='${teatro.senha}' />"/>
                         </td>
                     </tr>
                     <tr>
                         <th>CNPJ: </th>
                         <td>
-                            <input type="text" name="CNPJ" size="45"
+                            <input type="text" name="CNPJ" size="45" id="cnpjTeatro"
                                    value="<c:out value='${teatro.CNPJ}' />" 
-                                   required />
+                                    />
                         </td>
                     </tr>
                     <tr>
                         <th>Nome: </th>
                         <td>
-                            <input type="text" name="nome" size="45"
+                            <input type="text" name="nome" size="45" id="nomeTeatro"
                                    value="<c:out value='${teatro.nome}'/>"
-                                   required />
+                                    />
                         </td>
                     </tr>
                     <tr>
                         <th>Cidade: </th>
                         <td>
-                            <input type="text" name="cidade" size="45"
+                            <input type="text" name="cidade" size="45" id="cidadeTeatro"
                                    value="<c:out value='${teatro.cidade}'/>"
-                                   required />
+                                    />
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2" align="center">
-                            <input type="submit" value="Salva" />
+                            <input type="submit" value="Salva" id="submitTeatro"
+                                   />
                         </td>
                     </tr>
                 </table>

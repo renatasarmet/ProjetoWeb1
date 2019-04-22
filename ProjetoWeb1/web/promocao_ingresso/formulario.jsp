@@ -10,6 +10,8 @@
 <html>
     <head>
         <title>Site de promoções</title>
+        <jsp:include page="/helpers/common_head_include.jsp"></jsp:include>
+        <script type="text/javascript" src="../js/form_promocao.js"></script>
     </head>
     <body>
     <center>
@@ -29,35 +31,35 @@
             <tr>
                 <th>Url: </th>
                 <td>
-                    <input type="text" name="url" size="45"
+                    <input type="text" name="url" size="45" id="urlPromocao"
                            value="<c:out value='${promocao.url}' />"/>
                 </td>
             </tr>
             <tr>
                 <th>Cnpj </th>
                 <td>
-                    <input type="text" name="cnpj" size="45"
+                    <input type="text" name="cnpj" size="45" id="cnpjPromocao"
                            value="<c:out value='${promocao.cnpj}' />"/>
                 </td>
             </tr>
             <tr>
                 <th>Nome da peça: </th>
                 <td>
-                    <input type="text" name="nome" size="45"
+                    <input type="text" name="nome" size="45" id="nomePromocao"
                            value="<c:out value='${promocao.nome}' />"/>
                 </td>
             </tr>
             <tr>
                 <th>Preço: </th>
                 <td>
-                    <input type="text" name="preco" size="45"
+                    <input type="text" name="preco" size="45" id="precoPromocao"
                            value="<c:out value='${promocao.preco}' />"/>
                 </td>
             </tr>
             <tr>
                 <th>Data: </th>
                 <td>
-                    <input type="text" name="data_sessao" size="45"
+                    <input type="text" name="data_sessao" size="45" id="dataPromocao"
                            value="<c:out value='${promocao.data_sessao}' />"
                            />
                 </td>
@@ -65,7 +67,7 @@
             <tr>
                 <th>Horário: </th>
                 <td>
-                    <input type="text" name="horario_sessao" size="45"
+                    <input type="text" name="horario_sessao" size="45" id="horarioPromocao"
                            value="<c:out value='${promocao.horario_sessao}' />"
                            />
                 </td>

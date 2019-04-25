@@ -7,6 +7,7 @@ package br.ufscar.dc.dsw.controller;
 
 import br.ufscar.dc.dsw.dao.PromocaoDAO;
 import br.ufscar.dc.dsw.dao.Site_Venda_IngressoDAO;
+import br.ufscar.dc.dsw.dao.TeatroDAO;
 import br.ufscar.dc.dsw.model.Promocao;
 import java.io.IOException;
 import java.text.ParseException;
@@ -122,6 +123,8 @@ public class PromocaoController extends HttpServlet {
 
     private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setAttribute("listaTeatro", new TeatroDAO().getAll());
+        request.setAttribute("listaSite", new Site_Venda_IngressoDAO().getAll());
         RequestDispatcher dispatcher = request.getRequestDispatcher("/promocao_ingresso/formulario.jsp");
         dispatcher.forward(request, response);
     }
@@ -170,7 +173,9 @@ public class PromocaoController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         Promocao promo = dao.get(id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/promocao_ingresso/formulario.jsp");
-        request.setAttribute("promocao", promo);
+        request.setAttribute("promocao", promo);        
+        request.setAttribute("listaTeatro", new TeatroDAO().getAll());
+        request.setAttribute("listaSite", new Site_Venda_IngressoDAO().getAll());
         dispatcher.forward(request, response);
     }
 

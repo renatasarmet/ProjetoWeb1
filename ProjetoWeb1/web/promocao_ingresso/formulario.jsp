@@ -40,15 +40,35 @@
             <tr>
                 <th><fmt:message key="url"/></th>
                 <td>
-                    <input type="text" name="url" size="45" id="urlPromocao"
-                           value="<c:out value='${promocao.url}' />"/>
+                    <select id="urlPromocao" name="url">
+                    <c:forEach var="site" items="${listaSite}">   
+                        <c:choose>
+                            <c:when test="${site.url == promocao.url}">
+                                <option selected value="<c:out value="${site.url}" />"><c:out value="${site.nome}"/> - <c:out value="${site.url}"/></option> 
+                            </c:when>
+                            <c:otherwise>
+                                <option value="<c:out value="${site.url}" />"><c:out value="${site.nome}"/> - <c:out value="${site.url}"/></option> 
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </select>
                 </td>
             </tr>
             <tr>
                 <th><fmt:message key="cnpj"/></th>
                 <td>
-                    <input type="text" name="cnpj" size="45" id="cnpjPromocao"
-                           value="<c:out value='${promocao.cnpj}' />"/>
+                    <select id="cnpjPromocao" name="cnpj">
+                    <c:forEach var="teatro" items="${listaTeatro}">   
+                        <c:choose>
+                            <c:when test="${teatro.CNPJ == promocao.cnpj}">
+                                <option selected value="<c:out value="${teatro.CNPJ}" />"><c:out value="${teatro.nome}"/> - <c:out value="${teatro.CNPJ}"/></option> 
+                            </c:when>
+                            <c:otherwise>
+                                <option value="<c:out value="${teatro.CNPJ}" />"><c:out value="${teatro.nome}"/> - <c:out value="${teatro.CNPJ}"/></option> 
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </select>
                 </td>
             </tr>
             <tr>

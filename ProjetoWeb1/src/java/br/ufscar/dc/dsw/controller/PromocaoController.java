@@ -6,6 +6,7 @@
 package br.ufscar.dc.dsw.controller;
 
 import br.ufscar.dc.dsw.dao.PromocaoDAO;
+import br.ufscar.dc.dsw.dao.Site_Venda_IngressoDAO;
 import br.ufscar.dc.dsw.model.Promocao;
 import java.io.IOException;
 import java.text.ParseException;
@@ -28,9 +29,11 @@ import javax.servlet.http.HttpServletResponse;
 public class PromocaoController extends HttpServlet {
 
     private PromocaoDAO dao;
+    private Site_Venda_IngressoDAO daoSite;
     @Override
     public void init() {
         dao = new PromocaoDAO();
+        daoSite = new Site_Venda_IngressoDAO();
     }
     
     /**
@@ -147,7 +150,8 @@ public class PromocaoController extends HttpServlet {
     
     private void filtra_url(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Promocao> listaPromocao = dao.getPromocaoSite(request.getParameter("url_desejada"));
+        String email = request.getUserPrincipal().getName().toString();
+        List<Promocao> listaPromocao = dao.getPromocaoSite(daoSite.getURL(email));
         request.setAttribute("listaPromocao", listaPromocao);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/promocao_ingresso/lista.jsp");
         dispatcher.forward(request, response);

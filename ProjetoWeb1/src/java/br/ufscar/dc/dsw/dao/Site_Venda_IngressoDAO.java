@@ -38,7 +38,7 @@ public class Site_Venda_IngressoDAO {
 
     public void insert(Site_Venda_Ingresso site) {
         Usuario usuario = new Usuario(site.getEmail(),site.getSenha(),site.getAtivo());
-        site.setId_usuario(daoUsuario.insert(usuario));
+        site.setId_usuario(daoUsuario.insert(usuario,1));
         String sql = "INSERT INTO Site_Venda_Ingresso (id_usuario, url, nome, telefone) VALUES (?, ?, ?, ?)";
         try {
             Connection conn = this.getConnection();
@@ -104,6 +104,25 @@ public class Site_Venda_IngressoDAO {
             throw new RuntimeException(e);
         }
         return site;
+    }
+    public String getURL(String email) {
+        String url = "";
+        String sql = "SELECT url FROM Site_Venda_Ingresso, Usuario WHERE id_usuario = id and email = ?";
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                url = resultSet.getString("url");
+            }
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return url;
     }
 
     public void update(Site_Venda_Ingresso site) {

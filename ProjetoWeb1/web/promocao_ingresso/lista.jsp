@@ -27,7 +27,6 @@
             <c:if test="${!empty listaPromocao}">
                 <form action="filtrar_url" method="post">
                     <label><fmt:message key="filtre_url"/></label>
-                    <input type="text" name="url_desejada" size="45" />
                     <input type="submit" value= <fmt:message key="pesquisar"/> />
                 </form>
                 <br>

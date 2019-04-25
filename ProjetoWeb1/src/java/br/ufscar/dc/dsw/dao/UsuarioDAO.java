@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  *
@@ -32,16 +33,18 @@ public class UsuarioDAO {
     protected Connection getConnection() throws SQLException {
         return DriverManager.getConnection("jdbc:derby://localhost:1527/ProjetoWeb1", "root", "root");
     }
-
-    public int insert(Usuario usuario) {
+    //Tipo 1 = Site, 2 = Teatro
+    public int insert(Usuario usuario, int tipo) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String sql = "INSERT INTO Usuario (email,senha, ativo) VALUES (?, ?, ?)";
+        String roleSql = "Insert into Papel (email, nome) values (?,?)";
         int id=0;
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement;
             statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, usuario.getEmail());
-            statement.setString(2, usuario.getSenha());
+            statement.setString(2, encoder.encode(usuario.getSenha()));
             statement.setInt(3, usuario.getAtivo());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
@@ -49,7 +52,15 @@ public class UsuarioDAO {
                 id = resultSet.getInt(1);
             }
             resultSet.close();
+            PreparedStatement roleStatement = conn.prepareStatement(roleSql);
+            roleStatement.setString(1, usuario.getEmail());
+            if(tipo == 1)
+                roleStatement.setString(2, "ROLE_SITE");
+            else
+                roleStatement.setString(2, "ROLE_TEATRO");
+            roleStatement.executeUpdate();
             statement.close();
+            roleStatement.close();
             conn.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -43,6 +43,12 @@ public class CriaUsuarios {
             userStatement.setString(2, encoder.encode("site"));
             userStatement.setBoolean(3, true);
             userStatement.execute();
+            
+            userStatement = conn.prepareStatement(userSql);
+            userStatement.setString(1, "peralta@site");
+            userStatement.setString(2, encoder.encode("admin"));
+            userStatement.setBoolean(3, true);
+            userStatement.execute();
 
             roleStatement = conn.prepareStatement(roleSql);
             roleStatement.setString(1, "site@site");

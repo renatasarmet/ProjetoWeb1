@@ -42,7 +42,7 @@ public class TeatroDAO {
 
     public void insert(Teatro teatro) {
         Usuario usuario = new Usuario(teatro.getEmail(),teatro.getSenha(),teatro.getAtivo());
-        teatro.setId_Usuario(daoUsuario.insert(usuario));
+        teatro.setId_Usuario(daoUsuario.insert(usuario,2));
         String sql = "INSERT INTO Teatro (id_usuario, CNPJ, nome, cidade) VALUES (?, ?, ?, ?)";
         try {
             Connection conn = this.getConnection();

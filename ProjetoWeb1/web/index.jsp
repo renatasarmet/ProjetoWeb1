@@ -1,23 +1,33 @@
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<html>
-    <body>
-        <h2>Bemvindo
-            <%=request.getUserPrincipal().getName().toString()%>
-        </h2>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
+<% request.setAttribute("user_email", request.getUserPrincipal().getName().toString()); %>
+
+<t:genericpage>
+    <jsp:attribute name="header"></jsp:attribute>
+    <jsp:attribute name="footer"></jsp:attribute>
+    <jsp:attribute name="head_include">
+        <link rel="stylesheet" href="css/main.css" type="text/css"/>
+    </jsp:attribute>
+    <jsp:attribute name="title"></jsp:attribute>
+    <jsp:body>
+        <h2>Bemvindo ${user_email}</h2>
         <sec:authorize access="hasRole('ADMIN')">
-
-            Este conteúdo só será visível para usuários que desempenhem 
-            o papel "ADMIN" <br/><br/>
-
-            <a href="admin/admin.jsp">Área de Administrador</a>
+            <jsp:include page="/usuario/admin.jsp"></jsp:include>
         </sec:authorize>
 
         <sec:authorize access="hasRole('USER')">
-            Este conteúdo só será visível para usuários que desempenhem 
-            o papel "USER" <br/><br/>
-
-            <a href="user/user.jsp">Área de Usuário</a>
+            <jsp:include page="/usuario/user.jsp"></jsp:include>
         </sec:authorize>
-    </body>
-</html>
+            
+        <sec:authorize access="hasRole('TEATRO')">
+            <jsp:include page="/usuario/teatro.jsp"></jsp:include>
+        </sec:authorize>
+        
+        <sec:authorize access="hasRole('SITE')">
+            <jsp:include page="/usuario/site.jsp"></jsp:include>
+        </sec:authorize>
+        <a href="logout">Logout</a>
+    </jsp:body>
+</t:genericpage>

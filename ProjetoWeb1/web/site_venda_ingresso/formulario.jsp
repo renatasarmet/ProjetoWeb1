@@ -8,27 +8,34 @@
          pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<%@taglib prefix="f" tagdir="/WEB-INF/tags"%>
+
+<f:formulario model="${site}" model_id="${site.id}" model_null="${site == null}">
+
+    <jsp:attribute name="head_title_form">
         <fmt:bundle basename="i18n.mensagem">
-        <title><fmt:message key="site_de_promocoes"/></title>
+            <fmt:message key="site_de_promocoes"/>
         </fmt:bundle>
-    </head>
-    <body>
+    </jsp:attribute>
+
+    <jsp:attribute name="head_include_form">
+        <script type="text/javascript" src="../js/form_site.js"></script>
+    </jsp:attribute>
+
+    <jsp:attribute name="titulo_form">
         <fmt:bundle basename="i18n.mensagem">
-    <center>
-        <h1><fmt:message key="cadastro_site_venda_ingresso"/></h1>
-    </center>
-    <div align="center">
-        <c:if test="${site == null}">
-            <form action="insercao" method="post">
-        </c:if>
-        <c:if test="${site != null}">
-            <form action="atualizacao" method="post">
-                <input type="hidden" name="id" value="<c:out value='${site.id}' />" />
-        </c:if>
-        <table border="1" cellpadding="5">
+            <c:if test="${site != null}">
+                <fmt:message key="edicao_site_venda_ingresso"/>
+            </c:if>
+            <c:if test="${site == null}">
+                <fmt:message key="cadastro_site_venda_ingresso"/>
+            </c:if>
+        </fmt:bundle>
+    </jsp:attribute>
+
+    <jsp:body>
+        <fmt:bundle basename="i18n.mensagem">
+            <table border="1" cellpadding="5">
             <tr>
                 <th><fmt:message key="email"/></th>
                 <td>
@@ -71,9 +78,6 @@
                 </td>
             </tr>
         </table>
-    </form>
-</div>
-</fmt:bundle>
-</body>
-</html>
-
+        </fmt:bundle>
+    </jsp:body>
+</f:formulario>

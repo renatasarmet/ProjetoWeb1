@@ -48,6 +48,8 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .httpBasic()
                 .and()
+		.exceptionHandling().accessDeniedPage("/erro/403")
+                .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
     }

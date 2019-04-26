@@ -21,8 +21,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><jsp:invoke fragment="title"/></title>
+        <fmt:bundle basename="i18n.mensagem">
+        <title><jsp:invoke fragment="title"/> <fmt:message key="titulo_principal"/></title>
         <jsp:invoke fragment="head_include"/>
+        </fmt:bundle>
     </head>
     <body>
         <div id="header-gen">
@@ -59,14 +61,20 @@
                         <li><a href="/ProjetoWeb1/promocao/cadastro">
                                 <fmt:message key="cadastro_de_promocoes"/>
                             </a></li>
-                            <%--TODO: editar próprias infos --%>
+                        <li id="item-delimitador"></li>
+                        <li><a href="/ProjetoWeb1/teatro_crud/editar">
+                                <fmt:message key="editar_minha_conf"/>
+                            </a></li>
                         </sec:authorize>
 
                     <sec:authorize access="hasRole('SITE')">
                         <li><a href="/ProjetoWeb1/promocao/filtrar_url">
                             <fmt:message key="minhas_promocoes"/>
                             </a></li>
-                            <%--TODO: editar próprias infos--%>
+                        <li id="item-delimitador"></li>
+                        <li><a href="/ProjetoWeb1/site_venda_crud/editar">
+                                <fmt:message key="editar_minha_conf"/>
+                            </a></li>
                         </sec:authorize>
                     <li><a href="/ProjetoWeb1/logout"><fmt:message key="logout"/></a></li>
                 </fmt:bundle>

@@ -48,4 +48,12 @@ body{
 #conteudo-gen {
     margin-left: 18%;
     padding: 2%;
+    
+}
+
+#item-delimitador {
+    margin: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border-bottom: solid;
 }

@@ -83,6 +83,29 @@ public class TeatroDAO {
         }
         return t;
     }
+    public Teatro getByEmail(String email){
+        Usuario usuario = daoUsuario.getByEmail(email);
+        Teatro t = null;
+        String query = "SELECT * FROM Teatro WHERE id_usuario = ?";
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setInt(1, usuario.getId());
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()){
+                String cnpj = resultSet.getString("cnpj");
+                String nome = resultSet.getString("nome");
+                String cidade = resultSet.getString("cidade");
+                t = new Teatro(usuario.getId(), usuario.getEmail(), usuario.getSenha(), cnpj, nome, cidade);
+            }
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return t;
+    }
     
     public List<Teatro> getAll() {
         List<Teatro> listaTeatro = new ArrayList<>();

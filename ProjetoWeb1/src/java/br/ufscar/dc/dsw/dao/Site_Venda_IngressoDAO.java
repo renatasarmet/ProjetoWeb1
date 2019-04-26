@@ -105,6 +105,30 @@ public class Site_Venda_IngressoDAO {
         }
         return site;
     }
+    public Site_Venda_Ingresso getByEmail(String email) {
+        Usuario usuario = daoUsuario.getByEmail(email);
+        Site_Venda_Ingresso site = null;
+        String sql = "SELECT * FROM Site_Venda_Ingresso WHERE id_usuario = ?";
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, usuario.getId());
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                String url = resultSet.getString("url");
+                String nome = resultSet.getString("nome");
+                String telefone = resultSet.getString("telefone");
+                site = new Site_Venda_Ingresso(usuario.getId(), email, usuario.getSenha(), url, nome, telefone);
+            }
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return site;
+    }
+    
     public String getURL(String email) {
         String url = "";
         String sql = "SELECT url FROM Site_Venda_Ingresso, Usuario WHERE id_usuario = id and email = ?";

@@ -8,6 +8,7 @@ package br.ufscar.dc.dsw.controller;
 import br.ufscar.dc.dsw.dao.Site_Venda_IngressoDAO;
 import br.ufscar.dc.dsw.dao.UsuarioDAO;
 import br.ufscar.dc.dsw.model.Site_Venda_Ingresso;
+import br.ufscar.dc.dsw.model.Teatro;
 import br.ufscar.dc.dsw.model.Usuario;
 import java.io.IOException;
 import java.util.List;
@@ -17,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  *
@@ -56,6 +58,9 @@ public class Site_Venda_IngressoController extends HttpServlet {
                 case "edicao":
                     apresentaFormEdicao(request, response);
                     break;
+                case "editar":
+                    editarFormulario(request, response);
+                    break;
                 case "atualizacao":
                     atualize(request, response);
                     break;
@@ -80,13 +85,26 @@ public class Site_Venda_IngressoController extends HttpServlet {
             throws IOException {
         request.setCharacterEncoding("UTF-8");
         String email = request.getParameter("email");
-        String senha = request.getParameter("senha");
+        String senha1 = request.getParameter("senha1Site");
+        String senha2 = request.getParameter("senha2Site");
         String url = request.getParameter("url");
         String nome = request.getParameter("nome");
         String telefone = request.getParameter("telefone");
-        Site_Venda_Ingresso site = new Site_Venda_Ingresso(email,senha,url,nome,telefone);
-        dao.insert(site);
-        response.sendRedirect("lista");
+        if (senha1.equals(senha2)) {
+            Site_Venda_Ingresso site = new Site_Venda_Ingresso(email, senha2, url, nome, telefone);
+            dao.insert(site);
+            response.sendRedirect("lista");
+        }
+    }
+    private void editarFormulario(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        if(request.getUserPrincipal().getName().toString() != null){
+            Site_Venda_Ingresso site = dao.getByEmail(request.getUserPrincipal().getName().toString());
+            request.setAttribute("site", site);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/site_venda_ingresso/formulario.jsp");
+            dispatcher.forward(request, response);
+        }
+        
     }
 
     private void lista(HttpServletRequest request, HttpServletResponse response)
@@ -109,15 +127,21 @@ public class Site_Venda_IngressoController extends HttpServlet {
     private void atualize(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         request.setCharacterEncoding("UTF-8");
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         int id_usuario = Integer.parseInt(request.getParameter("id"));
         String url = request.getParameter("url");
         String nome = request.getParameter("nome");
         String telefone = request.getParameter("telefone");
-        String senha = request.getParameter("senha");
+        String senhaEncode = request.getParameter("senhaEncode");
+        String senhaold = request.getParameter("senhaAntigaSite");
+        String senha1 = request.getParameter("senha1Site");
+        String senha2 = request.getParameter("senha2Site");
         String email = request.getParameter("email");
-        Site_Venda_Ingresso site = new Site_Venda_Ingresso(id_usuario, email, senha, url, nome, telefone);
-        dao.update(site);
-        response.sendRedirect("lista");
+        if (encoder.matches(senhaold, senhaEncode) && senha1.equals(senha2)) {
+            Site_Venda_Ingresso site = new Site_Venda_Ingresso(id_usuario, email, senha1, url, nome, telefone);
+            dao.update(site);
+            response.sendRedirect("lista");
+        }
     }
 
     private void remove(HttpServletRequest request, HttpServletResponse response)

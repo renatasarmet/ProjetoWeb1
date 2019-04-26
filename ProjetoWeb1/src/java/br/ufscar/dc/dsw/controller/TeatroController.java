@@ -18,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  *
@@ -53,6 +54,9 @@ public class TeatroController extends HttpServlet {
             switch (action) {
                 case "cadastro":
                     apresentaFormCadastro(request, response);
+                    break;
+                case "editar":
+                    editarFormulario(request, response);
                     break;
                 case "insercao":
                     insere(request, response);
@@ -124,19 +128,32 @@ public class TeatroController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/teatro/formulario.jsp");
         dispatcher.forward(request, response);
     }
+    
+    private void editarFormulario(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        if(request.getUserPrincipal().getName().toString() != null){
+            Teatro t = dao.getByEmail(request.getUserPrincipal().getName().toString());
+            request.setAttribute("teatro", t);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/teatro/formulario.jsp");
+            dispatcher.forward(request, response);
+        }
+        
+    }
 
     private void insere(HttpServletRequest request, HttpServletResponse response)
             throws UnsupportedEncodingException, IOException {
         request.setCharacterEncoding("UTF-8");
         String email = request.getParameter("email");
-        String senha = request.getParameter("senha");
+        String senha1 = request.getParameter("senha1Teatro");
+        String senha2 = request.getParameter("senha2Teatro");
         String CNPJ = request.getParameter("CNPJ");
         String nome = request.getParameter("nome");
         String cidade = request.getParameter("cidade");
-        
-        Teatro t = new Teatro(email, senha, CNPJ, nome, cidade);
-        dao.insert(t);
-        response.sendRedirect("lista");
+        if(senha1.equals(senha2)){
+            Teatro t = new Teatro(email, senha2, CNPJ, nome, cidade);
+            dao.insert(t);
+            response.sendRedirect("lista");
+        }
     }
 
     private void lista(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -148,17 +165,24 @@ public class TeatroController extends HttpServlet {
 
     private void atualiza(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, IOException {
         request.setCharacterEncoding("UTF-8");
+        
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         int id = Integer.parseInt(request.getParameter("id"));
         String email = request.getParameter("email");
-        String senha = request.getParameter("senha");
+        String senhaEncode = request.getParameter("senhaEncode");
+        String senhaold = request.getParameter("senhaAntigaTeatro");
+        String senha1 = request.getParameter("senha1Teatro");
+        String senha2 = request.getParameter("senha2Teatro");
         String CNPJ = request.getParameter("CNPJ");
         String nome = request.getParameter("nome");
         String cidade = request.getParameter("cidade");
-        
-        Teatro t = new Teatro(id,email, senha, CNPJ, nome, cidade);
-        dao.update(t);
-        response.sendRedirect("lista");
+        if(encoder.matches(senhaold,senhaEncode ) && senha1.equals(senha2)){
+            Teatro t = new Teatro(id,email, senha2, CNPJ, nome, cidade);
+            dao.update(t);
+            response.sendRedirect("lista");
+        }
     }
+    
     private void filtra_cidade(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Teatro> listaTeatro = dao.getTeatrosCidade(request.getParameter("cidade_desejado"));

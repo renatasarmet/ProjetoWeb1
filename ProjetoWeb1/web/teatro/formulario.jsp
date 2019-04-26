@@ -42,11 +42,25 @@
                                value="<c:out value='${teatro.email}' />"/>
                     </td>
                 </tr>
+                <c:if test="${teatro != null}">
+                    <tr>
+                        <th>Senha antiga</th>
+                        <td>
+                            <input  type="hidden" name="senhaEncode" size="45" id="senhaEncode" value="<c:out value='${teatro.senha}' />" />
+                            <input type="password" name="senhaAntigaTeatro" size="45" id="senhaAntigaTeatro"/>
+                        </td>
+                    </tr>
+                </c:if>
                 <tr>
-                    <th><fmt:message key="senha"/></th>
+                    <th>Senha Nova</th>
                     <td>
-                        <input type="password" name="senha" size="45" id="senhaTeatro"
-                               value="<c:out value='${teatro.senha}' />"/>
+                        <input type="password" name="senha1Teatro" size="45" id="senha1Teatro"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Senha confirma</th>
+                    <td>
+                        <input type="password" name="senha2Teatro" size="45" id="senha2Teatro"/>
                     </td>
                 </tr>
                 <c:if test="${teatro == null}">

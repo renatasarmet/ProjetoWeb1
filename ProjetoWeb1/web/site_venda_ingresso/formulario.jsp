@@ -43,13 +43,27 @@
                            value="<c:out value='${site.email}' />"/>
                 </td>
             </tr>
-            <tr>
-                <th><fmt:message key="senha"/></th>
-                <td>
-                    <input type="text" name="senha" size="45"
-                           value="<c:out value='${site.senha}' />"/>
-                </td>
-            </tr>
+            <c:if test="${site != null}">
+                    <tr>
+                        <th>Senha antiga</th>
+                        <td>
+                            <input  type="hidden" name="senhaEncode" size="45" id="senhaEncode" value="<c:out value='${site.senha}' />" />
+                            <input type="password" name="senhaAntigaSite" size="45" id="senhaAntigaSite"/>
+                        </td>
+                    </tr>
+                </c:if>
+                <tr>
+                    <th>Senha Nova</th>
+                    <td>
+                        <input type="password" name="senha1Site" size="45" id="senha1Site"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Senha confirma</th>
+                    <td>
+                        <input type="password" name="senha2Site" size="45" id="senha2Site"/>
+                    </td>
+                </tr>
             <tr>
                 <th><fmt:message key="url"/></th>
                 <td>

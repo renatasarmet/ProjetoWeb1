@@ -38,7 +38,6 @@
             <table border="1" cellpadding="5">
                 <tr>
                     <th><fmt:message key="email"/></th>
-                    <th><fmt:message key="senha"/></th>
                     <th><fmt:message key="cnpj"/></th>
                     <th><fmt:message key="nome"/></th>
                     <th><fmt:message key="cidade"/></th>
@@ -49,7 +48,6 @@
             <c:forEach var="teatro" items="${listaTeatros}">
                 <tr>
                     <td><c:out value="${teatro.email}" /></td>
-                    <td><c:out value="${teatro.senha}" /></td>
                     <td><c:out value="${teatro.CNPJ}" /></td>
                     <td><c:out value="${teatro.nome}" /></td>
                     <td><c:out value="${teatro.cidade}" /></td>

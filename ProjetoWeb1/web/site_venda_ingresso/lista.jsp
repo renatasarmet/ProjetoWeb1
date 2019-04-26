@@ -32,7 +32,6 @@
                 <tr>
                     <th><fmt:message key="id"/></th>
                     <th><fmt:message key="email"/></th>
-                    <th><fmt:message key="senha"/></th>
                     <th><fmt:message key="url"/></th>
                     <th><fmt:message key="nome"/></th>
                     <th><fmt:message key="telefone"/></th>
@@ -44,8 +43,6 @@
                 <tr>
                     <td><c:out value="${site.id}" /></td>
                     <td><c:out value="${site.email}" /></td>
-                    <td><c:out value="${site.senha}" /></td>
-    <!--                <td><c:out value="${site.ativo}" /></td>-->
                     <td><c:out value="${site.url}" /></td>
                     <td><c:out value="${site.nome}" /></td>
                     <td><c:out value="${site.telefone}" /></td>

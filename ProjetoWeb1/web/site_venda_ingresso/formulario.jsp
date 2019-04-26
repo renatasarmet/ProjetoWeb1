@@ -53,7 +53,7 @@
                     </tr>
                 </c:if>
                 <tr>
-                    <th>Senha Nova</th>
+                    <th>Senha</th>
                     <td>
                         <input type="password" name="senha1Site" size="45" id="senha1Site"/>
                     </td>

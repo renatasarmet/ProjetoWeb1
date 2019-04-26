@@ -35,14 +35,6 @@
     <jsp:body>
         <fmt:bundle basename="i18n.mensagem">
             <table border="1" cellpadding="5">
-                <h2>
-                    <c:if test="${teatro != null}">
-                        <fmt:message key="edicao_de_teatro"/>
-                    </c:if>
-                    <c:if test="${teatro == null}">
-                        <fmt:message key="cadastro_de_teatro"/>
-                    </c:if>
-                </h2>
                 <tr>
                     <th><fmt:message key="email"/></th>
                     <td>

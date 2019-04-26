@@ -49,6 +49,7 @@ public class PromocaoController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
         String action = request.getRequestURI();
+        log(action);
         action = action.split("/")[action.split("/").length - 1];
         try {
             switch (action) {

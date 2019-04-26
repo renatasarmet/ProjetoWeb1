@@ -24,6 +24,5 @@
         <sec:authorize access="hasRole('SITE')">
             <jsp:include page="/usuario/site.jsp"></jsp:include>
         </sec:authorize>
-        <a href="logout">Logout</a>
     </jsp:body>
 </t:genericpage>

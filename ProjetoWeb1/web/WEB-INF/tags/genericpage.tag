@@ -13,6 +13,7 @@
 <%@attribute name="footer" fragment="true"%>
 <%@attribute name="title" fragment="true"%>
 
+<% request.setAttribute("user_email", request.getUserPrincipal().getName().toString());%>
 
 <%-- any content can be specified here e.g.: --%>
 <html>
@@ -24,23 +25,25 @@
     <body>
         <div id="header-gen">
             <ul>
-                <li><a>Usuário</a></li>
-                <sec:authorize access="hasRole('ADMIN')">
-                    <li><a href="promocao/cadastro">Cadastrar promoção</a></li>
-                    <li><a href="site_venda_crud/cadastro">Cadastrar site de venda</a></li>
-                    <li><a href="teatro_crud/cadastro">Cadastrar teatro</a></li>
-                    <%--TODO: editar próprias infos --%>
-                </sec:authorize>
+                <li>${user_email}</li>
+                <li><a href="/ProjetoWeb1">Home</a></li>
+                    <sec:authorize access="hasRole('ADMIN')">
+                    <li><a href="/ProjetoWeb1/promocao/cadastro">Cadastrar promoção</a></li>
+                    <li><a href="/ProjetoWeb1/site_venda_crud/cadastro">Cadastrar site de venda</a></li>
+                    <li><a href="/ProjetoWeb1/teatro_crud/cadastro">Cadastrar teatro</a></li>
+                        <%--TODO: editar próprias infos --%>
+                    </sec:authorize>
 
                 <sec:authorize access="hasRole('TEATRO')">
-                    <li><a href="promocao/cadastro">Cadastrar Promoção</a></li>
-                    <%--TODO: editar próprias infos --%>
-                </sec:authorize>
+                    <li><a href="/ProjetoWeb1/promocao/cadastro">Cadastrar Promoção</a></li>
+                        <%--TODO: editar próprias infos --%>
+                    </sec:authorize>
 
                 <sec:authorize access="hasRole('SITE')">
-                    <li><a href="promocao/filtrar_url">Minhas promoções</a></li>
-                    <%--TODO: editar próprias infos--%>
-                </sec:authorize>
+                    <li><a href="/ProjetoWeb1/promocao/filtrar_url">Minhas promoções</a></li>
+                        <%--TODO: editar próprias infos--%>
+                    </sec:authorize>
+                <li><a href="/ProjetoWeb1/logout">Logout</a></li>
             </ul>
             <jsp:invoke fragment="header"/>
         </div>

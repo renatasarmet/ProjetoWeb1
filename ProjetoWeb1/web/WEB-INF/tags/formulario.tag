@@ -32,11 +32,11 @@
                 <jsp:invoke fragment="titulo_form"/>
             </h2>
             <c:if test="${!model_null}">
-                <form action="atualizacao">
+                <form class="criacao" action="atualizacao">
                     <input type="hidden" name="id" value="<c:out value='${model_id}' />" />
             </c:if>
             <c:if test="${model_null}">
-                <form action="insercao" onsubmit="return validaForm()">
+                <form class="edicao" action="insercao" onsubmit="return validaForm()">
             </c:if>
             <jsp:doBody/>
         </form>

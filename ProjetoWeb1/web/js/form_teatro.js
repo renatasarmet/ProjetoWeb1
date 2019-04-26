@@ -6,7 +6,7 @@
 
 function validaForm() {
     valido = true;
-    formData = new FormData($('form')[0]);
+    formData = new FormData($('.criacao', '.edicao')[0]);
     for (var pair of formData.entries()) {
         console.log("key: " + pair[0] + ", val: " + pair[1]);
     }

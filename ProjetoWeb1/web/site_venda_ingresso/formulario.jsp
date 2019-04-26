@@ -1,5 +1,5 @@
 <%-- 
-    Document   : formulario
+    Document   : formulario site
     Created on : Apr 15, 2019, 12:10:53 AM
     Author     : Leonardo
 --%>
@@ -39,7 +39,7 @@
             <tr>
                 <th><fmt:message key="email"/></th>
                 <td>
-                    <input type="text" name="email" size="45"
+                    <input type="text" name="email" size="45" id="siteEmail"
                            value="<c:out value='${site.email}' />"/>
                 </td>
             </tr>
@@ -53,13 +53,13 @@
                     </tr>
                 </c:if>
                 <tr>
-                    <th>Senha</th>
+                    <th><fmt:message key="senha"/></th>
                     <td>
                         <input type="password" name="senha1Site" size="45" id="senha1Site"/>
                     </td>
                 </tr>
                 <tr>
-                    <th>Senha confirma</th>
+                    <th><fmt:message key="confirma_senha"/></th>
                     <td>
                         <input type="password" name="senha2Site" size="45" id="senha2Site"/>
                     </td>
@@ -67,21 +67,21 @@
             <tr>
                 <th><fmt:message key="url"/></th>
                 <td>
-                    <input type="text" name="url" size="45"
+                    <input type="text" name="url" size="45" id="siteURL"
                            value="<c:out value='${site.url}' />"/>
                 </td>
             </tr>
             <tr>
                 <th><fmt:message key="nome"/></th>
                 <td>
-                    <input type="text" name="nome" size="45"
+                    <input type="text" name="nome" size="45" id="siteNome"
                            value="<c:out value='${site.nome}' />"/>
                 </td>
             </tr>
             <tr>
                 <th><fmt:message key="telefone"/></th>
                 <td>
-                    <input type="text" name="telefone" size="45"
+                    <input type="text" name="telefone" size="45" id="siteTelefone"
                            value="<c:out value='${site.telefone}' />"
                            />
                 </td>

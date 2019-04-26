@@ -68,6 +68,8 @@ public class Site_Venda_IngressoController extends HttpServlet {
                     remove(request, response);
                     break;
                 default:
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/error/404.jsp");
+                    dispatcher.forward(request, response);
                     break;
             }
         } catch (RuntimeException | IOException | ServletException e) {

@@ -1,12 +1,13 @@
 <%-- 
     Document   : lista sites de venda de ingresso
     Created on : Apr 15, 2019, 10:24:03 AM
-    Author     : root
+    Author     : Leonardo
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@taglib tagdir="/WEB-INF/tags" prefix="l" %>
 
 <l:listatag lista="${listaSites}" lista_vazia="${empty listaSites}" >
@@ -21,7 +22,9 @@
             <h1><fmt:message key="lista_site_venda_ingresso"/></h1>
             <c:if test="${empty listaSites}">
                 <h2><fmt:message key="nao_ha_site"/></h2>
-                <a href="cadastro"><fmt:message key="inserir"/></a>
+                <sec:authorize access="hasRole('TEATRO')">
+                    <a href="cadastro"><fmt:message key="inserir"/></a>
+                </sec:authorize>
             </c:if>
         </fmt:bundle>
     </jsp:attribute>

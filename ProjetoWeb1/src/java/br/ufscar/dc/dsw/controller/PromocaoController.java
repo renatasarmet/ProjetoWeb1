@@ -78,6 +78,8 @@ public class PromocaoController extends HttpServlet {
                     filtra_cnpj(request, response);
                     break;
                 default:
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/error/404.jsp");
+                    dispatcher.forward(request, response);
                     break;
             }
         } catch (RuntimeException | IOException | ServletException e) {

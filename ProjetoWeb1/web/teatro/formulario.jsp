@@ -52,13 +52,13 @@
                     </tr>
                 </c:if>
                 <tr>
-                    <th>Senha</th>
+                    <th><fmt:message key="senha"/></th>
                     <td>
                         <input type="password" name="senha1Teatro" size="45" id="senha1Teatro"/>
                     </td>
                 </tr>
                 <tr>
-                    <th>Senha confirma</th>
+                    <th><fmt:message key="confirma_senha"/></th>
                     <td>
                         <input type="password" name="senha2Teatro" size="45" id="senha2Teatro"/>
                     </td>

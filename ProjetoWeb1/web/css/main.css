@@ -26,7 +26,7 @@ body{
 }
 
 #header-gen li {
-    text-align: center;
+    text-align: left;
 }
 
 #header-gen li a{
@@ -39,6 +39,10 @@ body{
 #header-gen li a:hover{
     background-color: #555;
     color: white;
+}
+
+#header-gen .user_navbar {
+    padding: 8px 16px;
 }
 
 #conteudo-gen {

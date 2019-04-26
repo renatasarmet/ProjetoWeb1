@@ -24,6 +24,7 @@ public class ErrorController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException {
@@ -32,14 +33,10 @@ public class ErrorController extends HttpServlet {
         try {
             switch (action) {
                 case "403":
-                    if(request.getUserPrincipal().getName() != null){
-                        String email = request.getUserPrincipal().getName().toString();
-                        log("Acesso invalido de :" + email);
-                    }else{
-                        log("Acesso invalido anônimo");
-                    }
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/error/403.jsp");
-                    dispatcher.forward(request, response);
+                    handle403(request, response);
+                    break;
+                case "404":
+                    handle404(request, response);
                     break;
                 default:
                     break;
@@ -47,5 +44,22 @@ public class ErrorController extends HttpServlet {
         } catch (RuntimeException | IOException | ServletException e) {
             throw new ServletException(e);
         }
+    }
+
+    private void handle403(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getUserPrincipal().getName() != null) {
+            String email = request.getUserPrincipal().getName().toString();
+            log("Erro 403 - Acesso invalido de: " + email);
+        } else {
+            log("Erro 403 -Acesso invalido anônimo");
+        }
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/error/403.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void handle404(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        log("Erro 404 - Não encontrado!");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/error/404.jsp");
+        dispatcher.forward(request, response);
     }
 }

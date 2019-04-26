@@ -6,35 +6,43 @@
 
 function validaForm() {
     valido = true;
-    formData = new FormData($('form')[0]);
+    formData = new FormData($('.criacao, .edicao')[0]);
     for (var pair of formData.entries()) {
         console.log("key: " + pair[0] + ", val: " + pair[1]);
     }
     
-    if(!validaURL(formData['url'])) {
-        $('#cnpjPromocao').css("border-color", "red");
-    }
-    
-    if (!validaCNPJ($('#cnpjPromocao').val())) {
-        $('#cnpjPromocao').css("border-color", "red");
-        valido = false;
-    } else {
-        $('#cnpjPromocao').css("border", "none");
-    }
-
-    if (!validaInputTexto(formData['nome'])) {
+    // key: nome
+    if (!validaInputTexto(formData.get('nome'))) {
         $('#nomePromocao').css("border-color", "red");
         valido = false;
     } else {
         $('#nomePromocao').css("border", "none");
     }
-
-    if (!validaInputTexto(formData['cidade'])) {
-        $('#cidadePromocao').css("border-color", "red");
+    
+    // key: preço
+    if (!validaNaoVazio(formData.get('preco'))) {
+        $('#precoPromocao').css("border-color", "red");
         valido = false;
     } else {
-        $('#cidadePromocao').css("border", "none");
+        $('#precoPromocao').css("border", "none");
     }
+    
+    // key: data
+    if (!validaNaoVazio(formData.get('data_sessao'))) {
+        $('#dataPromocao').css("border-color", "red");
+        valido = false;
+    } else {
+        $('#dataPromocao').css("border", "none");
+    }
+    
+    // key: horario
+    if (!validaNaoVazio(formData.get('horario_sessao'))) {
+        $('#horarioPromocao').css("border-color", "red");
+        valido = false;
+    } else {
+        $('#horarioPromocao').css("border", "none");
+    }
+
     if (!valido)
         alert("invalido!")
     return(valido);

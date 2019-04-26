@@ -6,11 +6,11 @@
 
 function validaEmail(email) {
     var expReg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return expReg.test(String(email).toLowerCase());
+    return (validaNaoVazio(email) && expReg.test(String(email).toLowerCase()));
 }
 
 function validaNaoVazio(texto) {
-    if (texto === '')
+    if (texto === '' || texto === undefined)
         return false;
 
     return true;

@@ -73,6 +73,8 @@ public class TeatroController extends HttpServlet {
                 case "remocao":
                     remove(request, response);
                 default:
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/error/404.jsp");
+                    dispatcher.forward(request, response);
                     break;
             }
         } catch (RuntimeException | IOException | ServletException e) {

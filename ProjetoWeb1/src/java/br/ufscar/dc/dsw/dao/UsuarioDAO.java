@@ -114,15 +114,38 @@ public class UsuarioDAO {
         }
         return usuario;
     }
+    public Usuario getByEmail(String email) {
+        Usuario usuario = null;
+        String sql = "SELECT * FROM Usuario WHERE email = ?";
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String senha = resultSet.getString("senha");
+                int ativo = resultSet.getInt("ativo");
+                usuario = new Usuario(id, email, senha, ativo);
+            }
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return usuario;
+    }
 
     public void update(Usuario usuario) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String sql = "UPDATE Usuario SET email = ?, senha = ?, ativo = ?";
         sql += " WHERE id = ?";
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, usuario.getEmail());
-            statement.setString(2, usuario.getSenha());
+            statement.setString(2, encoder.encode(usuario.getSenha()));
             statement.setInt(3, usuario.getAtivo());
             statement.setInt(4, usuario.getId());
             statement.executeUpdate();

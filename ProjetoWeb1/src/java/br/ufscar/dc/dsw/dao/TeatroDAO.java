@@ -109,6 +109,31 @@ public class TeatroDAO {
         }
         return listaTeatro;
     }
+    public List<Teatro> getTeatrosCidade(String cidade) {
+        List<Teatro> listaTeatro = new ArrayList<>();
+        String query = "SELECT id, email, senha, cnpj, nome, cidade FROM Teatro,Usuario where id = id_usuario and cidade = ?";
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setString(1, cidade);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String email = resultSet.getString("email");
+                String senha = resultSet.getString("senha");
+                String CNPJ = resultSet.getString("CNPJ");
+                String nome = resultSet.getString("nome");
+                Teatro teatro = new Teatro(id, email, senha, CNPJ, nome, cidade);
+                listaTeatro.add(teatro);
+            }
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaTeatro;
+    }
 
     public void update(Teatro t) {
         Usuario usuario = new Usuario(t.getId_Usuario(),t.getEmail(),t.getSenha(),t.getAtivo());

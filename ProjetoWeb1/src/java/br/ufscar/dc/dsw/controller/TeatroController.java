@@ -6,6 +6,7 @@
 package br.ufscar.dc.dsw.controller;
 
 import br.ufscar.dc.dsw.dao.TeatroDAO;
+import br.ufscar.dc.dsw.model.Promocao;
 import br.ufscar.dc.dsw.model.Teatro;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -58,6 +59,9 @@ public class TeatroController extends HttpServlet {
                     break;
                 case "lista":
                     lista(request, response);
+                    break;
+                case "filtrar_cidade":
+                    filtra_cidade(request, response);
                     break;
                 case "atualizacao":
                     atualiza(request, response);
@@ -154,6 +158,13 @@ public class TeatroController extends HttpServlet {
         Teatro t = new Teatro(id,email, senha, CNPJ, nome, cidade);
         dao.update(t);
         response.sendRedirect("lista");
+    }
+    private void filtra_cidade(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<Teatro> listaTeatro = dao.getTeatrosCidade(request.getParameter("cidade_desejado"));
+        request.setAttribute("listaTeatros", listaTeatro);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/teatro/lista.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void remove(HttpServletRequest request, HttpServletResponse response) throws IOException {

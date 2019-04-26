@@ -29,6 +29,11 @@
     </jsp:attribute>
 
     <jsp:body>
+            <form action="filtrar_cidade" method="post">
+                <label>Cidade:</label>
+                <input type="text" name="cidade_desejado" size="45" />
+                <input type="submit" value=<fmt:message key="pesquisar"/> />
+            </form>
         <fmt:bundle basename="i18n.mensagem">
             <table border="1" cellpadding="5">
                 <caption><h2><fmt:message key="lista_de_teatros"/></h2></caption>
@@ -52,7 +57,7 @@
                     </tr>
                 </c:forEach>
                 <a href="cadastro"><fmt:message key="cadastrar_novo_teatro"/></a>
-            </c:if>
+            
         </table>
         </fmt:bundle>
     </jsp:body>

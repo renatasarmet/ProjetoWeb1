@@ -11,7 +11,7 @@
     <jsp:attribute name="header"></jsp:attribute>
     <jsp:attribute name="footer"></jsp:attribute>
     <jsp:attribute name="head_include">
-        <link rel="stylesheet" href="css/main.css" type="text/css"/>
+        <link rel="stylesheet" href="../css/main.css" type="text/css"/>
     </jsp:attribute>
     <jsp:attribute name="title">Forbidden</jsp:attribute>
     <jsp:body>

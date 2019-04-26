@@ -22,7 +22,7 @@
         <jsp:invoke fragment="head_title_form"/>
     </jsp:attribute>
     <jsp:attribute name="head_include">
-        <jsp:include page="/helpers/common_head_include.jsp"></jsp:include>
+        <script type="text/javascript" src="../js/validacao.js"></script>
         <jsp:invoke fragment="head_include_form"/>
         <link rel="stylesheet" href="../css/main.css" type="text/css"/>
     </jsp:attribute>

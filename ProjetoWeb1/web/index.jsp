@@ -16,10 +16,6 @@
         <sec:authorize access="hasRole('ADMIN')">
             <jsp:include page="/usuario/admin.jsp"></jsp:include>
         </sec:authorize>
-
-        <sec:authorize access="hasRole('USER')">
-            <jsp:include page="/usuario/user.jsp"></jsp:include>
-        </sec:authorize>
             
         <sec:authorize access="hasRole('TEATRO')">
             <jsp:include page="/usuario/teatro.jsp"></jsp:include>

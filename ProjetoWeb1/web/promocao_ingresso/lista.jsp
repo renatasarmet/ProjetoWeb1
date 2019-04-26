@@ -49,22 +49,26 @@
                     <th><fmt:message key="preco"/></th>
                     <th><fmt:message key="data_sessao"/></th>
                     <th><fmt:message key="horario_sessao"/></th>
+                <sec:authorize access="hasRole('ADMIN')">
                     <th colspan="2" ><fmt:message key="opcoes"/></th>
-                </tr>
-                <c:forEach var="promo" items="${listaPromocao}">
-                    <tr>
-                        <td><c:out value="${promo.id}" /></td>
-                        <td><c:out value="${promo.url}" /></td>
-                        <td><c:out value="${promo.cnpj}" /></td>
-                        <td><c:out value="${promo.nome}" /></td>
-                        <td><c:out value="${promo.preco}" /></td>
-                        <td><c:out value="${promo.data_sessao}" /></td>
-                        <td><c:out value="${promo.horario_sessao}" /></td>
-                        <td><a href="edicao?id=<c:out value='${promo.id}' />"><fmt:message key="edicao"/></a></td>
-                        <td><a href="remocao?id=<c:out value='${promo.id}' />"onclick="return confirm('Deseja excluir esse item?');"><fmt:message key="remocao"/></a></td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </fmt:bundle>
-    </jsp:body>
+                </sec:authorize>
+            </tr>
+            <c:forEach var="promo" items="${listaPromocao}">
+                <tr>
+                    <td><c:out value="${promo.id}" /></td>
+                    <td><c:out value="${promo.url}" /></td>
+                    <td><c:out value="${promo.cnpj}" /></td>
+                    <td><c:out value="${promo.nome}" /></td>
+                    <td><c:out value="${promo.preco}" /></td>
+                    <td><c:out value="${promo.data_sessao}" /></td>
+                    <td><c:out value="${promo.horario_sessao}" /></td>
+                <sec:authorize access="hasRole('ADMIN')">
+                    <td><a href="edicao?id=<c:out value='${promo.id}' />"><fmt:message key="edicao"/></a></td>
+                    <td><a href="remocao?id=<c:out value='${promo.id}' />"onclick="return confirm('Deseja excluir esse item?');"><fmt:message key="remocao"/></a></td>
+                </sec:authorize>
+            </tr>
+        </c:forEach>
+    </table>
+</fmt:bundle>
+</jsp:body>
 </l:listatag>

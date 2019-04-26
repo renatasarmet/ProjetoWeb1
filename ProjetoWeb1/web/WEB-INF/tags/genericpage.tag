@@ -24,22 +24,23 @@
     <body>
         <div id="header-gen">
             <ul>
-                <li>Usuário</li>
-                <%--<sec:authorize access="hasRole('ADMIN')">--%>
-                <%-- TODO: todas as opções --%>
-                <%--</sec:authorize>--%>
+                <li><a>Usuário</a></li>
+                <sec:authorize access="hasRole('ADMIN')">
+                    <li><a href="promocao/cadastro">Cadastrar promoção</a></li>
+                    <li><a href="site_venda_crud/cadastro">Cadastrar site de venda</a></li>
+                    <li><a href="teatro_crud/cadastro">Cadastrar teatro</a></li>
+                    <%--TODO: editar próprias infos --%>
+                </sec:authorize>
 
-                <%--<sec:authorize access="hasRole('USER')">--%>
+                <sec:authorize access="hasRole('TEATRO')">
+                    <li><a href="promocao/cadastro">Cadastrar Promoção</a></li>
+                    <%--TODO: editar próprias infos --%>
+                </sec:authorize>
 
-                <%--</sec:authorize>--%>
-
-                <%--<sec:authorize access="hasRole('TEATRO')">--%>
-
-                <%--</sec:authorize>--%>
-
-                <%--<sec:authorize access="hasRole('SITE')">--%>
-
-                <%--</sec:authorize>--%>
+                <sec:authorize access="hasRole('SITE')">
+                    <li><a href="promocao/filtrar_url">Minhas promoções</a></li>
+                    <%--TODO: editar próprias infos--%>
+                </sec:authorize>
             </ul>
             <jsp:invoke fragment="header"/>
         </div>

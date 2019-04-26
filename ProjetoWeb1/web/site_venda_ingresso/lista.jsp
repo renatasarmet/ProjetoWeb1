@@ -36,22 +36,26 @@
                     <th><fmt:message key="url"/></th>
                     <th><fmt:message key="nome"/></th>
                     <th><fmt:message key="telefone"/></th>
+                <sec:authorize access="hasRole('ADMIN')">
                     <th colspan="2" ><fmt:message key="opcoes"/></th>
-                </tr>
-                <c:forEach var="site" items="${listaSites}">
-                    <tr>
-                        <td><c:out value="${site.id}" /></td>
-                        <td><c:out value="${site.email}" /></td>
-                        <td><c:out value="${site.senha}" /></td>
-        <!--                <td><c:out value="${site.ativo}" /></td>-->
-                        <td><c:out value="${site.url}" /></td>
-                        <td><c:out value="${site.nome}" /></td>
-                        <td><c:out value="${site.telefone}" /></td>
-                        <td><a href="edicao?id=<c:out value='${site.id}' />"><fmt:message key="edicao"/></a></td>
-                        <td><a href="remocao?id=<c:out value='${site.id}' />"onclick="return confirm('Deseja excluir esse item?');"><fmt:message key="remocao"/></a></td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </fmt:bundle>
-    </jsp:body>
+                </sec:authorize>
+            </tr>
+            <c:forEach var="site" items="${listaSites}">
+                <tr>
+                    <td><c:out value="${site.id}" /></td>
+                    <td><c:out value="${site.email}" /></td>
+                    <td><c:out value="${site.senha}" /></td>
+    <!--                <td><c:out value="${site.ativo}" /></td>-->
+                    <td><c:out value="${site.url}" /></td>
+                    <td><c:out value="${site.nome}" /></td>
+                    <td><c:out value="${site.telefone}" /></td>
+                <sec:authorize access="hasRole('ADMIN')">
+                    <td><a href="edicao?id=<c:out value='${site.id}' />"><fmt:message key="edicao"/></a></td>
+                    <td><a href="remocao?id=<c:out value='${site.id}' />"onclick="return confirm('Deseja excluir esse item?');"><fmt:message key="remocao"/></a></td>
+                </sec:authorize>
+            </tr>
+        </c:forEach>
+    </table>
+</fmt:bundle>
+</jsp:body>
 </l:listatag>

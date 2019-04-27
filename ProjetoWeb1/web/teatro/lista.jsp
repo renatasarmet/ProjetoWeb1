@@ -38,6 +38,7 @@
                 <input type="text" name="cidade_desejado" size="45" />
                 <input type="submit" value=<fmt:message key="pesquisar"/> />
             </form>
+            <br>
             <table border="1" cellpadding="5">
                 <tr>
                     <th><fmt:message key="email"/></th>
@@ -60,9 +61,6 @@
                 </sec:authorize>
             </tr>
         </c:forEach>
-        <sec:authorize access="hasRole('ADMIN')">
-            <a href="cadastro"><fmt:message key="cadastrar_novo_teatro"/></a>
-        </sec:authorize>
     </table>
 </fmt:bundle>
 </jsp:body>

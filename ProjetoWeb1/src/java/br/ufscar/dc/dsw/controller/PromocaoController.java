@@ -31,10 +31,12 @@ public class PromocaoController extends HttpServlet {
 
     private PromocaoDAO dao;
     private Site_Venda_IngressoDAO daoSite;
+    private TeatroDAO daoTeatro;
     @Override
     public void init() {
         dao = new PromocaoDAO();
         daoSite = new Site_Venda_IngressoDAO();
+        daoTeatro = new TeatroDAO();
     }
     
     /**
@@ -74,8 +76,8 @@ public class PromocaoController extends HttpServlet {
                 case "filtrar_url":
                     filtra_url(request, response);
                     break;
-                case "filtrar_cnpj":
-                    filtra_cnpj(request, response);
+                case "filtrar_teatro":
+                    filtra_teatro(request, response);
                     break;
                 default:
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/error/404.jsp");
@@ -126,23 +128,28 @@ public class PromocaoController extends HttpServlet {
 
     private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("listaTeatro", new TeatroDAO().getAll());
         request.setAttribute("listaSite", new Site_Venda_IngressoDAO().getAll());
         RequestDispatcher dispatcher = request.getRequestDispatcher("/promocao_ingresso/formulario.jsp");
         dispatcher.forward(request, response);
     }
     
     private void insere(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ParseException {
+            throws IOException, ParseException, ServletException {
         request.setCharacterEncoding("UTF-8");
         String url = request.getParameter("url");
-        String cnpj = request.getParameter("cnpj");
+        String email = request.getUserPrincipal().getName().toString();
+        String cnpj = daoTeatro.getCNPJ(email);
         String nome = request.getParameter("nome");
         Float preco = Float.parseFloat(request.getParameter("preco"));
         String data_sessao =  request.getParameter("data_sessao");
         String horario_sessao =  request.getParameter("horario_sessao");
         Promocao promo = new Promocao(url,cnpj,nome,preco,data_sessao,horario_sessao);
-        dao.insert(promo);
+        boolean deu_certo = dao.insert(promo);
+        if(!deu_certo){
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/promocao_ingresso/formulario.jsp");
+            request.setAttribute("errorUpdate", 1); 
+            dispatcher.forward(request, response);
+        }
         response.sendRedirect("lista");
     }
     
@@ -163,9 +170,9 @@ public class PromocaoController extends HttpServlet {
         dispatcher.forward(request, response);
     }
     
-     private void filtra_cnpj(HttpServletRequest request, HttpServletResponse response)
+     private void filtra_teatro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Promocao> listaPromocao = dao.getPromocaoTeatro(request.getParameter("cnpj_desejado"));
+        List<Promocao> listaPromocao = dao.getPromocaoTeatro(request.getParameter("teatro_desejado"));
         request.setAttribute("listaPromocao", listaPromocao);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/promocao_ingresso/lista.jsp");
         dispatcher.forward(request, response);
@@ -177,13 +184,12 @@ public class PromocaoController extends HttpServlet {
         Promocao promo = dao.get(id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/promocao_ingresso/formulario.jsp");
         request.setAttribute("promocao", promo);        
-        request.setAttribute("listaTeatro", new TeatroDAO().getAll());
         request.setAttribute("listaSite", new Site_Venda_IngressoDAO().getAll());
         dispatcher.forward(request, response);
     }
 
     private void atualize(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ParseException {
+            throws IOException, ParseException, ServletException {
         request.setCharacterEncoding("UTF-8");
         int id = Integer.parseInt(request.getParameter("id"));
         String url = request.getParameter("url");
@@ -193,7 +199,13 @@ public class PromocaoController extends HttpServlet {
         String data_sessao =  request.getParameter("data_sessao");
         String horario_sessao =  request.getParameter("horario_sessao");
         Promocao promo = new Promocao(id,url,cnpj,nome,preco,data_sessao,horario_sessao);
-        dao.update(promo);
+        boolean deu_certo = dao.update(promo);
+        if(!deu_certo){
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/promocao_ingresso/formulario.jsp");
+            request.setAttribute("promocao", promo);
+            request.setAttribute("errorUpdate", 1); 
+            dispatcher.forward(request, response);
+        }
         response.sendRedirect("lista");
     }
     

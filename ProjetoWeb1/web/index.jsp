@@ -12,9 +12,6 @@
     </jsp:attribute>
     <jsp:attribute name="title"></jsp:attribute>
     <jsp:body>
-        <sec:authorize access="hasAnyRole()">
-            <h1>oi</h1>
-        </sec:authorize>
         <%--<h2>Bemvindo ${user_email}</h2>--%>
         <sec:authorize access="hasRole('ADMIN')">
             <jsp:include page="/usuario/admin.jsp"></jsp:include>

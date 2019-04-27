@@ -189,4 +189,47 @@ public class TeatroDAO {
         }
         daoUsuario.delete(id);
     }
+    
+        
+    public String getCNPJ(String email) {
+        String cnpj = "";
+        String sql = "SELECT cnpj FROM Teatro, Usuario WHERE id_usuario = id and email = ?";
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                cnpj = resultSet.getString("cnpj");
+            }
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return cnpj;
+    }
+    
+    
+    public String getNomeTeatroPorCnpj(String cnpj) {
+        String nome = "";
+        String sql = "SELECT nome FROM Teatro WHERE CNPJ = ?";
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, cnpj);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                nome = resultSet.getString("nome");
+            }
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return nome;
+    }
 }
+

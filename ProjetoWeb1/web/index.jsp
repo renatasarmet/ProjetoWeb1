@@ -2,7 +2,7 @@
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
-<% request.setAttribute("user_email", request.getUserPrincipal().getName().toString()); %>
+<%--<% request.setAttribute("user_email", request.getUserPrincipal().getName().toString()); %>--%>
 
 <t:genericpage>
     <jsp:attribute name="header"></jsp:attribute>
@@ -12,7 +12,10 @@
     </jsp:attribute>
     <jsp:attribute name="title"></jsp:attribute>
     <jsp:body>
-        <h2>Bemvindo ${user_email}</h2>
+        <sec:authorize access="hasAnyRole()">
+            <h1>oi</h1>
+        </sec:authorize>
+        <%--<h2>Bemvindo ${user_email}</h2>--%>
         <sec:authorize access="hasRole('ADMIN')">
             <jsp:include page="/usuario/admin.jsp"></jsp:include>
         </sec:authorize>

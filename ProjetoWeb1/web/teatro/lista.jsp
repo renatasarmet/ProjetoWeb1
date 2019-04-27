@@ -8,13 +8,14 @@
          pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@taglib tagdir="/WEB-INF/tags" prefix="l" %>
 
 <l:listatag lista="${listaTeatros}" lista_vazia="${empty listaTeatros}">
 
     <jsp:attribute name="head_title_lista">
         <fmt:bundle basename="i18n.mensagem">
-            <fmt:message key="lista_de_teatros"/> | <fmt:message key="site_de_promocoes"/>
+            <fmt:message key="lista_de_teatros"/>
         </fmt:bundle>
     </jsp:attribute>
 
@@ -23,7 +24,9 @@
             <h1><fmt:message key="lista_de_teatros"/></h1>
             <c:if test="${empty listaTeatros}">
                 <h2><fmt:message key="nao_ha_teatro"/></h2>
-                <a href="cadastro"><fmt:message key="inserir"/></a>
+                <sec:authorize access="hasRole('ADMIN')">
+                    <a href="cadastro"><fmt:message key="inserir"/></a>
+                </sec:authorize>
             </c:if>
         </fmt:bundle>
     </jsp:attribute>
@@ -57,7 +60,9 @@
                 </sec:authorize>
             </tr>
         </c:forEach>
-        <a href="cadastro"><fmt:message key="cadastrar_novo_teatro"/></a>
+        <sec:authorize access="hasRole('ADMIN')">
+            <a href="cadastro"><fmt:message key="cadastrar_novo_teatro"/></a>
+        </sec:authorize>
     </table>
 </fmt:bundle>
 </jsp:body>

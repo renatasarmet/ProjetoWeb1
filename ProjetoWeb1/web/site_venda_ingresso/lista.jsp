@@ -13,7 +13,7 @@
 <l:listatag lista="${listaSites}" lista_vazia="${empty listaSites}" >
     <jsp:attribute name="head_title_lista">
         <fmt:bundle basename="i18n.mensagem">
-            <fmt:message key="lista_site_venda_ingresso"/> | <fmt:message key="site_de_promocoes"/>
+            <fmt:message key="lista_site_venda_ingresso"/>
         </fmt:bundle>
     </jsp:attribute>
 
@@ -22,7 +22,7 @@
             <h1><fmt:message key="lista_site_venda_ingresso"/></h1>
             <c:if test="${empty listaSites}">
                 <h2><fmt:message key="nao_ha_site"/></h2>
-                <sec:authorize access="hasRole('TEATRO')">
+                <sec:authorize access="hasAnyRole('ADMIN','TEATRO')">
                     <a href="cadastro"><fmt:message key="inserir"/></a>
                 </sec:authorize>
             </c:if>
@@ -38,7 +38,7 @@
                     <th><fmt:message key="url"/></th>
                     <th><fmt:message key="nome"/></th>
                     <th><fmt:message key="telefone"/></th>
-                <sec:authorize access="hasRole('ADMIN')">
+                <sec:authorize access="hasAnyRole('ADMIN')">
                     <th colspan="2" ><fmt:message key="opcoes"/></th>
                 </sec:authorize>
             </tr>

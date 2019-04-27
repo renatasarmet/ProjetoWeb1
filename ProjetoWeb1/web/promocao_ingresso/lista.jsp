@@ -9,6 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib tagdir="/WEB-INF/tags" prefix="l" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <l:listatag lista="${listaPromocao}" lista_vazia="${empty listaPromocao}" >
     <jsp:attribute name="head_title_lista">
@@ -22,7 +23,9 @@
             <h1><fmt:message key="lista_de_promocoes"/></h1>
             <c:if test="${empty listaPromocao}">
                 <h2><fmt:message key="nao_ha_promocao"/></h2>
-                <a href="cadastro"><fmt:message key="inserir"/></a>
+                <sec:authorize access="hasAnyRole('ADMIN', 'TEATRO')">
+                    <a href="cadastro"><fmt:message key="inserir"/></a>
+                </sec:authorize>
             </c:if>
         </fmt:bundle>
     </jsp:attribute>
@@ -62,7 +65,7 @@
                     <td><c:out value="${promo.preco}" /></td>
                     <td><c:out value="${promo.data_sessao}" /></td>
                     <td><c:out value="${promo.horario_sessao}" /></td>
-                <sec:authorize access="hasRole('ADMIN')">
+                <sec:authorize access="hasAnyRole('ADMIN','TEATRO')">
                     <td><a href="edicao?id=<c:out value='${promo.id}' />"><fmt:message key="edicao"/></a></td>
                     <td><a href="remocao?id=<c:out value='${promo.id}' />"onclick="return confirm('Deseja excluir esse item?');"><fmt:message key="remocao"/></a></td>
                 </sec:authorize>

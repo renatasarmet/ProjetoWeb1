@@ -144,7 +144,11 @@ public class PromocaoController extends HttpServlet {
         String data_sessao =  request.getParameter("data_sessao");
         String horario_sessao =  request.getParameter("horario_sessao");
         Promocao promo = new Promocao(url,cnpj,nome,preco,data_sessao,horario_sessao);
-        dao.insert(promo);
+        boolean deu_certo = dao.insert(promo);
+        if(!deu_certo){
+            //CHAMAR AQUI UM ALERT() avisando que deu horario conflitante
+            log("Preciso chamar um alert aqui avisando que teve horario conflitante");
+        }
         response.sendRedirect("lista");
     }
     
@@ -194,7 +198,11 @@ public class PromocaoController extends HttpServlet {
         String data_sessao =  request.getParameter("data_sessao");
         String horario_sessao =  request.getParameter("horario_sessao");
         Promocao promo = new Promocao(id,url,cnpj,nome,preco,data_sessao,horario_sessao);
-        dao.update(promo);
+        boolean deu_certo = dao.update(promo);
+        if(!deu_certo){
+            //CHAMAR AQUI UM ALERT() avisando que deu horario conflitante
+            log("Preciso chamar um alert aqui avisando que teve horario conflitante");
+        }
         response.sendRedirect("lista");
     }
     

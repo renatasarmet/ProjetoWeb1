@@ -5,6 +5,7 @@
  */
 package br.ufscar.dc.dsw.model;
 
+import br.ufscar.dc.dsw.dao.TeatroDAO;
 import java.util.Date;
 
 
@@ -14,6 +15,8 @@ import java.util.Date;
  */
 public class Promocao {
 
+    private TeatroDAO daoTeatro;
+    
     private int id;
     private String url;
     private String cnpj;
@@ -32,7 +35,7 @@ public class Promocao {
         this.nome = nome;
         this.preco = preco;
         this.data_sessao = data_sessao;
-        this.horario_sessao = horario_sessao;
+        this.horario_sessao = horario_sessao;   
     }
 
     public Promocao(int id, String url, String cnpj, String nome, float preco, String data_sessao, String horario_sessao) {
@@ -99,6 +102,11 @@ public class Promocao {
 
     public void setHorario_sessao(String horario_sessao) {
         this.horario_sessao = horario_sessao;
+    }
+    
+    public String getNomeTeatroPorCnpj(String cnpj) {
+        daoTeatro = new TeatroDAO();
+        return daoTeatro.getNomeTeatroPorCnpj(cnpj);
     }
     
 }

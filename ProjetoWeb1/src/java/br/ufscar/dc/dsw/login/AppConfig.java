@@ -48,7 +48,7 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/promocao/filtrar_url").hasRole("SITE")
 //                .antMatchers("/teatro_crud/lista").anonymous()
                 .antMatchers("/teatro_crud/cadastro").hasAnyRole("ADMIN", "TEATRO")
-                .antMatchers("/promocao/cadastro").hasAnyRole("ADMIN", "TEATRO")
+                .antMatchers("/promocao/cadastro").hasAnyRole("TEATRO")
 //                .antMatchers("/promocao/lista").hasAnyRole("ADMIN", "TEATRO", "SITE")
 //                .anyRequest().authenticated()
                 .and()

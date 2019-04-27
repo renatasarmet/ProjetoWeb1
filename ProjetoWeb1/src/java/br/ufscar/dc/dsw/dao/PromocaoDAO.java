@@ -179,19 +179,25 @@ public class PromocaoDAO {
         return listaPromocao;
     }
     
-    public List<Promocao> getPromocaoTeatro(String cnpj) {
+    public List<Promocao> getPromocaoTeatro(String nome_teatro) {
         List<Promocao> listaPromocao = new ArrayList<>();
-        String sql = "SELECT * FROM Promocao WHERE cnpj = ?";
+        String sql;
+        if(nome_teatro.isEmpty())
+            sql = "SELECT * FROM Promocao";
+        else
+            sql = "SELECT * FROM Promocao, Teatro WHERE upper(Teatro.nome) = upper( ? ) and Promocao.cnpj = Teatro.CNPJ";
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, cnpj);
+            
+            if(!nome_teatro.isEmpty())
+                statement.setString(1, nome_teatro);
             ResultSet resultSet = statement.executeQuery();
             
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String url = resultSet.getString("url");
-//                String cnpj = resultSet.getString("cnpj");
+                String cnpj = resultSet.getString("cnpj");
                 String nome = resultSet.getString("nome");
                 Float preco = resultSet.getFloat("preco");
                 String data_sessao = resultSet.getString("data_sessao");

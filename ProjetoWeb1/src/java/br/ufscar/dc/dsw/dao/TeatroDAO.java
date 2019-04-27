@@ -210,4 +210,26 @@ public class TeatroDAO {
         }
         return cnpj;
     }
+    
+    
+    public String getNomeTeatroPorCnpj(String cnpj) {
+        String nome = "";
+        String sql = "SELECT nome FROM Teatro WHERE CNPJ = ?";
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, cnpj);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                nome = resultSet.getString("nome");
+            }
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return nome;
+    }
 }
+

@@ -38,9 +38,9 @@
                     <input type="submit" value= <fmt:message key="pesquisar"/> />
                 </form>
                 <br>
-                <form action="filtrar_cnpj" method="post">
-                    <label><fmt:message key="filtre_cnpj"/></label>
-                    <input type="text" name="cnpj_desejado" size="45" />
+                <form action="filtrar_teatro" method="post">
+                    <label><fmt:message key="filtre_teatro"/></label>
+                    <input type="text" name="teatro_desejado" size="45" />
                     <input type="submit" value=<fmt:message key="pesquisar"/> />
                 </form>
             </sec:authorize>
@@ -54,7 +54,7 @@
                 <tr>
                     <th><fmt:message key="id"/></th>
                     <th><fmt:message key="url"/></th>
-                    <th><fmt:message key="cnpj"/></th>
+                    <th><fmt:message key="teatro"/></th>
                     <th><fmt:message key="nome"/></th>
                     <th><fmt:message key="preco"/></th>
                     <th><fmt:message key="data_sessao"/></th>
@@ -67,7 +67,7 @@
                 <tr>
                     <td><c:out value="${promo.id}" /></td>
                     <td><c:out value="${promo.url}" /></td>
-                    <td><c:out value="${promo.cnpj}" /></td>
+                    <td><c:out value="${promo.getNomeTeatroPorCnpj(promo.cnpj)}" /></td>
                     <td><c:out value="${promo.nome}" /></td>
                     <td><c:out value="${promo.preco}" /></td>
                     <td><c:out value="${promo.data_sessao}" /></td>

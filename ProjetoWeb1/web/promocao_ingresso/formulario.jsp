@@ -15,7 +15,7 @@
     
     <jsp:attribute name="head_title_form">
         <fmt:bundle basename="i18n.mensagem">
-            <fmt:message key="site_de_promocoes"/>
+            <fmt:message key="titulo_principal"/>
         </fmt:bundle>
     </jsp:attribute>
     
@@ -48,23 +48,6 @@
                                     </c:when>
                                     <c:otherwise>
                                         <option value="<c:out value="${site.url}" />"><c:out value="${site.nome}"/> - <c:out value="${site.url}"/></option> 
-                                    </c:otherwise>
-                                </c:choose>
-                            </c:forEach>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th><fmt:message key="cnpj"/></th>
-                    <td>
-                        <select id="cnpjPromocao" name="cnpj">
-                            <c:forEach var="teatro" items="${listaTeatro}">   
-                                <c:choose>
-                                    <c:when test="${teatro.CNPJ == promocao.cnpj}">
-                                        <option selected value="<c:out value="${teatro.CNPJ}" />"><c:out value="${teatro.nome}"/> - <c:out value="${teatro.CNPJ}"/></option> 
-                                    </c:when>
-                                    <c:otherwise>
-                                        <option value="<c:out value="${teatro.CNPJ}" />"><c:out value="${teatro.nome}"/> - <c:out value="${teatro.CNPJ}"/></option> 
                                     </c:otherwise>
                                 </c:choose>
                             </c:forEach>

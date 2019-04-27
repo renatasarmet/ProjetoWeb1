@@ -36,7 +36,7 @@
                 <jsp:invoke fragment="titulo_form"/>
             </h2>
             <c:if test="${!model_null}">
-                <form class="criacao" action="atualizacao">
+                <form class="criacao" action="atualizacao" onsubmit="return validaForm()">
                     <input type="hidden" name="id" value="<c:out value='${model_id}' />" />
                 </c:if>
                 <c:if test="${model_null}">

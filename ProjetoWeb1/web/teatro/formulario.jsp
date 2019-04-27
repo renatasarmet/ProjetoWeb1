@@ -13,7 +13,7 @@
 
     <jsp:attribute name="head_title_form">
         <fmt:bundle basename="i18n.mensagem">
-            <fmt:message key="site_de_promocoes"/>
+            <fmt:message key="titulo_principal"/>
         </fmt:bundle>
     </jsp:attribute>
 

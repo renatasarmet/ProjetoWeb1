@@ -200,4 +200,5 @@ public class PromocaoDAO {
             throw new RuntimeException(e);
         }
     }
+
 }

@@ -31,10 +31,12 @@ public class PromocaoController extends HttpServlet {
 
     private PromocaoDAO dao;
     private Site_Venda_IngressoDAO daoSite;
+    private TeatroDAO daoTeatro;
     @Override
     public void init() {
         dao = new PromocaoDAO();
         daoSite = new Site_Venda_IngressoDAO();
+        daoTeatro = new TeatroDAO();
     }
     
     /**
@@ -126,7 +128,6 @@ public class PromocaoController extends HttpServlet {
 
     private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("listaTeatro", new TeatroDAO().getAll());
         request.setAttribute("listaSite", new Site_Venda_IngressoDAO().getAll());
         RequestDispatcher dispatcher = request.getRequestDispatcher("/promocao_ingresso/formulario.jsp");
         dispatcher.forward(request, response);
@@ -136,7 +137,8 @@ public class PromocaoController extends HttpServlet {
             throws IOException, ParseException {
         request.setCharacterEncoding("UTF-8");
         String url = request.getParameter("url");
-        String cnpj = request.getParameter("cnpj");
+        String email = request.getUserPrincipal().getName().toString();
+        String cnpj = daoTeatro.getCNPJ(email);
         String nome = request.getParameter("nome");
         Float preco = Float.parseFloat(request.getParameter("preco"));
         String data_sessao =  request.getParameter("data_sessao");
@@ -177,7 +179,6 @@ public class PromocaoController extends HttpServlet {
         Promocao promo = dao.get(id);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/promocao_ingresso/formulario.jsp");
         request.setAttribute("promocao", promo);        
-        request.setAttribute("listaTeatro", new TeatroDAO().getAll());
         request.setAttribute("listaSite", new Site_Venda_IngressoDAO().getAll());
         dispatcher.forward(request, response);
     }

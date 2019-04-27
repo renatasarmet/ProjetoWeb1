@@ -147,6 +147,7 @@ public class PromocaoController extends HttpServlet {
         boolean deu_certo = dao.insert(promo);
         if(!deu_certo){
             RequestDispatcher dispatcher = request.getRequestDispatcher("/promocao_ingresso/formulario.jsp");
+            request.setAttribute("listaSite", new Site_Venda_IngressoDAO().getAll());
             request.setAttribute("errorUpdate", 1); 
             dispatcher.forward(request, response);
         }
@@ -193,6 +194,7 @@ public class PromocaoController extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         int id = Integer.parseInt(request.getParameter("id"));
         String url = request.getParameter("url");
+        log(url);
         String cnpj = request.getParameter("cnpj");
         String nome = request.getParameter("nome");
         Float preco = Float.parseFloat(request.getParameter("preco"));
@@ -203,7 +205,7 @@ public class PromocaoController extends HttpServlet {
         if(!deu_certo){
             RequestDispatcher dispatcher = request.getRequestDispatcher("/promocao_ingresso/formulario.jsp");
             request.setAttribute("promocao", promo);
-            request.setAttribute("errorUpdate", 1); 
+            request.setAttribute("errorUpdate", 2); 
             dispatcher.forward(request, response);
         }
         response.sendRedirect("lista");

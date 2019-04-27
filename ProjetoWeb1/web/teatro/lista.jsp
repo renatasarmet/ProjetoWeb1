@@ -15,7 +15,7 @@
 
     <jsp:attribute name="head_title_lista">
         <fmt:bundle basename="i18n.mensagem">
-            <fmt:message key="lista_de_teatros"/>
+            <fmt:message key="lista_de_teatros"/> |
         </fmt:bundle>
     </jsp:attribute>
 

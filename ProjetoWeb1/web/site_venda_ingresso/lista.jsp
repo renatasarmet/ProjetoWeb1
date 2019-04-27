@@ -13,7 +13,7 @@
 <l:listatag lista="${listaSites}" lista_vazia="${empty listaSites}" >
     <jsp:attribute name="head_title_lista">
         <fmt:bundle basename="i18n.mensagem">
-            <fmt:message key="lista_site_venda_ingresso"/>
+            <fmt:message key="lista_site_venda_ingresso"/> |
         </fmt:bundle>
     </jsp:attribute>
 

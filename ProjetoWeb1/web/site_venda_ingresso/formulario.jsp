@@ -14,7 +14,12 @@
 
     <jsp:attribute name="head_title_form">
         <fmt:bundle basename="i18n.mensagem">
-            <fmt:message key="site_de_promocoes"/>
+            <c:if test="${site != null}">
+                <fmt:message key="edicao_site_venda_ingresso"/> |
+            </c:if>
+            <c:if test="${site == null}">
+                <fmt:message key="cadastro_site_venda_ingresso"/> |
+            </c:if>
         </fmt:bundle>
     </jsp:attribute>
 
@@ -25,10 +30,10 @@
     <jsp:attribute name="titulo_form">
         <fmt:bundle basename="i18n.mensagem">
             <c:if test="${site != null}">
-                <fmt:message key="edicao_site_venda_ingresso"/>
+                <h1><fmt:message key="edicao_site_venda_ingresso"/></h1>
             </c:if>
             <c:if test="${site == null}">
-                <fmt:message key="cadastro_site_venda_ingresso"/>
+                <h1><fmt:message key="cadastro_site_venda_ingresso"/></h1>
             </c:if>
         </fmt:bundle>
     </jsp:attribute>

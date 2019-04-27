@@ -14,7 +14,7 @@
 <l:listatag lista="${listaPromocao}" lista_vazia="${empty listaPromocao}" >
     <jsp:attribute name="head_title_lista">
         <fmt:bundle basename="i18n.mensagem">
-            <fmt:message key="lista_de_promocoes"/>
+            <fmt:message key="lista_de_promocoes"/> |
         </fmt:bundle>
     </jsp:attribute>
 

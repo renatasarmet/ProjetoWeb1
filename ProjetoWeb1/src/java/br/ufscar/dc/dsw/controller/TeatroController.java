@@ -143,7 +143,7 @@ public class TeatroController extends HttpServlet {
     }
 
     private void insere(HttpServletRequest request, HttpServletResponse response)
-            throws UnsupportedEncodingException, IOException {
+            throws UnsupportedEncodingException, IOException, ServletException {
         request.setCharacterEncoding("UTF-8");
         String email = request.getParameter("email");
         String senha1 = request.getParameter("senha1Teatro");
@@ -151,10 +151,16 @@ public class TeatroController extends HttpServlet {
         String CNPJ = request.getParameter("CNPJ");
         String nome = request.getParameter("nome");
         String cidade = request.getParameter("cidade");
+        
+        Teatro t = new Teatro(email, senha2, CNPJ, nome, cidade);
         if(senha1.equals(senha2)){
-            Teatro t = new Teatro(email, senha2, CNPJ, nome, cidade);
             dao.insert(t);
-            response.sendRedirect("lista");
+            response.sendRedirect("/ProjetoWeb1/");
+        }else {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/teatro/formulario.jsp");
+            request.setAttribute("teatro", t);
+            request.setAttribute("errorUpdate", 1);
+            dispatcher.forward(request, response);
         }
     }
 
@@ -165,7 +171,7 @@ public class TeatroController extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    private void atualiza(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, IOException {
+    private void atualiza(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, IOException, ServletException {
         request.setCharacterEncoding("UTF-8");
         
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -178,10 +184,21 @@ public class TeatroController extends HttpServlet {
         String CNPJ = request.getParameter("CNPJ");
         String nome = request.getParameter("nome");
         String cidade = request.getParameter("cidade");
-        if(encoder.matches(senhaold,senhaEncode ) && senha1.equals(senha2)){
+        
             Teatro t = new Teatro(id,email, senha2, CNPJ, nome, cidade);
+        if(encoder.matches(senhaold,senhaEncode ) && senha1.equals(senha2)){
             dao.update(t);
-            response.sendRedirect("lista");
+            response.sendRedirect("/ProjetoWeb1/");
+        }else{
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/teatro/formulario.jsp");
+            request.setAttribute("teatro", t);
+            if (!encoder.matches(senhaold, senhaEncode)) {
+                request.setAttribute("errorUpdate", 3);
+                dispatcher.forward(request, response);
+            } else {
+                request.setAttribute("errorConfirmacao", 2);
+                dispatcher.forward(request, response);
+            }
         }
     }
     

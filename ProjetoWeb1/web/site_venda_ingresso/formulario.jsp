@@ -29,11 +29,14 @@
 
     <jsp:attribute name="titulo_form">
         <fmt:bundle basename="i18n.mensagem">
-            <c:if test="${site != null}">
-                <h1><fmt:message key="edicao_site_venda_ingresso"/></h1>
+            <c:if test="${site != null && errorUpdate != 1}">
+                <fmt:message key="edicao_site_venda_ingresso"/>
             </c:if>
-            <c:if test="${site == null}">
-                <h1><fmt:message key="cadastro_site_venda_ingresso"/></h1>
+            <c:if test="${site == null || errorUpdate ==1}">
+                <fmt:message key="cadastro_site_venda_ingresso"/>
+            </c:if>
+            <c:if test="${errorUpdate != null}">
+                    <h3 style="color: red">Senha invalida</h3>
             </c:if>
         </fmt:bundle>
     </jsp:attribute>

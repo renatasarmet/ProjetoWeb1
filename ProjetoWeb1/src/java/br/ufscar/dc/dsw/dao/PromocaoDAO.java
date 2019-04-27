@@ -229,18 +229,16 @@ public class PromocaoDAO {
             }
         }
         
-        String sql = "UPDATE Promocao SET url = ?, cnpj = ?, nome = ?, preco = ?,  data_sessao = ?,  horario_sessao = ?";
+        String sql = "UPDATE Promocao SET  nome = ?, preco = ?,  data_sessao = ?,  horario_sessao = ?";
         sql += " WHERE id = ?";
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, promo.getUrl());
-            statement.setString(2, promo.getCnpj());
-            statement.setString(3, promo.getNome());
-            statement.setFloat(4, promo.getPreco());
-            statement.setString(5, promo.getData_sessao());
-            statement.setString(6, promo.getHorario_sessao());
-            statement.setInt(7, promo.getId());
+            statement.setString(1, promo.getNome());
+            statement.setFloat(2, promo.getPreco());
+            statement.setString(3, promo.getData_sessao());
+            statement.setString(4, promo.getHorario_sessao());
+            statement.setInt(5, promo.getId());
             statement.executeUpdate();
             statement.close();
             conn.close();

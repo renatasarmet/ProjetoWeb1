@@ -84,7 +84,7 @@ public class Site_Venda_IngressoController extends HttpServlet {
     }
 
     private void insere(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
+            throws IOException, ServletException {
         request.setCharacterEncoding("UTF-8");
         String email = request.getParameter("email");
         String senha1 = request.getParameter("senha1Site");
@@ -92,21 +92,27 @@ public class Site_Venda_IngressoController extends HttpServlet {
         String url = request.getParameter("url");
         String nome = request.getParameter("nome");
         String telefone = request.getParameter("telefone");
+        Site_Venda_Ingresso site = new Site_Venda_Ingresso(email, senha2, url, nome, telefone);
         if (senha1.equals(senha2)) {
-            Site_Venda_Ingresso site = new Site_Venda_Ingresso(email, senha2, url, nome, telefone);
             dao.insert(site);
-            response.sendRedirect("lista");
+            response.sendRedirect("/ProjetoWeb1/");
+        } else {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/promocao_ingresso/formulario.jsp");
+            request.setAttribute("site", site);
+            request.setAttribute("errorUpdate", 1);
+            dispatcher.forward(request, response);
         }
     }
+
     private void editarFormulario(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if(request.getUserPrincipal().getName().toString() != null){
+        if (request.getUserPrincipal().getName().toString() != null) {
             Site_Venda_Ingresso site = dao.getByEmail(request.getUserPrincipal().getName().toString());
             request.setAttribute("site", site);
             RequestDispatcher dispatcher = request.getRequestDispatcher("/site_venda_ingresso/formulario.jsp");
             dispatcher.forward(request, response);
         }
-        
+
     }
 
     private void lista(HttpServletRequest request, HttpServletResponse response)
@@ -127,7 +133,7 @@ public class Site_Venda_IngressoController extends HttpServlet {
     }
 
     private void atualize(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
+            throws IOException, ServletException {
         request.setCharacterEncoding("UTF-8");
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         int id_usuario = Integer.parseInt(request.getParameter("id"));
@@ -139,10 +145,21 @@ public class Site_Venda_IngressoController extends HttpServlet {
         String senha1 = request.getParameter("senha1Site");
         String senha2 = request.getParameter("senha2Site");
         String email = request.getParameter("email");
+        Site_Venda_Ingresso site = new Site_Venda_Ingresso(id_usuario, email, senha1, url, nome, telefone);
         if (encoder.matches(senhaold, senhaEncode) && senha1.equals(senha2)) {
-            Site_Venda_Ingresso site = new Site_Venda_Ingresso(id_usuario, email, senha1, url, nome, telefone);
             dao.update(site);
-            response.sendRedirect("lista");
+            response.sendRedirect("/ProjetoWeb1/");
+        } else {
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/promocao_ingresso/formulario.jsp");
+            request.setAttribute("site", site);
+            if (!encoder.matches(senhaold, senhaEncode)) {
+                request.setAttribute("errorUpdate", 3);
+                dispatcher.forward(request, response);
+            } else {
+                request.setAttribute("errorConfirmacao", 2);
+                dispatcher.forward(request, response);
+            }
         }
     }
 

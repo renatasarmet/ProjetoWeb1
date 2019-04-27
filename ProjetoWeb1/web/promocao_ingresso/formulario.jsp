@@ -11,7 +11,7 @@
 <%@taglib prefix="f" tagdir="/WEB-INF/tags"%>
 
 
-<f:formulario model="${promocao}" model_id="${promocao}" model_null="${promocao == null}">
+<f:formulario model="${promocao}" model_id="${promocao.id}" model_null="${promocao == null}">
     
     <jsp:attribute name="head_title_form">
         <fmt:bundle basename="i18n.mensagem">
@@ -30,15 +30,15 @@
 
     <jsp:attribute name="titulo_form">
         <fmt:bundle basename="i18n.mensagem">
-            <c:if test="${promocao == null}">
+            <c:if test="${promocao == null || errorUpdate == 1}">
                 <h1><fmt:message key="cadastro_de_promocoes"/></h1>
                 <c:if test="${errorUpdate == 1}">
                     <h3 style="color: red">Promocao nao cadastrada por conta de conflito de horario.</h3>
                 </c:if>
             </c:if>
-            <c:if test="${promocao != null}">
+            <c:if test="${promocao != null && errorUpdate != 1}">
                 <h1><fmt:message key="edicao_de_promocoes"/></h1>
-                <c:if test="${errorUpdate == 1}">
+                <c:if test="${errorUpdate == 2}">
                     <h3 style="color: red">Promocao nao atualizada por conta de conflito de horario.</h3>
                 </c:if>
             </c:if>
@@ -48,6 +48,7 @@
     <jsp:body>
         <fmt:bundle basename="i18n.mensagem">
             <table border="1" cellpadding="5">
+                <c:if test="${promocao == null}">
                 <tr>
                     <th><fmt:message key="url"/></th>
                     <td>
@@ -55,21 +56,24 @@
                             <c:forEach var="site" items="${listaSite}">   
                                 <c:choose>
                                     <c:when test="${site.url == promocao.url}">
-                                        <option selected value="<c:out value="${site.url}" />"><c:out value="${site.nome}"/> - <c:out value="${site.url}"/></option> 
+                                        <option selected value="<c:out value="${site.url}" />"><c:out value="${site.url}"/></option> 
                                     </c:when>
                                     <c:otherwise>
-                                        <option value="<c:out value="${site.url}" />"><c:out value="${site.nome}"/> - <c:out value="${site.url}"/></option> 
+                                        <option value="<c:out value="${site.url}" />"><c:out value="${site.url}"/></option> 
                                     </c:otherwise>
                                 </c:choose>
                             </c:forEach>
                         </select>
                     </td>
                 </tr>
+                </c:if>
                 <tr>
                     <th><fmt:message key="nome"/></th>
                     <td>
                         <input type="text" name="nome" size="45" id="nomePromocao"
                                value="<c:out value='${promocao.nome}' />"/>
+                        <input type="hidden" name="cnpj" size="45" id="cnpj"
+                               value="<c:out value='${promocao.cnpj}' />"/>
                     </td>
                 </tr>
                 <tr>

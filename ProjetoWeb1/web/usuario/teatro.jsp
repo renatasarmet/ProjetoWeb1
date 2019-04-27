@@ -3,7 +3,7 @@
     Created on : 25/04/2019, 12:48:39
     Author     : João
 --%>
-
-Este conteúdo só será visível para usuários que desempenhem 
-o papel "TEATRO" <br/><br/>
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<fmt:bundle basename="i18n.mensagem">
+    <fmt:message key="teatro_greet" /> <br/><br/>
+</fmt:bundle>

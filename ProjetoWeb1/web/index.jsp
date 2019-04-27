@@ -1,8 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<%--<% request.setAttribute("user_email", request.getUserPrincipal().getName().toString()); %>--%>
+<sec:authorize access="hasAnyRole('ADMIN','SITE','TEATRO')">
+    <% request.setAttribute("user_email", request.getUserPrincipal().getName().toString()); %>
+</sec:authorize>
 
 <t:genericpage>
     <jsp:attribute name="header"></jsp:attribute>
@@ -12,7 +15,14 @@
     </jsp:attribute>
     <jsp:attribute name="title"></jsp:attribute>
     <jsp:body>
-        <%--<h2>Bemvindo ${user_email}</h2>--%>
+        <sec:authorize access="hasAnyRole('ADMIN','SITE','TEATRO')">
+            <fmt:bundle basename="i18n.mensagem">
+                <h2><fmt:message key="bem_vindo"/> ${user_email}</h2>
+            </fmt:bundle>
+        </sec:authorize>
+        <sec:authorize access="!hasAnyRole('ADMIN','TEATRO','SITE')">
+            <jsp:include page="/usuario/anonymous.jsp"></jsp:include>
+        </sec:authorize>
         <sec:authorize access="hasRole('ADMIN')">
             <jsp:include page="/usuario/admin.jsp"></jsp:include>
         </sec:authorize>

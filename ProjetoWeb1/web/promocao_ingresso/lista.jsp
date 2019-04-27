@@ -74,7 +74,7 @@
                     <td><c:out value="${promo.horario_sessao}" /></td>
                 <sec:authorize access="hasAnyRole('ADMIN','TEATRO')">
                     <td><a href="edicao?id=<c:out value='${promo.id}' />"><fmt:message key="edicao"/></a></td>
-                    <td><a href="remocao?id=<c:out value='${promo.id}' />"onclick="return confirm('Deseja excluir esse item?');"><fmt:message key="remocao"/></a></td>
+                    <td><a href="remocao?id=<c:out value='${promo.id}' />"onclick="return confirm('<fmt:message key="deseja_excluir"/>');"><fmt:message key="remocao"/></a></td>
                 </sec:authorize>
             </tr>
         </c:forEach>

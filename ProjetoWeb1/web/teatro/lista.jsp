@@ -57,7 +57,7 @@
                     <td><c:out value="${teatro.cidade}" /></td>
                 <sec:authorize access="hasRole('ADMIN')">
                     <td><a href="cadastro?id=<c:out value='${teatro.id}' />"><fmt:message key="edicao"/></a></td>
-                    <td><a href="remocao?id=<c:out value='${teatro.id}' />"onclick="return confirm('Deseja excluir esse item?');"><fmt:message key="remocao"/></a></td>
+                    <td><a href="remocao?id=<c:out value='${teatro.id}' />"onclick="return confirm('<fmt:message key="deseja_excluir"/>');"><fmt:message key="remocao"/></a></td>
                 </sec:authorize>
             </tr>
         </c:forEach>

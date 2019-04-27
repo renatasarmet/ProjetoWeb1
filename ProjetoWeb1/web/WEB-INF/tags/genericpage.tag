@@ -70,7 +70,11 @@
                                 <fmt:message key="lista_de_teatros"/>
                             </a>
                         </li>
-
+                        <li>
+                            <a href="/ProjetoWeb1/promocao/cadastro">
+                                <fmt:message key="cadastro_de_promocoes"/>
+                            </a>
+                        </li>
                         <li>
                             <a href="/ProjetoWeb1/site_venda_crud/cadastro">
                                 <fmt:message key="cadastro_site_venda_ingresso"/>

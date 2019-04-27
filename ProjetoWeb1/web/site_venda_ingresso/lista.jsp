@@ -51,7 +51,7 @@
                     <td><c:out value="${site.telefone}" /></td>
                 <sec:authorize access="hasRole('ADMIN')">
                     <td><a href="edicao?id=<c:out value='${site.id}' />"><fmt:message key="edicao"/></a></td>
-                    <td><a href="remocao?id=<c:out value='${site.id}' />"onclick="return confirm('Deseja excluir esse item?');"><fmt:message key="remocao"/></a></td>
+                    <td><a href="remocao?id=<c:out value='${site.id}' />"onclick="return confirm('<fmt:message key="deseja_excluir"/>');"><fmt:message key="remocao"/></a></td>
                 </sec:authorize>
             </tr>
         </c:forEach>

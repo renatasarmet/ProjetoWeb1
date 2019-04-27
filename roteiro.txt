@@ -1,0 +1,30 @@
+* SGBD utilizado, nome do banco, usuário e senha de acesso
+
+- SGDB: JavaDB
+- Nome do banco: ProjetoWeb1
+- Usuário: root
+- Senha: root
+
+
+* Como criar as tabelas? Existe algum script de criação da tabelas? Onde está localizado?
+
+- Existe, está em: https://docs.google.com/document/d/18aB_roBFz8uZ7kTJ1TI4kuT_czbbRIm8no0PLq8rSxE/edit?usp=sharing
+
+
+* É necessário popular as tabelas? Existe algum programa/classe para popular as tabelas? Onde está localizado?
+
+- É necessário popular a tabela User com o usuário ADMIN, pois depois disso será possível realizar qualquer cadastro e alteração no próprio sistema.
+- Para realizar isso, basta Executar o script CriaUsuarios
+- Localizado em: ProjetoWeb1/ProjetoWeb1/src/java/br/ufscar/dc/dsw/login
+
+
+* Login/senha para acesso ao sistema?
+
+- Ao rodar o script CriaUsuarios, você terá o User de administrador, que poderá fazer qualquer alteração posteriormente, inclusive criar novos usuários do tipo SITE DE VENDAS e do tipo TEATRO.
+- Login do administrador: admin@admin
+- Senha do administrador: admin
+
+
+* Alguma informação adicional?
+
+- Se der algum problema, por favor certifique-se de que as bibliotecas estão corretamente colocadas no projeto. Estamos utilizando o Driver do Java DB, o JSTL e todas aquelas mesmas que você utilizou de spring e commons-logging no seu exemplo de LoginJSP. Essas relacionadas ao login estão na pasta /lib do nosso projeto.

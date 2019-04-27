@@ -134,7 +134,7 @@ public class PromocaoController extends HttpServlet {
     }
     
     private void insere(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ParseException {
+            throws IOException, ParseException, ServletException {
         request.setCharacterEncoding("UTF-8");
         String url = request.getParameter("url");
         String email = request.getUserPrincipal().getName().toString();
@@ -146,8 +146,9 @@ public class PromocaoController extends HttpServlet {
         Promocao promo = new Promocao(url,cnpj,nome,preco,data_sessao,horario_sessao);
         boolean deu_certo = dao.insert(promo);
         if(!deu_certo){
-            //CHAMAR AQUI UM ALERT() avisando que deu horario conflitante
-            log("Preciso chamar um alert aqui avisando que teve horario conflitante");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/promocao_ingresso/formulario.jsp");
+            request.setAttribute("errorUpdate", 1); 
+            dispatcher.forward(request, response);
         }
         response.sendRedirect("lista");
     }
@@ -188,7 +189,7 @@ public class PromocaoController extends HttpServlet {
     }
 
     private void atualize(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ParseException {
+            throws IOException, ParseException, ServletException {
         request.setCharacterEncoding("UTF-8");
         int id = Integer.parseInt(request.getParameter("id"));
         String url = request.getParameter("url");
@@ -200,8 +201,10 @@ public class PromocaoController extends HttpServlet {
         Promocao promo = new Promocao(id,url,cnpj,nome,preco,data_sessao,horario_sessao);
         boolean deu_certo = dao.update(promo);
         if(!deu_certo){
-            //CHAMAR AQUI UM ALERT() avisando que deu horario conflitante
-            log("Preciso chamar um alert aqui avisando que teve horario conflitante");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/promocao_ingresso/formulario.jsp");
+            request.setAttribute("promocao", promo);
+            request.setAttribute("errorUpdate", 1); 
+            dispatcher.forward(request, response);
         }
         response.sendRedirect("lista");
     }

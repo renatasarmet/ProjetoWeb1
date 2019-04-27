@@ -27,9 +27,15 @@
         <fmt:bundle basename="i18n.mensagem">
             <c:if test="${promocao == null}">
                 <h1><fmt:message key="cadastro_de_promocoes"/></h1>
+                <c:if test="${errorUpdate == 1}">
+                    <h3 style="color: red">Promocao nao cadastrada por conta de conflito de horario.</h3>
+                </c:if>
             </c:if>
             <c:if test="${promocao != null}">
                 <h1><fmt:message key="edicao_de_promocoes"/></h1>
+                <c:if test="${errorUpdate == 1}">
+                    <h3 style="color: red">Promocao nao atualizada por conta de conflito de horario.</h3>
+                </c:if>
             </c:if>
         </fmt:bundle>
     </jsp:attribute>

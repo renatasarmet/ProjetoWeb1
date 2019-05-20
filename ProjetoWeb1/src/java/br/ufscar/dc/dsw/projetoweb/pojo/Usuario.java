@@ -3,34 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufscar.dc.dsw.model;
+package br.ufscar.dc.dsw.projetoweb.pojo;
 
 /**
  *
  * @author root
  */
-public class Usuario {
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Usuario implements Serializable{
+    
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
     private String email;
     private String senha;
     private int ativo;
 
-    public Usuario(int id) {
-        this.id = id;
-    }
-
-    public Usuario(int id, String email, String senha, int ativo) {
-        this.id = id;
-        this.email = email;
-        this.senha = senha;
-        this.ativo = ativo;
-    }
-
-    public Usuario(String email, String senha, int ativo) {
-        this.email = email;
-        this.senha = senha;
-        this.ativo = ativo;
-    }
 
     public void setId(int id) {
         this.id = id;

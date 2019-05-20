@@ -8,7 +8,7 @@ package br.ufscar.dc.dsw.controller;
 import br.ufscar.dc.dsw.dao.PromocaoDAO;
 import br.ufscar.dc.dsw.dao.Site_Venda_IngressoDAO;
 import br.ufscar.dc.dsw.dao.TeatroDAO;
-import br.ufscar.dc.dsw.model.Promocao;
+import br.ufscar.dc.dsw.projetoweb.pojo.Promocao;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

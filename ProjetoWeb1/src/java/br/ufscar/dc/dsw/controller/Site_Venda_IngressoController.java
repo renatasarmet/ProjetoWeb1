@@ -7,9 +7,9 @@ package br.ufscar.dc.dsw.controller;
 
 import br.ufscar.dc.dsw.dao.Site_Venda_IngressoDAO;
 import br.ufscar.dc.dsw.dao.UsuarioDAO;
-import br.ufscar.dc.dsw.model.Site_Venda_Ingresso;
-import br.ufscar.dc.dsw.model.Teatro;
-import br.ufscar.dc.dsw.model.Usuario;
+import br.ufscar.dc.dsw.projetoweb.pojo.Site_Venda_Ingresso;
+import br.ufscar.dc.dsw.projetoweb.pojo.Teatro;
+import br.ufscar.dc.dsw.projetoweb.pojo.Usuario;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;

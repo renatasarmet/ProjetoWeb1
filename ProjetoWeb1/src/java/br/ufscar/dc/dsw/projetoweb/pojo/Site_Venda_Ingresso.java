@@ -3,35 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufscar.dc.dsw.model;
+package br.ufscar.dc.dsw.projetoweb.pojo;
 
 /**
  *
  * @author Leonardo
  */
-public class Site_Venda_Ingresso extends Usuario{
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+
+@Entity
+@Table(uniqueConstraints={@UniqueConstraint(columnNames={"url"})})
+public class Site_Venda_Ingresso extends Usuario {
     
     private String url;
     private String nome;
     private String telefone;
-
-    public Site_Venda_Ingresso(int id_usuario) {
-        super(id_usuario);
-    }
-
-    public Site_Venda_Ingresso(int id_usuario,String email, String senha, String url, String nome, String telefone) {
-        super(id_usuario,email,senha,1);
-        this.url = url;
-        this.nome = nome;
-        this.telefone = telefone;
-    }
-
-    public Site_Venda_Ingresso(String email, String senha, String url, String nome, String telefone) {
-        super(email,senha,1);
-        this.url = url;
-        this.nome = nome;
-        this.telefone = telefone;
-    }
 
     public void setId_usuario(int id_usuario) {
         super.setId(id_usuario);

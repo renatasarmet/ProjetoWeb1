@@ -3,31 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufscar.dc.dsw.model;
+package br.ufscar.dc.dsw.projetoweb.pojo;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  *
  * @author João
  */
+@Entity
+@Table(uniqueConstraints={@UniqueConstraint(columnNames={"CNPJ"})})
 public class Teatro extends Usuario{
     
     private String CNPJ;
     private String nome;
     private String cidade;
     
-    public Teatro(int id, String email, String senha, String CNPJ, String nome, String cidade) {
-        super(id,email,senha,1);
-        this.CNPJ = CNPJ;
-        this.nome = nome;
-        this.cidade = cidade;
-    }
-    
-    public Teatro(String email, String senha, String CNPJ, String nome, String cidade) {
-        super(email,senha,1);
-        this.CNPJ = CNPJ;
-        this.nome = nome;
-        this.cidade = cidade;
-    }
     public void setId_Usuario(int id){
         super.setId(id);
     }

@@ -5,183 +5,62 @@
  */
 package br.ufscar.dc.dsw.dao;
 
-import br.ufscar.dc.dsw.model.Site_Venda_Ingresso;
-import br.ufscar.dc.dsw.model.Usuario;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+import br.ufscar.dc.dsw.projetoweb.pojo.Site_Venda_Ingresso;
 import java.util.List;
-
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 /**
  *
  * @author Leonardo
  */
-public class Site_Venda_IngressoDAO {
-    private UsuarioDAO daoUsuario ;
+public class Site_Venda_IngressoDAO extends GenericDAO<Site_Venda_Ingresso> {
     
-    public Site_Venda_IngressoDAO() {
-        daoUsuario = new UsuarioDAO();
-        try {
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+
+    @Override
+    public Site_Venda_Ingresso get(Long id) {
+        EntityManager em = this.getEntityManager();
+        Site_Venda_Ingresso site_Venda_Ingresso = em.find(Site_Venda_Ingresso.class, id);
+        em.close();
+        return site_Venda_Ingresso;
     }
 
-    protected Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:derby://localhost:1527/ProjetoWeb1", "root", "root");
-    }
-
-    public void insert(Site_Venda_Ingresso site) {
-        Usuario usuario = new Usuario(site.getEmail(),site.getSenha(),site.getAtivo());
-        site.setId_usuario(daoUsuario.insert(usuario,1));
-        String sql = "INSERT INTO Site_Venda_Ingresso (id_usuario, url, nome, telefone) VALUES (?, ?, ?, ?)";
-        try {
-            Connection conn = this.getConnection();
-            PreparedStatement statement = conn.prepareStatement(sql);
-            statement = conn.prepareStatement(sql);
-            statement.setInt(1, site.getId_usuario());
-            statement.setString(2, site.getUrl());
-            statement.setString(3, site.getNome());
-            statement.setString(4, site.getTelefone());
-            statement.executeUpdate();
-            statement.close();
-            conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
+    @Override
     public List<Site_Venda_Ingresso> getAll() {
-        List<Site_Venda_Ingresso> listaSite = new ArrayList<>();
-        String sql = "SELECT id, email,senha, url, nome, telefone FROM Site_Venda_Ingresso, Usuario where id = id_usuario";
-        try {
-            Connection conn = this.getConnection();
-            Statement statement = conn.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                int id_usuario = resultSet.getInt("id");
-                String url = resultSet.getString("url");
-                String email = resultSet.getString("email");
-                String senha = resultSet.getString("senha");
-                String nome = resultSet.getString("nome");
-                String telefone = resultSet.getString("telefone");
-                Site_Venda_Ingresso site = new Site_Venda_Ingresso(id_usuario, email, senha, url, nome, telefone );
-                listaSite.add(site);
-            }
-            resultSet.close();
-            statement.close();
-            conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return listaSite;
+        EntityManager em = this.getEntityManager();
+        Query q = em.createQuery("select s from Site_Venda_Ingresso s", Site_Venda_Ingresso.class);
+        List<Site_Venda_Ingresso> site_Venda_Ingresso = q.getResultList();
+        em.close();
+        return site_Venda_Ingresso;
     }
 
-    public Site_Venda_Ingresso get(int id_usuario) {
-        Usuario usuario = daoUsuario.get(id_usuario);
-        Site_Venda_Ingresso site = null;
-        String sql = "SELECT * FROM Site_Venda_Ingresso WHERE id_usuario = ?";
-        try {
-            Connection conn = this.getConnection();
-            PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setInt(1, id_usuario);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                String url = resultSet.getString("url");
-                String nome = resultSet.getString("nome");
-                String telefone = resultSet.getString("telefone");
-                site = new Site_Venda_Ingresso(id_usuario, usuario.getEmail(), usuario.getSenha(), url, nome, telefone);
-            }
-            resultSet.close();
-            statement.close();
-            conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return site;
-    }
-    public Site_Venda_Ingresso getByEmail(String email) {
-        Usuario usuario = daoUsuario.getByEmail(email);
-        Site_Venda_Ingresso site = null;
-        String sql = "SELECT * FROM Site_Venda_Ingresso WHERE id_usuario = ?";
-        try {
-            Connection conn = this.getConnection();
-            PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setInt(1, usuario.getId());
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                String url = resultSet.getString("url");
-                String nome = resultSet.getString("nome");
-                String telefone = resultSet.getString("telefone");
-                site = new Site_Venda_Ingresso(usuario.getId(), email, usuario.getSenha(), url, nome, telefone);
-            }
-            resultSet.close();
-            statement.close();
-            conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return site;
-    }
-    
-    public String getURL(String email) {
-        String url = "";
-        String sql = "SELECT url FROM Site_Venda_Ingresso, Usuario WHERE id_usuario = id and email = ?";
-        try {
-            Connection conn = this.getConnection();
-            PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, email);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                url = resultSet.getString("url");
-            }
-            resultSet.close();
-            statement.close();
-            conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return url;
+    @Override
+    public void save(Site_Venda_Ingresso site_Venda_Ingresso) {
+        EntityManager em = this.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        em.persist(site_Venda_Ingresso);
+        tx.commit();
+        em.close();
     }
 
-    public void update(Site_Venda_Ingresso site) {
-        Usuario usuario = new Usuario(site.getId_usuario(),site.getEmail(),site.getSenha(),site.getAtivo());
-        daoUsuario.update(usuario);
-        String sql = "UPDATE Site_Venda_Ingresso SET url = ?, nome = ?, telefone = ?";
-        sql += " WHERE id_usuario = ?";
-        try {
-            Connection conn = this.getConnection();
-            PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, site.getUrl());
-            statement.setString(2, site.getNome());
-            statement.setString(3, site.getTelefone());
-            statement.setInt(4, site.getId_usuario());
-            statement.executeUpdate();
-            statement.close();
-            conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    @Override
+    public void update(Site_Venda_Ingresso site_Venda_Ingresso) {
+        EntityManager em = this.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        em.merge(site_Venda_Ingresso);
+        tx.commit();
+        em.close();
     }
 
-    public void delete(Site_Venda_Ingresso site) {
-        String sql = "DELETE FROM Site_Venda_Ingresso where id_usuario = ?";
-        try {
-            Connection conn = this.getConnection();
-            PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setInt(1, site.getId_usuario());
-            statement.executeUpdate();
-            statement.close();
-            conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        daoUsuario.delete(site.getId_usuario());
+    @Override
+    public void delete(Site_Venda_Ingresso site_Venda_Ingresso) {
+        EntityManager em = this.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        site_Venda_Ingresso = em.getReference(Site_Venda_Ingresso.class, site_Venda_Ingresso.getId());
+        tx.begin();
+        em.remove(site_Venda_Ingresso);
+        tx.commit();
     }
-
 }

@@ -3,61 +3,71 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufscar.dc.dsw.model;
+package br.ufscar.dc.dsw.projetoweb.pojo;
 
 import br.ufscar.dc.dsw.dao.TeatroDAO;
 import java.util.Date;
+import javax.persistence.Entity;
 
 
 /**
  *
  * @author Renata
  */
+@Entity
 public class Promocao {
-
-    private TeatroDAO daoTeatro;
     
     private int id;
-    private String url;
-    private String cnpj;
     private String nome;
     private float preco;
     private String data_sessao;
     private String horario_sessao;
 
+    private Teatro teatro;
+    private Site_Venda_Ingresso site_Venda_Ingresso;
+    
     public Promocao(int id) {
         this.id = id;
     }
 
-    public Promocao(String url, String cnpj, String nome, float preco, String data_sessao, String horario_sessao) {
-        this.url = url;
-        this.cnpj = cnpj;
+    public Promocao(Teatro teatro, Site_Venda_Ingresso site_Venda_Ingresso, String nome, float preco, String data_sessao, String horario_sessao) {
+        this.teatro = teatro;
+        this.site_Venda_Ingresso = site_Venda_Ingresso;
         this.nome = nome;
         this.preco = preco;
         this.data_sessao = data_sessao;
         this.horario_sessao = horario_sessao;   
     }
 
-    public Promocao(int id, String url, String cnpj, String nome, float preco, String data_sessao, String horario_sessao) {
+    public Promocao(int id, Teatro teatro, Site_Venda_Ingresso site_Venda_Ingresso, String nome, float preco, String data_sessao, String horario_sessao) {
         this.id = id;
-        this.url = url;
-        this.cnpj = cnpj;
+        this.teatro = teatro;
+        this.site_Venda_Ingresso = site_Venda_Ingresso;
         this.nome = nome;
         this.preco = preco;
         this.data_sessao = data_sessao;
         this.horario_sessao = horario_sessao;
     }
+
+    public Teatro getTeatro() {
+        return teatro;
+    }
+
+    public Site_Venda_Ingresso getSite_Venda_Ingresso() {
+        return site_Venda_Ingresso;
+    }
+
+    public void setTeatro(Teatro teatro) {
+        this.teatro = teatro;
+    }
+
+    public void setSite_Venda_Ingresso(Site_Venda_Ingresso site_Venda_Ingresso) {
+        this.site_Venda_Ingresso = site_Venda_Ingresso;
+    }
+    
     
     public int getId() {
         return id;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public String getCnpj() {
-        return cnpj;
     }
 
     public String getNome() {
@@ -79,14 +89,6 @@ public class Promocao {
     public void setId(int id) {
         this.id = id;
     }
-    
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
-    }
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -102,11 +104,6 @@ public class Promocao {
 
     public void setHorario_sessao(String horario_sessao) {
         this.horario_sessao = horario_sessao;
-    }
-    
-    public String getNomeTeatroPorCnpj(String cnpj) {
-        daoTeatro = new TeatroDAO();
-        return daoTeatro.getNomeTeatroPorCnpj(cnpj);
     }
     
 }

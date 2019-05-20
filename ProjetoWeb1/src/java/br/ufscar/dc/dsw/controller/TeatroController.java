@@ -6,8 +6,8 @@
 package br.ufscar.dc.dsw.controller;
 
 import br.ufscar.dc.dsw.dao.TeatroDAO;
-import br.ufscar.dc.dsw.model.Promocao;
-import br.ufscar.dc.dsw.model.Teatro;
+import br.ufscar.dc.dsw.projetoweb.pojo.Promocao;
+import br.ufscar.dc.dsw.projetoweb.pojo.Teatro;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;

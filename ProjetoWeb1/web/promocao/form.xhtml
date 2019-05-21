@@ -5,7 +5,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">  
     <h:head>  
-        <title>Formulário: Promocao</title>
+        <title>#{msg['cadastro_de_promocoes']}</title>
         <link rel="stylesheet" 
               href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
               integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" 
@@ -16,61 +16,61 @@
             <div class="form-group">  
                 <div class="col-sm-4"></div>  
                 <div  class="col-sm-4">  
-                    <h2 style="text-align: center">Dados</h2>  
+                    <h2 style="text-align: center">#{msg['dados']}</h2>  
                 </div>  
             </div>  
             <hr/>  
             <div class="form-group">  
-                <h:outputLabel for="nome" class="control-label col-sm-4">Nome</h:outputLabel>  
+                <h:outputLabel for="nome" class="control-label col-sm-4">#{msg['nome']}</h:outputLabel>  
                 <div class="col-sm-4">  
-                    <h:inputText id="nome-id" value="#{promocaoBean.promocao.nome}" class="form-control"   
-                                 validatorMessage="Nome é obrigatório">
+                    <h:inputText id="nome" value="#{promocaoBean.promocao.nome}" class="form-control"   
+                                 validatorMessage="#{msg['nome_obrigatorio']}">
                         <f:validateRequired/>
                     </h:inputText>  
                 </div>  
             </div>  
             <div class="form-group">  
-                <h:outputLabel for="preco" class="control-label col-sm-4">Preço</h:outputLabel>  
+                <h:outputLabel for="preco" class="control-label col-sm-4">#{msg['preco']}</h:outputLabel>  
                 <div class="col-sm-4">  
-                    <h:inputText id="preco-id" value="#{promocaoBean.promocao.preco}" class="form-control"   
-                                 validatorMessage="Preço é obrigatório"
+                    <h:inputText id="preco" value="#{promocaoBean.promocao.preco}" class="form-control"   
+                                 validatorMessage="#{msg['preco_obrigatorio']}"
                                  a:type="Number" a:step="any" a:min="0.01">
                         <f:validateRequired/>
                     </h:inputText>  
                 </div>  
             </div>  
             <div class="form-group">  
-                <h:outputLabel for="data_sessao" class="control-label col-sm-4">Data Sessao</h:outputLabel>  
+                <h:outputLabel for="data_sessao" class="control-label col-sm-4">#{msg['data_sessao']}</h:outputLabel>  
                 <div class="col-sm-4">  
-                    <h:inputText id="data_sessao-id" value="#{promocaoBean.promocao.data_sessao}" class="form-control"   
-                                   validatorMessage="Data sessão é obrigatório">
+                    <h:inputText id="data_sessao" value="#{promocaoBean.promocao.data_sessao}" class="form-control"   
+                                   validatorMessage="#{msg['data_sessao_obrigatorio']}">
                         <f:validateRequired/>
                     </h:inputText>  
                 </div>  
             </div>
             <div class="form-group">  
-                <h:outputLabel for="horario_sessao" class="control-label col-sm-4">Horario Sessao</h:outputLabel>  
+                <h:outputLabel for="horario_sessao" class="control-label col-sm-4">#{msg['horario_sessao']}</h:outputLabel>  
                 <div class="col-sm-4">  
-                    <h:inputText id="horario_sessao-id" value="#{promocaoBean.promocao.horario_sessao}" class="form-control"   
-                                 validatorMessage="Horário sessão é obrigatório">
+                    <h:inputText id="horario_sessao" value="#{promocaoBean.promocao.horario_sessao}" class="form-control"   
+                                 validatorMessage="#{msg['horario_sessao_obrigatorio']}">
                         <f:validateRequired/>
                     </h:inputText>  
                 </div>  
             </div>
 <!--            <div class="form-group">  
-                <h:outputLabel for="teatro" class="control-label col-sm-4">Teatro</h:outputLabel>  
+                <h:outputLabel for="teatro" class="control-label col-sm-4">#{msg['teatro']}</h:outputLabel>  
                 <div class="col-sm-4">  
-                    <h:inputText id="teatro-id" value="#{promocaoBean.promocao.teatro}" class="form-control"   
-                                 validatorMessage="Teatro é obrigatório">
+                    <h:inputText id="teatro" value="#{promocaoBean.promocao.teatro}" class="form-control"   
+                                 validatorMessage="#{msg['teatro_obrigatorio']}">
                         <f:validateRequired/>
                     </h:inputText>  
                 </div>  
             </div>
             <div class="form-group">  
-                <h:outputLabel for="site_Venda_Ingresso" class="control-label col-sm-4">Site Venda Ingresso</h:outputLabel>  
+                <h:outputLabel for="site_Venda_Ingresso" class="control-label col-sm-4">#{msg['site']}</h:outputLabel>  
                 <div class="col-sm-4">  
-                    <h:inputText id="site_Venda_Ingresso-id" value="#{promocaoBean.promocao.site_Venda_Ingresso}" class="form-control"   
-                                 validatorMessage="Site Venda Ingresso é obrigatório">
+                    <h:inputText id="site_Venda_Ingresso" value="#{promocaoBean.promocao.site_Venda_Ingresso}" class="form-control"   
+                                 validatorMessage="#{msg['site_obrigatorio']}">
                         <f:validateRequired/>
                     </h:inputText>  
                 </div>  
@@ -79,12 +79,12 @@
                 <div class="col-sm-4"></div>  
                 <div class="col-sm-4">  
                     <div class="col-sm-2">                        
-                        <h:commandButton value="Salva" action="#{promocaoBean.salva()}" class="btn btn-primary"   
+                        <h:commandButton value="#{msg['salvar']}" action="#{promocaoBean.salva()}" class="btn btn-primary"   
                                          style="width: 80px;"></h:commandButton>  
                     </div>  
                     <br/> 
                     <div class="col-sm-2">  
-                        <h:link outcome="index" value="Lista de Promocoes" class="btn btn-success" />  
+                        <h:link outcome="index" value="#{msg['lista_de_promocoes']}" class="btn btn-success" />  
                     </div>  
                 </div>  
             </div>  

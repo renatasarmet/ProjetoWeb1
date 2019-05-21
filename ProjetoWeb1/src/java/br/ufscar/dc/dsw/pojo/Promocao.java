@@ -31,26 +31,27 @@ public class Promocao implements Serializable {
     private String data_sessao;
     private String horario_sessao;
 
-     @ManyToOne
+    @ManyToOne
     private Teatro teatro;
 
-    private Site_Venda_Ingresso site_Venda_Ingresso;
+    @ManyToOne
+    private Site_Venda_Ingresso site_venda_ingresso;
 
 
     public Teatro getTeatro() {
         return teatro;
     }
 
-    public Site_Venda_Ingresso getSite_Venda_Ingresso() {
-        return site_Venda_Ingresso;
+    public Site_Venda_Ingresso getSite_venda_ingresso() {
+        return site_venda_ingresso;
     }
 
     public void setTeatro(Teatro teatro) {
         this.teatro = teatro;
     }
 
-    public void setSite_Venda_Ingresso(Site_Venda_Ingresso site_Venda_Ingresso) {
-        this.site_Venda_Ingresso = site_Venda_Ingresso;
+    public void setSite_venda_ingresso(Site_Venda_Ingresso site_venda_ingresso) {
+        this.site_venda_ingresso = site_venda_ingresso;
     }
     
     

@@ -64,19 +64,20 @@
                         <f:selectItems value="#{teatroBean.teatros}"/>
                         <f:converter converterId="TeatroConverter" />
                     </h:selectOneMenu>
-                    <h:message for="publisher"/>
+                    <h:message for="teatro"/>
  
                 </div>  
             </div>
-           <!-- <div class="form-group">  
-                <h:outputLabel for="site_Venda_Ingresso" class="control-label col-sm-4">#{msg['site']}</h:outputLabel>  
+            <div class="form-group">  
+                <h:outputLabel for="site_venda_ingresso" class="control-label col-sm-4">#{msg['site']}</h:outputLabel>  
                 <div class="col-sm-4">  
-                    <h:inputText id="site_Venda_Ingresso" value="#{promocaoBean.promocao.site_Venda_Ingresso}" class="form-control"   
-                                 validatorMessage="#{msg['site_obrigatorio']}">
-                        <f:validateRequired/>
-                    </h:inputText>  
+                    <h:selectOneMenu id="site_venda_ingresso" value="#{promocaoBean.promocao.site_venda_ingresso}">
+                        <f:selectItems value="#{site_Venda_IngressoBean.sites}"/>
+                        <f:converter converterId="Site_Venda_IngressoConverter" />
+                    </h:selectOneMenu>
+                    <h:message for="site_venda_ingresso"/>  
                 </div>  
-            </div>-->
+            </div>
             <div class="form-group">  
                 <div class="col-sm-4"></div>  
                 <div class="col-sm-4">  

@@ -20,47 +20,47 @@ public class Site_Venda_IngressoDAO extends GenericDAO<Site_Venda_Ingresso> {
     @Override
     public Site_Venda_Ingresso get(Long id) {
         EntityManager em = this.getEntityManager();
-        Site_Venda_Ingresso site_Venda_Ingresso = em.find(Site_Venda_Ingresso.class, id);
+        Site_Venda_Ingresso site_venda_ingresso = em.find(Site_Venda_Ingresso.class, id);
         em.close();
-        return site_Venda_Ingresso;
+        return site_venda_ingresso;
     }
 
     @Override
     public List<Site_Venda_Ingresso> getAll() {
         EntityManager em = this.getEntityManager();
         Query q = em.createQuery("select s from Site_Venda_Ingresso s", Site_Venda_Ingresso.class);
-        List<Site_Venda_Ingresso> site_Venda_Ingresso = q.getResultList();
+        List<Site_Venda_Ingresso> site_venda_ingresso = q.getResultList();
         em.close();
-        return site_Venda_Ingresso;
+        return site_venda_ingresso;
     }
 
     @Override
-    public void save(Site_Venda_Ingresso site_Venda_Ingresso) {
+    public void save(Site_Venda_Ingresso site_venda_ingresso) {
         EntityManager em = this.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
-        em.persist(site_Venda_Ingresso);
+        em.persist(site_venda_ingresso);
         tx.commit();
         em.close();
     }
 
     @Override
-    public void update(Site_Venda_Ingresso site_Venda_Ingresso) {
+    public void update(Site_Venda_Ingresso site_venda_ingresso) {
         EntityManager em = this.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
-        em.merge(site_Venda_Ingresso);
+        em.merge(site_venda_ingresso);
         tx.commit();
         em.close();
     }
 
     @Override
-    public void delete(Site_Venda_Ingresso site_Venda_Ingresso) {
+    public void delete(Site_Venda_Ingresso site_venda_ingresso) {
         EntityManager em = this.getEntityManager();
         EntityTransaction tx = em.getTransaction();
-        site_Venda_Ingresso = em.getReference(Site_Venda_Ingresso.class, site_Venda_Ingresso.getId());
+        site_venda_ingresso = em.getReference(Site_Venda_Ingresso.class, site_venda_ingresso.getId());
         tx.begin();
-        em.remove(site_Venda_Ingresso);
+        em.remove(site_venda_ingresso);
         tx.commit();
     }
 }

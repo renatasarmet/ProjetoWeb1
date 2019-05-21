@@ -9,7 +9,10 @@ package br.ufscar.dc.dsw.pojo;
  *
  * @author Leonardo
  */
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -22,6 +25,10 @@ public class Site_Venda_Ingresso extends Usuario {
     private String nome;
     private String telefone;
 
+    @OneToMany(mappedBy = "site_venda_ingresso", fetch = FetchType.LAZY)
+    private List<Promocao> promocoes;
+
+    
     public void setId_usuario(Long id_usuario) {
         super.setId(id_usuario);
     }
@@ -52,5 +59,30 @@ public class Site_Venda_Ingresso extends Usuario {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+    
+    public List<Promocao> getPromocoes() {
+        return promocoes;
+    }
+ 
+    public void setLivros(List<Promocao> promocoes) {
+        this.promocoes = promocoes;
+    }
+ 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+		return true;
+	if (obj == null)
+		return false;
+	if (!(obj instanceof Site_Venda_Ingresso))
+		return false;
+	Site_Venda_Ingresso other = (Site_Venda_Ingresso) obj;
+	return other.nome.equals(this.nome);
+    }
+    
+    @Override
+    public String toString() {
+        return nome;
     }
 }

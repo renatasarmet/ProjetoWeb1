@@ -5,7 +5,7 @@
  */
 package br.ufscar.dc.dsw.dao;
 
-import br.ufscar.dc.dsw.projetoweb.pojo.Promocao;
+import br.ufscar.dc.dsw.pojo.Promocao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

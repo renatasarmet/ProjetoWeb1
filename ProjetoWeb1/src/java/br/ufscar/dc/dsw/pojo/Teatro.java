@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufscar.dc.dsw.projetoweb.pojo;
+package br.ufscar.dc.dsw.pojo;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

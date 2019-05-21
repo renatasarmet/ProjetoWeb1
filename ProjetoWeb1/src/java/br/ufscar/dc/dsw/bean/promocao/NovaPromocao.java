@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufscar.dc.dsw.projetoweb.bean.site_venda_ingresso;
+package br.ufscar.dc.dsw.bean.promocao;
 
-
-import br.ufscar.dc.dsw.dao.Site_Venda_IngressoDAO;
-import br.ufscar.dc.dsw.projetoweb.pojo.Site_Venda_Ingresso;
+import br.ufscar.dc.dsw.dao.PromocaoDAO;
+import br.ufscar.dc.dsw.pojo.Promocao;
 import java.io.Serializable;
 import java.sql.SQLException;
 import javax.annotation.ManagedBean;
@@ -21,27 +20,27 @@ import javax.naming.NamingException;
 
 @ManagedBean
 @SessionScoped
-public class Novo_Site_Venda_Ingresso implements Serializable {
+public class NovaPromocao implements Serializable {
     
-    private Site_Venda_Ingresso site_venda_ingresso;
+    private Promocao promocao;
     
-    public Novo_Site_Venda_Ingresso() {
-        site_venda_ingresso = new Site_Venda_Ingresso();
+    public NovaPromocao() {
+        promocao = new Promocao();
     }
     
-    public Site_Venda_Ingresso getSite_Venda_Ingresso() {
-        return site_venda_ingresso;
+    public Promocao getPromocao() {
+        return promocao;
     }
-    public void setSite_Venda_Ingresso(Site_Venda_Ingresso site_venda_ingresso) {
-        this.site_venda_ingresso = site_venda_ingresso;
+    public void setPromocao(Promocao promocao) {
+        this.promocao = promocao;
     }
     public String recomecar() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "index?faces-redirect=true";
     }
-    public String gravarSite_Venda_Ingresso() throws SQLException, NamingException {
-        Site_Venda_IngressoDAO dao = new Site_Venda_IngressoDAO();
-        dao.save(site_venda_ingresso);
+    public String gravarPromocao() throws SQLException, NamingException {
+        PromocaoDAO dao = new PromocaoDAO();
+        dao.save(promocao);
         FacesContext facesContext = FacesContext.getCurrentInstance();
         Flash flash = facesContext.getExternalContext().getFlash();
         flash.setKeepMessages(true);

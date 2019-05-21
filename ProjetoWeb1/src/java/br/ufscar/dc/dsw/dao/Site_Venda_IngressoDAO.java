@@ -5,7 +5,7 @@
  */
 package br.ufscar.dc.dsw.dao;
 
-import br.ufscar.dc.dsw.projetoweb.pojo.Site_Venda_Ingresso;
+import br.ufscar.dc.dsw.pojo.Site_Venda_Ingresso;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;

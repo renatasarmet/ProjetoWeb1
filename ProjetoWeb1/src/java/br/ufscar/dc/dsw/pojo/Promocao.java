@@ -3,21 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufscar.dc.dsw.projetoweb.pojo;
+
+package br.ufscar.dc.dsw.pojo;
 
 import br.ufscar.dc.dsw.dao.TeatroDAO;
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
-
+import javax.persistence.Id; 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 /**
  *
  * @author Renata
  */
 @Entity
-public class Promocao {
+public class Promocao implements Serializable {
     
-    private int id;
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long id;
+    
     private String nome;
     private float preco;
     private String data_sessao;
@@ -25,29 +32,7 @@ public class Promocao {
 
     private Teatro teatro;
     private Site_Venda_Ingresso site_Venda_Ingresso;
-    
-    public Promocao(int id) {
-        this.id = id;
-    }
 
-    public Promocao(Teatro teatro, Site_Venda_Ingresso site_Venda_Ingresso, String nome, float preco, String data_sessao, String horario_sessao) {
-        this.teatro = teatro;
-        this.site_Venda_Ingresso = site_Venda_Ingresso;
-        this.nome = nome;
-        this.preco = preco;
-        this.data_sessao = data_sessao;
-        this.horario_sessao = horario_sessao;   
-    }
-
-    public Promocao(int id, Teatro teatro, Site_Venda_Ingresso site_Venda_Ingresso, String nome, float preco, String data_sessao, String horario_sessao) {
-        this.id = id;
-        this.teatro = teatro;
-        this.site_Venda_Ingresso = site_Venda_Ingresso;
-        this.nome = nome;
-        this.preco = preco;
-        this.data_sessao = data_sessao;
-        this.horario_sessao = horario_sessao;
-    }
 
     public Teatro getTeatro() {
         return teatro;
@@ -66,7 +51,7 @@ public class Promocao {
     }
     
     
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -86,7 +71,7 @@ public class Promocao {
         return horario_sessao;
     }
       
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

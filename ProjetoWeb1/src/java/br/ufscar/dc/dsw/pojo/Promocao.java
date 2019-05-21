@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id; 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -30,7 +31,9 @@ public class Promocao implements Serializable {
     private String data_sessao;
     private String horario_sessao;
 
+     @ManyToOne
     private Teatro teatro;
+
     private Site_Venda_Ingresso site_Venda_Ingresso;
 
 

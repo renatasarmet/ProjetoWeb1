@@ -22,11 +22,11 @@ public class Site_Venda_Ingresso extends Usuario {
     private String nome;
     private String telefone;
 
-    public void setId_usuario(int id_usuario) {
+    public void setId_usuario(Long id_usuario) {
         super.setId(id_usuario);
     }
     
-    public int getId_usuario() {
+    public Long getId_usuario() {
         return super.getId();
     }
 

@@ -57,16 +57,18 @@
                     </h:inputText>  
                 </div>  
             </div>
-<!--            <div class="form-group">  
+            <div class="form-group">  
                 <h:outputLabel for="teatro" class="control-label col-sm-4">#{msg['teatro']}</h:outputLabel>  
                 <div class="col-sm-4">  
-                    <h:inputText id="teatro" value="#{promocaoBean.promocao.teatro}" class="form-control"   
-                                 validatorMessage="#{msg['teatro_obrigatorio']}">
-                        <f:validateRequired/>
-                    </h:inputText>  
+                    <h:selectOneMenu id="teatro" value="#{promocaoBean.promocao.teatro}">
+                        <f:selectItems value="#{teatroBean.teatros}"/>
+                        <f:converter converterId="TeatroConverter" />
+                    </h:selectOneMenu>
+                    <h:message for="publisher"/>
+ 
                 </div>  
             </div>
-            <div class="form-group">  
+           <!-- <div class="form-group">  
                 <h:outputLabel for="site_Venda_Ingresso" class="control-label col-sm-4">#{msg['site']}</h:outputLabel>  
                 <div class="col-sm-4">  
                     <h:inputText id="site_Venda_Ingresso" value="#{promocaoBean.promocao.site_Venda_Ingresso}" class="form-control"   

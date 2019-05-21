@@ -5,8 +5,12 @@
  */
 package br.ufscar.dc.dsw.pojo;
 
+import java.util.List;
+import javax.persistence.Cacheable;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -14,23 +18,28 @@ import javax.persistence.UniqueConstraint;
  *
  * @author João
  */
-@Entity
-@Table(uniqueConstraints={@UniqueConstraint(columnNames={"CNPJ"})})
+@Entity 
+@Cacheable(value = false)
+@Table(uniqueConstraints={@UniqueConstraint(columnNames={"cnpj"})})
 public class Teatro extends Usuario{
     
-    private String CNPJ;
+    private String cnpj;
     private String nome;
     private String cidade;
     
-    public void setId_Usuario(int id){
+    @OneToMany(mappedBy = "teatro", fetch = FetchType.LAZY)
+    private List<Promocao> promocoes;
+
+    
+    public void setId_Usuario(Long id){
         super.setId(id);
     }
-    public int getId_Usuario(){
+    public Long getId_Usuario(){
         return super.getId();
     }
 
-    public void setCNPJ(String CNPJ) {
-        this.CNPJ = CNPJ;
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
 
     public void setNome(String nome) {
@@ -41,8 +50,8 @@ public class Teatro extends Usuario{
         this.cidade = cidade;
     }
 
-    public String getCNPJ() {
-        return CNPJ;
+    public String getCnpj() {
+        return cnpj;
     }
 
     public String getNome() {
@@ -52,4 +61,30 @@ public class Teatro extends Usuario{
     public String getCidade() {
         return cidade;
     }
+    
+    public List<Promocao> getPromocoes() {
+        return promocoes;
+    }
+ 
+    public void setPromocoes(List<Promocao> promocao) {
+        this.promocoes = promocoes;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+		return true;
+	if (obj == null)
+		return false;
+	if (!(obj instanceof Teatro))
+		return false;
+	Teatro other = (Teatro) obj;
+	return other.nome.equals(this.nome);
+    }
+    
+    @Override
+    public String toString() {
+        return nome;
+    }
+
 }

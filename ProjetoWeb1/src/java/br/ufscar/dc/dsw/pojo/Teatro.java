@@ -30,14 +30,14 @@ public class Teatro extends Usuario{
     @OneToMany(mappedBy = "teatro", fetch = FetchType.LAZY)
     private List<Promocao> promocoes;
 
-    
     public void setId_Usuario(Long id){
         super.setId(id);
     }
+    
     public Long getId_Usuario(){
         return super.getId();
     }
-
+    
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }

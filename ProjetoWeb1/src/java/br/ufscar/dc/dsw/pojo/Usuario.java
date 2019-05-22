@@ -16,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -26,14 +27,9 @@ public class Usuario implements Serializable{
     private Long id;
     private String email;
     private String senha;
-    private int ativo;
 
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
-    
+    @ManyToOne
+    private Papel papel;
 
     public Long getId() {
         return id;
@@ -47,10 +43,11 @@ public class Usuario implements Serializable{
         return senha;
     }
 
-    public int getAtivo() {
-        return ativo;
-    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
     public void setEmail(String email) {
         this.email = email;
     }
@@ -58,9 +55,8 @@ public class Usuario implements Serializable{
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
-    public void setAtivo(int ativo) {
-        this.ativo = ativo;
-    }
     
+    public void setPapel(Papel papel) {
+        this.papel = papel;
+    }
 }

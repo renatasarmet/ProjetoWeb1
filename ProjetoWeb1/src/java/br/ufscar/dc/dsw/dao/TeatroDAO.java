@@ -6,13 +6,6 @@
 package br.ufscar.dc.dsw.dao;
 
 import br.ufscar.dc.dsw.pojo.Teatro;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -44,6 +37,8 @@ public class TeatroDAO extends GenericDAO<Teatro> {
 
     @Override
     public void save(Teatro teatro) {
+        PapelDAO papelDAO = new PapelDAO();
+        teatro.setPapel(papelDAO.get("TEATRO"));
         EntityManager em = this.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();

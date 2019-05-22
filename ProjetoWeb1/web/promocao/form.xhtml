@@ -72,7 +72,7 @@
                 <h:outputLabel for="site_venda_ingresso" class="control-label col-sm-4">#{msg['site']}</h:outputLabel>  
                 <div class="col-sm-4">  
                     <h:selectOneMenu id="site_venda_ingresso" value="#{promocaoBean.promocao.site_venda_ingresso}">
-                        <f:selectItems value="#{site_Venda_IngressoBean.sites}"/>
+                        <f:selectItems value="#{siteVendaIngressoBean.sites}"/>
                         <f:converter converterId="Site_Venda_IngressoConverter" />
                     </h:selectOneMenu>
                     <h:message for="site_venda_ingresso"/>  

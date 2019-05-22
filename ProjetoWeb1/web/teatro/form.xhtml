@@ -19,7 +19,27 @@
                     <h2 style="text-align: center">#{msg['cadastro_de_teatro']}</h2>  
                 </div>  
             </div>  
-            <hr/>  
+            <hr/>
+            <div class="form-group">  
+                <h:outputLabel for="url" class="control-label col-sm-4">#{msg['email']}</h:outputLabel>  
+                <div class="col-sm-4">  
+                    <h:inputText id="email" value="#{teatroBean.teatro.email}" class="form-control"   
+                                 validatorMessage="#{msg['email_obrigatoria']}">
+                        <f:validateRequired/>
+                    </h:inputText>
+                    <h:message for="url"/>
+                </div>  
+            </div>
+            <div class="form-group">  
+                <h:outputLabel for="url" class="control-label col-sm-4">#{msg['senha']}</h:outputLabel>  
+                <div class="col-sm-4">  
+                    <h:inputText id="senha" value="#{teatroBean.teatro.senha}" class="form-control"   
+                                 validatorMessage="#{msg['senha_obrigatoria']}">
+                        <f:validateRequired/>
+                    </h:inputText>
+                    <h:message for="url"/>
+                </div>  
+            </div>
             <div class="form-group">  
                 <h:outputLabel for="cnpj" class="control-label col-sm-4">#{msg['cnpj']}</h:outputLabel>  
                 <div class="col-sm-4">  

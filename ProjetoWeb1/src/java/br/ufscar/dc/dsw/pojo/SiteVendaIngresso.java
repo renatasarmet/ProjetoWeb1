@@ -19,7 +19,7 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(uniqueConstraints={@UniqueConstraint(columnNames={"url"})})
-public class Site_Venda_Ingresso extends Usuario {
+public class SiteVendaIngresso extends Usuario {
     
     private String url;
     private String nome;
@@ -65,7 +65,7 @@ public class Site_Venda_Ingresso extends Usuario {
         return promocoes;
     }
  
-    public void setLivros(List<Promocao> promocoes) {
+    public void setPromocoes(List<Promocao> promocoes) {
         this.promocoes = promocoes;
     }
  
@@ -75,9 +75,9 @@ public class Site_Venda_Ingresso extends Usuario {
 		return true;
 	if (obj == null)
 		return false;
-	if (!(obj instanceof Site_Venda_Ingresso))
+	if (!(obj instanceof SiteVendaIngresso))
 		return false;
-	Site_Venda_Ingresso other = (Site_Venda_Ingresso) obj;
+	SiteVendaIngresso other = (SiteVendaIngresso) obj;
 	return other.nome.equals(this.nome);
     }
     

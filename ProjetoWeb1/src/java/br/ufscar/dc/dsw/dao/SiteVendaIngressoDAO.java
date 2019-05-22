@@ -5,7 +5,7 @@
  */
 package br.ufscar.dc.dsw.dao;
 
-import br.ufscar.dc.dsw.pojo.Site_Venda_Ingresso;
+import br.ufscar.dc.dsw.pojo.SiteVendaIngresso;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -14,55 +14,55 @@ import javax.persistence.Query;
  *
  * @author Leonardo
  */
-public class Site_Venda_IngressoDAO extends GenericDAO<Site_Venda_Ingresso> {
+public class SiteVendaIngressoDAO extends GenericDAO<SiteVendaIngresso> {
     
 
     @Override
-    public Site_Venda_Ingresso get(Long id) {
+    public SiteVendaIngresso get(Long id) {
         EntityManager em = this.getEntityManager();
-        Site_Venda_Ingresso site_venda_ingresso = em.find(Site_Venda_Ingresso.class, id);
+        SiteVendaIngresso siteVendaIngresso = em.find(SiteVendaIngresso.class, id);
         em.close();
-        return site_venda_ingresso;
+        return siteVendaIngresso;
     }
 
     @Override
-    public List<Site_Venda_Ingresso> getAll() {
+    public List<SiteVendaIngresso> getAll() {
         EntityManager em = this.getEntityManager();
-        Query q = em.createQuery("select s from Site_Venda_Ingresso s", Site_Venda_Ingresso.class);
-        List<Site_Venda_Ingresso> site_venda_ingresso = q.getResultList();
+        Query q = em.createQuery("select s from SiteVendaIngresso s", SiteVendaIngresso.class);
+        List<SiteVendaIngresso> siteVendaIngresso = q.getResultList();
         em.close();
-        return site_venda_ingresso;
+        return siteVendaIngresso;
     }
 
     @Override
-    public void save(Site_Venda_Ingresso site_venda_ingresso) {
+    public void save(SiteVendaIngresso siteVendaIngresso) {
         PapelDAO papelDAO = new PapelDAO();
-        site_venda_ingresso.setPapel(papelDAO.get("SITE"));
+        siteVendaIngresso.setPapel(papelDAO.get("SITE"));
         EntityManager em = this.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
-        em.persist(site_venda_ingresso);
+        em.persist(siteVendaIngresso);
         tx.commit();
         em.close();
     }
 
     @Override
-    public void update(Site_Venda_Ingresso site_venda_ingresso) {
+    public void update(SiteVendaIngresso siteVendaIngresso) {
         EntityManager em = this.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
-        em.merge(site_venda_ingresso);
+        em.merge(siteVendaIngresso);
         tx.commit();
         em.close();
     }
 
     @Override
-    public void delete(Site_Venda_Ingresso site_venda_ingresso) {
+    public void delete(SiteVendaIngresso siteVendaIngresso) {
         EntityManager em = this.getEntityManager();
         EntityTransaction tx = em.getTransaction();
-        site_venda_ingresso = em.getReference(Site_Venda_Ingresso.class, site_venda_ingresso.getId());
+        siteVendaIngresso = em.getReference(SiteVendaIngresso.class, siteVendaIngresso.getId());
         tx.begin();
-        em.remove(site_venda_ingresso);
+        em.remove(siteVendaIngresso);
         tx.commit();
     }
 }

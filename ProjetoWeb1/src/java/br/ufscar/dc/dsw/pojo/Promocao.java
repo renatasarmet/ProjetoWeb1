@@ -35,14 +35,14 @@ public class Promocao implements Serializable {
     private Teatro teatro;
 
     @ManyToOne
-    private Site_Venda_Ingresso site_venda_ingresso;
+    private SiteVendaIngresso site_venda_ingresso;
 
 
     public Teatro getTeatro() {
         return teatro;
     }
 
-    public Site_Venda_Ingresso getSite_venda_ingresso() {
+    public SiteVendaIngresso getSite_venda_ingresso() {
         return site_venda_ingresso;
     }
 
@@ -50,7 +50,7 @@ public class Promocao implements Serializable {
         this.teatro = teatro;
     }
 
-    public void setSite_venda_ingresso(Site_Venda_Ingresso site_venda_ingresso) {
+    public void setSite_venda_ingresso(SiteVendaIngresso site_venda_ingresso) {
         this.site_venda_ingresso = site_venda_ingresso;
     }
     

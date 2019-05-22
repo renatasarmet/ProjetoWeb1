@@ -6,7 +6,7 @@
 package br.ufscar.dc.dsw.dao;
 
 import br.ufscar.dc.dsw.pojo.Papel;
-import br.ufscar.dc.dsw.pojo.Site_Venda_Ingresso;
+import br.ufscar.dc.dsw.pojo.SiteVendaIngresso;
 import br.ufscar.dc.dsw.pojo.Teatro;
 import br.ufscar.dc.dsw.pojo.Usuario;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,8 +28,8 @@ public class CriaTudo{
         return t;
     }
     
-    private static Site_Venda_Ingresso criaSVI(){
-        Site_Venda_Ingresso svi = new Site_Venda_Ingresso();
+    private static SiteVendaIngresso criaSVI(){
+        SiteVendaIngresso svi = new SiteVendaIngresso();
         svi.setUrl("https://ingresso.com");
         svi.setNome("Ingresso ponto com");
         svi.setEmail("site@site");
@@ -47,7 +47,7 @@ public class CriaTudo{
     public static void main(String[] args) throws ClassNotFoundException {
         PapelDAO papelDAO = new PapelDAO();
         TeatroDAO teatroDAO = new TeatroDAO();
-        Site_Venda_IngressoDAO sviDAO = new Site_Venda_IngressoDAO();
+        SiteVendaIngressoDAO sviDAO = new SiteVendaIngressoDAO();
         
         
         // Criar os papeis "TEATRO, SITE e ADMIN"
@@ -64,7 +64,7 @@ public class CriaTudo{
         papelDAO.save(p3);
         
         // Criar usuários de teste pra Teatro, Site e Admin
-        Site_Venda_Ingresso svi = criaSVI();
+        SiteVendaIngresso svi = criaSVI();
         Teatro t = criaTeatro();
         Usuario admin = criaAdmin();
         

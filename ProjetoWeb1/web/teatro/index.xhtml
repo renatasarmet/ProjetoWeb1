@@ -43,7 +43,16 @@
                                      class="btn btn-danger" disabled="#{!empty teatro.promocoes}">  
                     </h:commandButton>  
                 </h:column>  
-            </h:dataTable>  
+            </h:dataTable>
+            <center>
+                <h:inputText id="cidadeProcura" value="#{teatroBean.cidade}" class="form-control"   
+                                 validatorMessage="#{msg['email_obrigatoria']}">
+            </h:inputText>
+              <br />
+              <h:commandButton action = "#{teatroBean.listaBusca()}" value="Procurar por cidade" class="btn btn-primary" >  
+                    </h:commandButton> 
+            </center>
+            <br />
             <center>
                 <h:commandButton action = "#{teatroBean.cadastra()}"   
                                  value="#{msg['cadastrar_novo_teatro']}" class="btn btn-primary"></h:commandButton>

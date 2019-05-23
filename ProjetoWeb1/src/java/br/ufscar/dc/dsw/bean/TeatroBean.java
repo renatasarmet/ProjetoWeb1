@@ -19,9 +19,21 @@ import javax.faces.bean.SessionScoped;
 public class TeatroBean implements Serializable {
  
     private Teatro teatro;
+    private String cidade;
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
  
     public String lista() {
         return "teatro/index.xhtml";
+    }
+    public String listaBusca(){
+        return "index.xhtml";
     }
  
     public String cadastra() {
@@ -57,7 +69,14 @@ public class TeatroBean implements Serializable {
     
     public List<Teatro> getTeatros() throws SQLException {
         TeatroDAO dao = new TeatroDAO();
-        return dao.getAll();
+        if(cidade == null || cidade.equals(""))
+            return dao.getAll();
+        else
+            return dao.getAllCidade(cidade);
+    }
+    public List<Teatro> getTeatrosCidade() throws SQLException {
+        TeatroDAO dao = new TeatroDAO();
+        return dao.getAllCidade(cidade);
     }
  
     public Teatro getTeatro() {

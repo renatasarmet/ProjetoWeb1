@@ -63,11 +63,7 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/site_venda_crud/form.ufscar").hasRole("ADMIN")
-                .antMatchers("/promocao/filtrar_url").hasRole("SITE")
-                .antMatchers("/teatro/form.ufscar").hasRole("ADMIN")
-                .antMatchers("/promocao/form.ufscar").hasAnyRole("TEATRO")
+                .antMatchers("/**").anonymous()
                 .and()
                 .formLogin()
                 .and()

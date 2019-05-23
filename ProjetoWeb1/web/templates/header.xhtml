@@ -1,0 +1,109 @@
+<?xml version = "1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xmlns:sec="http://www.springframework.org/security/tags">
+
+    <body>
+        <ui:composition> 
+            <div id="header-gen">
+                <ul>
+                    <sec:authorize access="hasAnyRole('ADMIN','SITE','TEATRO')">
+                        <li><h1 class="user_navbar">${user_email}</h1></li>
+                    </sec:authorize>
+                    <li><a href="/ProjetoWeb1"><b>Home</b></a></li>
+                    <sec:authorize access="!hasAnyRole('ADMIN','SITE','TEATRO')">
+                        <li>
+                            <a href="/ProjetoWeb1/promocao/lista">
+                                #{msg.lista_de_promocoes}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/ProjetoWeb1/site_venda_crud/lista">
+                                #{msg.lista_site_venda_ingresso}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/ProjetoWeb1/teatro_crud/lista">
+                                #{msg.lista_de_teatros}
+                            </a>
+                        </li>
+                        <li id="item-delimitador"></li>
+                    </sec:authorize>
+                    <sec:authorize ifAllGranted="ADMIN">
+                        <li>
+                            <a href="/ProjetoWeb1/promocao/lista">
+                                #{msg.lista_de_promocoes}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/ProjetoWeb1/site_venda_crud/lista">
+                                #{msg.lista_site_venda_ingresso}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/ProjetoWeb1/teatro_crud/lista">
+                                #{msg.lista_de_teatros}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/ProjetoWeb1/promocao/cadastro">
+                                #{msg.cadastro_de_promocoes}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/ProjetoWeb1/site_venda_crud/cadastro">
+                                #{msg.cadastro_site_venda_ingresso}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/ProjetoWeb1/teatro_crud/cadastro">
+                                #{msg.cadastro_de_teatro}
+                            </a>
+                        </li>
+                        <li id="item-delimitador"></li>
+                    </sec:authorize>
+
+                    <sec:authorize ifAllGranted="TEATRO">
+                        <li>
+                            <a href="/ProjetoWeb1/promocao/lista">
+                                #{msg.lista_de_promocoes}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/ProjetoWeb1/promocao/cadastro">
+                                #{msg.cadastro_de_promocoes}
+                            </a>
+                        </li>
+                        <li id="item-delimitador"></li>
+                        <li>
+                            <a href="/ProjetoWeb1/teatro_crud/editar">
+                                #{msg.editar_minha_conf}
+                            </a>
+                        </li>
+                    </sec:authorize>
+
+                    <sec:authorize ifAllGranted="SITE">
+                        <li>
+                            <a href="/ProjetoWeb1/promocao/filtrar_url">
+                                #{msg.minhas_promocoes}
+                            </a>
+                        </li>
+                        <li id="item-delimitador"></li>
+                        <li>
+                            <a href="/ProjetoWeb1/site_venda_crud/editar">
+                                #{msg.editar_minha_conf}
+                            </a>
+                        </li>
+                    </sec:authorize>
+                    <li>
+                        <sec:authorize access="hasAnyRole('TEATRO', 'SITE', 'ADMIN')"><a href="/ProjetoWeb1/logout"><fmt:message key="logout"/></a></sec:authorize>
+                        <sec:authorize access="!hasAnyRole('TEATRO', 'SITE', 'ADMIN')"><a href="/ProjetoWeb1/login"><fmt:message key="login"/></a></sec:authorize>
+                    </li>
+                </ul>
+            </div>
+        </ui:composition>
+    </body>
+</html>

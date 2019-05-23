@@ -2,66 +2,75 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
 <html xmlns="http://www.w3.org/1999/xhtml"  
       xmlns:h="http://xmlns.jcp.org/jsf/html"  
-      xmlns:f="http://xmlns.jcp.org/jsf/core">  
-    <h:head>  
-        <title>#{msg['lista_de_teatros']}</title>
-        <link rel="stylesheet" 
-              href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
-              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" 
-              crossorigin="anonymous"/>
-        <h:outputStylesheet name="/css/estilo.css"/>
-    </h:head>  
-    <h:body>  
-        <h:form>  
-            <center>  
-                <h2><h:outputText value="#{msg['lista_de_teatros']}"/></h2>  
-            </center>  
-            <h:dataTable value="#{teatroBean.teatros}" var="teatro"   
-                         class="table table-striped table-hover table-bordered">  
-                <h:column>  
-                    <f:facet name="header">#{msg['cnpj']}</f:facet>  
-                    <h:outputText value="#{teatro.cnpj}"/>  
-                </h:column>  
-                <h:column>  
-                    <f:facet name="header">#{msg['nome']}</f:facet>  
-                    <h:outputText value="#{teatro.nome}"/>  
-                </h:column>  
-                <h:column>  
-                    <f:facet name="header">#{msg['cidade']}</f:facet>  
-                    <h:outputText value="#{teatro.cidade}"/>  
-                </h:column> 
-                <h:column>  
-                    <f:facet name="header"></f:facet>  
-                    <h:commandButton action = "#{teatroBean.edita(teatro.id)}" 
-                           value="#{msg['edicao']}" class="btn btn-primary">  
-                    </h:commandButton>  
-                </h:column>  
-                <h:column>  
-                    <f:facet name="header"></f:facet>  
-                    <h:commandButton action = "#{teatroBean.delete(teatro)}" value="#{msg['remocao']}" 
-                                     onclick="return confirm('#{msg['confirmar_excluir']}');"
-                                     class="btn btn-danger" disabled="#{!empty teatro.promocoes}">  
-                    </h:commandButton>  
-                </h:column>  
-            </h:dataTable>
-            <center>
-                <h:inputText id="cidadeProcura" value="#{teatroBean.cidade}" class="form-control"   
-                                 validatorMessage="#{msg['email_obrigatoria']}">
-            </h:inputText>
-              <br />
-              <h:commandButton action = "#{teatroBean.listaBusca()}" value="Procurar por cidade" class="btn btn-primary" >  
-                    </h:commandButton> 
-            </center>
-            <br />
-            <center>
-                <h:commandButton action = "#{teatroBean.cadastra()}"   
-                                 value="#{msg['cadastrar_novo_teatro']}" class="btn btn-primary"></h:commandButton>
-            </center>
-            <br/>
-            <center>
-                <h:commandButton action = "#{teatroBean.volta()}"   
-                                 value="#{msg['menu_principal']}" class="btn btn-success"></h:commandButton>
-            </center>
-        </h:form>  
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui = "http://java.sun.com/jsf/facelets">   
+    <!--    <h:head>  
+            <title>#{msg['lista_de_teatros']}</title>
+            <link rel="stylesheet" 
+                  href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
+                  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" 
+                  crossorigin="anonymous"/>
+            <h:outputStylesheet name="/css/estilo.css"/>
+        </h:head>  -->
+    <h:body>
+        <ui:composition template="/templates/common.xhtml">
+            <ui:define name="title">
+                #{msg.lista_de_teatros} | #{msg.titulo_principal}
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form>  
+                    <center>  
+                        <h2><h:outputText value="#{msg['lista_de_teatros']}"/></h2>  
+                    </center>  
+                    <h:dataTable value="#{teatroBean.teatros}" var="teatro"   
+                                 class="table table-striped table-hover table-bordered">  
+                        <h:column>  
+                            <f:facet name="header">#{msg['cnpj']}</f:facet>  
+                            <h:outputText value="#{teatro.cnpj}"/>  
+                        </h:column>  
+                        <h:column>  
+                            <f:facet name="header">#{msg['nome']}</f:facet>  
+                            <h:outputText value="#{teatro.nome}"/>  
+                        </h:column>  
+                        <h:column>  
+                            <f:facet name="header">#{msg['cidade']}</f:facet>  
+                            <h:outputText value="#{teatro.cidade}"/>  
+                        </h:column> 
+                        <h:column>  
+                            <f:facet name="header"></f:facet>  
+                            <h:commandButton action = "#{teatroBean.edita(teatro.id)}" 
+                                             value="#{msg['edicao']}" class="btn btn-primary">  
+                            </h:commandButton>  
+                        </h:column>  
+                        <h:column>  
+                            <f:facet name="header"></f:facet>  
+                            <h:commandButton action = "#{teatroBean.delete(teatro)}" value="#{msg['remocao']}" 
+                                             onclick="return confirm('#{msg['confirmar_excluir']}');"
+                                             class="btn btn-danger" disabled="#{!empty teatro.promocoes}">  
+                            </h:commandButton>  
+                        </h:column>  
+                    </h:dataTable>
+                    <center>
+                        <h:inputText id="cidadeProcura" value="#{teatroBean.cidade}" class="form-control"   
+                                     validatorMessage="#{msg['email_obrigatoria']}">
+                        </h:inputText>
+                        <br />
+                        <h:commandButton action = "#{teatroBean.listaBusca()}" value="Procurar por cidade" class="btn btn-primary" >  
+                        </h:commandButton> 
+                    </center>
+                    <br />
+                    <center>
+                        <h:commandButton action = "#{teatroBean.cadastra()}"   
+                                         value="#{msg['cadastrar_novo_teatro']}" class="btn btn-primary"></h:commandButton>
+                    </center>
+                    <br/>
+                    <center>
+                        <h:commandButton action = "#{teatroBean.volta()}"   
+                                         value="#{msg['menu_principal']}" class="btn btn-success"></h:commandButton>
+                    </center>
+                </h:form>  
+            </ui:define>  
     </h:body>
 </html>

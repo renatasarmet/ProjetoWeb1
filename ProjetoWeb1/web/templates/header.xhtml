@@ -99,8 +99,8 @@
                         </li>
                     </sec:authorize>
                     <li>
-                        <sec:authorize access="hasAnyRole('TEATRO', 'SITE', 'ADMIN')"><a href="/ProjetoWeb1/logout"><fmt:message key="logout"/></a></sec:authorize>
-                        <sec:authorize access="!hasAnyRole('TEATRO', 'SITE', 'ADMIN')"><a href="/ProjetoWeb1/login"><fmt:message key="login"/></a></sec:authorize>
+                        <sec:authorize access="hasAnyRole('TEATRO', 'SITE', 'ADMIN')"><a href="/ProjetoWeb1/logout">#{msg.logout}</a></sec:authorize>
+                        <sec:authorize access="!hasAnyRole('TEATRO', 'SITE', 'ADMIN')"><a href="/ProjetoWeb1/login">#{msg.login}</a></sec:authorize>
                     </li>
                 </ul>
             </div>

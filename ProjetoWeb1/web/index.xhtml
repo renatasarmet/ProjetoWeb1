@@ -10,10 +10,8 @@
             Home | #{msg.titulo_principal}
         </ui:define>
     </h:head>
-    <h:body>
-        <ui:composition template="templates/common.xhtml">
-            
-            
+    <!--<h:body>-->
+        <ui:composition template="/templates/common.xhtml">
             <ui:define name="content">
                 <sec:authorize access="hasAnyRole('ADMIN','SITE','TEATRO')">
                     <h2>#{msg.bem_vindo}#{request.getUserPrincipal().getName().toString()}</h2>
@@ -37,5 +35,5 @@
                                 </h:form>-->
             </ui:define>
         </ui:composition>
-    </h:body>
+    <!--</h:body>-->
 </html>

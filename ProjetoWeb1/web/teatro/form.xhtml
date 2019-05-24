@@ -12,13 +12,13 @@
                   integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" 
                   crossorigin="anonymous"/>  
         </h:head>  -->
-
+    <h:head>
+        <ui:define name="title">
+            #{msg.cadastro_de_teatro} | #{msg.titulo_principal}
+        </ui:define>
+    </h:head>
     <h:body>
         <ui:composition template="/templates/common.xhtml">
-            <ui:define name="title">
-                #{msg.cadastro_de_teatro} | #{msg.titulo_principal}
-            </ui:define>
-            
             <ui:define name="content">
                 <h:form id="form" class="form-horizontal">  
                     <div class="form-group">  

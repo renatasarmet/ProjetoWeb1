@@ -15,25 +15,18 @@
         <ui:insert name = "title"><title>#{msg.titulo_principal}</title></ui:insert>
     </h:head>
     <h:body> 
-        <div style = "border-width:2px; border-color:green; border-style:solid;">
-            <ui:insert name = "header" >
-                <ui:include src = "/templates/header.xhtml" />
-            </ui:insert> 
-        </div>
+        <ui:insert name = "header" >
+            <ui:include src = "/templates/header.xhtml" />
+        </ui:insert> 
         <br/>
 
         <div style = "border-width:2px; border-color:black; border-style:solid;">
-            <ui:insert name = "content" >
-                <ui:include src = "/templates/contents.xhtml" />
-            </ui:insert>    
+            <div id="conteudo-gen">
+                <ui:insert name = "content" >
+                    <ui:include src = "/templates/contents.xhtml" />
+                </ui:insert>
+            </div>
         </div>
         <br/>
-
-        <div style = "border-width:2px; border-color:red; border-style:solid;">
-            <ui:insert name = "footer" >
-                <ui:include src = "/templates/footer.xhtml" />
-            </ui:insert>
-        </div>
-
     </h:body>
 </html>

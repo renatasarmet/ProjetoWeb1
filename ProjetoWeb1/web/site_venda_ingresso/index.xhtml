@@ -5,63 +5,62 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui = "http://java.sun.com/jsf/facelets">  
-<!--    <h:head>  
-        <title>#{msg['lista_site_venda_ingresso']}</title>
+    <h:head>  
+        <ui:define name="title">
+            #{msg.lista_site_venda_ingresso} | #{msg.titulo_principal}
+        </ui:define>
         <link rel="stylesheet" 
               href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
               integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" 
               crossorigin="anonymous"/>
         <h:outputStylesheet name="/css/estilo.css"/>
-    </h:head>  -->
-        <h:body>
+    </h:head>  
+    <h:body>
         <ui:composition template="/templates/common.xhtml">
-            <ui:define name="title">
-                #{msg.lista_site_venda_ingresso} | #{msg.titulo_principal}
-            </ui:define>
-
             <ui:define name="content">
-        <h:form>  
-            <center>  
-                <h2><h:outputText value="#{msg['lista_site_venda_ingresso']}"/></h2>  
-            </center>  
-            <h:dataTable value="#{siteVendaIngressoBean.sites}" var="site_venda_ingresso"   
-                         class="table table-striped table-hover table-bordered">  
-                <h:column>  
-                    <f:facet name="header">#{msg['url']}</f:facet>  
-                    <h:outputText value="#{site_venda_ingresso.url}"/>  
-                </h:column>  
-                <h:column>  
-                    <f:facet name="header">#{msg['nome']}</f:facet>  
-                    <h:outputText value="#{site_venda_ingresso.nome}"/>  
-                </h:column>  
-                <h:column>  
-                    <f:facet name="header">#{msg['telefone']}</f:facet>  
-                    <h:outputText value="#{site_venda_ingresso.telefone}"/>  
-                </h:column> 
-                <h:column>  
-                    <f:facet name="header"></f:facet>  
-                    <h:commandButton action = "#{siteVendaIngressoBean.edita(site_venda_ingresso.id)}" 
-                           value="#{msg['edicao']}" class="btn btn-primary">  
-                    </h:commandButton>  
-                </h:column>  
-                <h:column>  
-                    <f:facet name="header"></f:facet>  
-                    <h:commandButton action = "#{siteVendaIngressoBean.delete(site_venda_ingresso)}" value="#{msg['remocao']}" 
-                                     onclick="return confirm('#{msg['confirmar_excluir']}');"
-                                     class="btn btn-danger" disabled="#{!empty site_venda_ingresso.promocoes}">  
-                    </h:commandButton>  
-                </h:column>  
-            </h:dataTable>  
-            <center>
-                <h:commandButton action = "#{siteVendaIngressoBean.cadastra()}"   
-                                 value="#{msg['cadastrar_novo_site']}" class="btn btn-primary"></h:commandButton>
-            </center>
-            <br/>
-            <center>
-                <h:commandButton action = "#{siteVendaIngressoBean.volta()}"   
-                                 value="#{msg['menu_principal']}" class="btn btn-success"></h:commandButton>
-            </center>
-        </h:form>  
-            </ui:define>  
+                <h:form>  
+                    <center>  
+                        <h2><h:outputText value="#{msg['lista_site_venda_ingresso']}"/></h2>  
+                    </center>  
+                    <h:dataTable value="#{siteVendaIngressoBean.sites}" var="site_venda_ingresso"   
+                                 class="table table-striped table-hover table-bordered">  
+                        <h:column>  
+                            <f:facet name="header">#{msg['url']}</f:facet>  
+                            <h:outputText value="#{site_venda_ingresso.url}"/>  
+                        </h:column>  
+                        <h:column>  
+                            <f:facet name="header">#{msg['nome']}</f:facet>  
+                            <h:outputText value="#{site_venda_ingresso.nome}"/>  
+                        </h:column>  
+                        <h:column>  
+                            <f:facet name="header">#{msg['telefone']}</f:facet>  
+                            <h:outputText value="#{site_venda_ingresso.telefone}"/>  
+                        </h:column> 
+                        <h:column>  
+                            <f:facet name="header"></f:facet>  
+                            <h:commandButton action = "#{siteVendaIngressoBean.edita(site_venda_ingresso.id)}" 
+                                             value="#{msg['edicao']}" class="btn btn-primary">  
+                            </h:commandButton>  
+                        </h:column>  
+                        <h:column>  
+                            <f:facet name="header"></f:facet>  
+                            <h:commandButton action = "#{siteVendaIngressoBean.delete(site_venda_ingresso)}" value="#{msg['remocao']}" 
+                                             onclick="return confirm('#{msg['confirmar_excluir']}');"
+                                             class="btn btn-danger" disabled="#{!empty site_venda_ingresso.promocoes}">  
+                            </h:commandButton>  
+                        </h:column>  
+                    </h:dataTable>  
+                    <center>
+                        <h:commandButton action = "#{siteVendaIngressoBean.cadastra()}"   
+                                         value="#{msg['cadastrar_novo_site']}" class="btn btn-primary"></h:commandButton>
+                    </center>
+                    <br/>
+                    <center>
+                        <h:commandButton action = "#{siteVendaIngressoBean.volta()}"   
+                                         value="#{msg['menu_principal']}" class="btn btn-success"></h:commandButton>
+                    </center>
+                </h:form>  
+            </ui:define> 
+        </ui:composition>
     </h:body>
 </html>

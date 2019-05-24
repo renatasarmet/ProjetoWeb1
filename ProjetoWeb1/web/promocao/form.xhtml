@@ -5,19 +5,17 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui = "http://java.sun.com/jsf/facelets">  
-    <!--    <h:head>  
-            <title>#{msg['cadastro_de_promocoes']}</title>
-            <link rel="stylesheet" 
-                  href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
-                  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" 
-                  crossorigin="anonymous"/>  
-        </h:head>  -->
+    <h:head>  
+        <ui:define name="title">
+            #{msg.cadastro_de_promocoes} | #{msg.titulo_principal}
+        </ui:define>
+        <link rel="stylesheet" 
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
+              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" 
+              crossorigin="anonymous"/>  
+    </h:head>
     <h:body>
         <ui:composition template="/templates/common.xhtml">
-            <ui:define name="title">
-                #{msg.cadastro_de_promocoes} | #{msg.titulo_principal}
-            </ui:define>
-
             <ui:define name="content">
                 <h:form id="form" class="form-horizontal">  
                     <div class="form-group">  
@@ -80,7 +78,7 @@
                         <div class="col-sm-4">  
                             <h:selectOneMenu id="site_venda_ingresso" value="#{promocaoBean.promocao.site_venda_ingresso}">
                                 <f:selectItems value="#{siteVendaIngressoBean.sites}"/>
-                                <f:converter converterId="Site_Venda_IngressoConverter" />
+                                <f:converter converterId="SiteVendaIngressoConverter" />
                             </h:selectOneMenu>
                             <h:message for="site_venda_ingresso"/>  
                         </div>  
@@ -100,5 +98,6 @@
                     </div>  
                 </h:form>  
             </ui:define>  
+        </ui:composition>
     </h:body>  
 </html>

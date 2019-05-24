@@ -3,37 +3,37 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui = "http://java.sun.com/jsf/facelets"
-      xmlns:sec="http://www.springframework.org/security/tags">
-    
+      xmlns:s="http://www.springframework.org/security/tags">
+
     <h:head>
         <ui:define name="title">
             Home | #{msg.titulo_principal}
         </ui:define>
     </h:head>
-    <!--<h:body>-->
+    <h:body>
         <ui:composition template="/templates/common.xhtml">
             <ui:define name="content">
-                <sec:authorize access="hasAnyRole('ADMIN','SITE','TEATRO')">
+                <s:authorize access="hasAnyRole('ADMIN','SITE','TEATRO')">
                     <h2>#{msg.bem_vindo}#{request.getUserPrincipal().getName().toString()}</h2>
-                </sec:authorize>
-                <sec:authorize access="!hasAnyRole('ADMIN','TEATRO','SITE')">
+                </s:authorize>
+                <s:authorize access="!hasAnyRole('ADMIN','TEATRO','SITE')">
                     #{msg.anonimo_greet}
-                </sec:authorize>
-                <sec:authorize ifAllGranted="ADMIN">
+                </s:authorize>
+                <s:authorize ifAllGranted="ADMIN">
                     #{msg.admin_greet}
-                </sec:authorize>
-                <sec:authorize ifAllGranted="TEATRO">
+                </s:authorize>
+                <s:authorize ifAllGranted="TEATRO">
                     #{msg.teatro_greet}
-                </sec:authorize>
-                <sec:authorize ifAllGranted="SITE">
+                </s:authorize>
+                <s:authorize ifAllGranted="SITE">
                     #{msg.site_greet}
-                </sec:authorize>
-                <!--                <h:form>
-                                    <h:commandLink action="#{promocaoBean.lista()}">#{msg['promocoes']}: CRUD</h:commandLink><br/>
-                                    <h:commandLink action="#{teatroBean.lista()}">#{msg['teatro']}: CRUD</h:commandLink><br/>
-                                    <h:commandLink action="#{siteVendaIngressoBean.lista()}">#{msg['site']}: CRUD</h:commandLink><br/>
-                                </h:form>-->
+                </s:authorize>
+                <h:form>
+                    <h:commandLink action="#{promocaoBean.lista()}">#{msg['promocoes']}: CRUD</h:commandLink><br/>
+                    <h:commandLink action="#{teatroBean.lista()}">#{msg['teatro']}: CRUD</h:commandLink><br/>
+                    <h:commandLink action="#{siteVendaIngressoBean.lista()}">#{msg['site']}: CRUD</h:commandLink><br/>
+                </h:form>
             </ui:define>
         </ui:composition>
-    <!--</h:body>-->
+    </h:body>
 </html>

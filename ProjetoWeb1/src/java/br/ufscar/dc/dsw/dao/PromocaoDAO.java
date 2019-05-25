@@ -34,6 +34,21 @@ public class PromocaoDAO extends GenericDAO<Promocao> {
         return promocao;
     }
 
+    public List<Promocao> getAllURL(String email) {
+        EntityManager em = this.getEntityManager();
+        Query q = em.createQuery("select p from Promocao p where p.site_venda_ingresso.email = '"+email+"'", Promocao.class);
+        List<Promocao> promocao = q.getResultList();
+        em.close();
+        return promocao;
+    }
+    public List<Promocao> getAllTeatro(String nome) {
+        EntityManager em = this.getEntityManager();
+        Query q = em.createQuery("select p from Promocao p where p.teatro.nome = '"+nome+"'", Promocao.class);
+        List<Promocao> promocao = q.getResultList();
+        em.close();
+        return promocao;
+    }
+
     @Override
     public void save(Promocao promocao) {
         EntityManager em = this.getEntityManager();

@@ -6,6 +6,7 @@
 
 package br.ufscar.dc.dsw.bean;
  
+import br.ufscar.dc.dsw.dao.PapelDAO;
 import br.ufscar.dc.dsw.dao.SiteVendaIngressoDAO;
 import br.ufscar.dc.dsw.pojo.SiteVendaIngresso;
 import java.io.Serializable;
@@ -13,12 +14,14 @@ import java.sql.SQLException;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  
 @ManagedBean
 @SessionScoped
 public class SiteVendaIngressoBean implements Serializable {
  
     private SiteVendaIngresso siteVendaIngresso;
+    private static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
  
     public String lista() {
         return "site_venda_ingresso/index.xhtml";
@@ -37,8 +40,13 @@ public class SiteVendaIngressoBean implements Serializable {
  
     public String salva() {
         SiteVendaIngressoDAO dao = new SiteVendaIngressoDAO();
+        PapelDAO papelDAO = new PapelDAO();
+        siteVendaIngresso.setSenha(encoder.encode(siteVendaIngresso.getSenha()));
+        siteVendaIngresso.setAtivo(true);
         if (siteVendaIngresso.getId() == null) {
             dao.save(siteVendaIngresso);
+            siteVendaIngresso.getPapel().add(papelDAO.get("ROLE_SITE"));
+            dao.update(siteVendaIngresso);
         } else {
             dao.update(siteVendaIngresso);
         }

@@ -24,6 +24,7 @@ public class CriaTudo{
         t.setNome("Teatro Municipal");
         t.setCidade("Maceio");
         t.setEmail("teatro@teatro");
+        t.setAtivo(true);
         t.setSenha(encoder.encode("teatro"));
         return t;
     }
@@ -33,6 +34,7 @@ public class CriaTudo{
         svi.setUrl("https://ingresso.com");
         svi.setNome("Ingresso ponto com");
         svi.setEmail("site@site");
+        svi.setAtivo(true);
         svi.setSenha(encoder.encode("site"));
         return svi;
     }
@@ -41,6 +43,7 @@ public class CriaTudo{
         Usuario admin = new Usuario();
         admin.setEmail("admin@admin");
         admin.setSenha(encoder.encode("admin"));
+        admin.setAtivo(true);
         return admin;
     }
     
@@ -48,19 +51,19 @@ public class CriaTudo{
         PapelDAO papelDAO = new PapelDAO();
         TeatroDAO teatroDAO = new TeatroDAO();
         SiteVendaIngressoDAO sviDAO = new SiteVendaIngressoDAO();
-        
+        UsuarioDAO userDAO = new UsuarioDAO();
         
         // Criar os papeis "TEATRO, SITE e ADMIN"
         Papel p1 = new Papel();
-        p1.setNome("TEATRO");
+        p1.setNome("ROLE_TEATRO");
         papelDAO.save(p1);
         
         Papel p2 = new Papel();
-        p2.setNome("SITE");
+        p2.setNome("ROLE_SITE");
         papelDAO.save(p2);
         
         Papel p3 = new Papel();
-        p3.setNome("ADMIN");
+        p3.setNome("ROLE_ADMIN");
         papelDAO.save(p3);
         
         // Criar usuários de teste pra Teatro, Site e Admin
@@ -68,9 +71,20 @@ public class CriaTudo{
         Teatro t = criaTeatro();
         Usuario admin = criaAdmin();
         
+        teatroDAO.save(t);
+        sviDAO.save(svi);
+        userDAO.save(admin);
+        
         // Atribuir papéis
-        t.setPapel(p1);
-        svi.setPapel(p2);
-        admin.setPapel(p3);        
+        t.getPapel().add(p1);
+        svi.getPapel().add(p2);
+        admin.getPapel().add(p3);
+        
+        t.getPapel().add(p1);
+        teatroDAO.update(t);
+        svi.getPapel().add(p2);
+        sviDAO.update(svi);
+        admin.getPapel().add(p3);
+        userDAO.update(admin);
     }
 }

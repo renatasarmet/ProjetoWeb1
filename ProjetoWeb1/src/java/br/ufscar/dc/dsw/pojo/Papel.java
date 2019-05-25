@@ -9,11 +9,10 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Cacheable;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -28,8 +27,8 @@ public class Papel implements Serializable {
     private Long id;    
     private String nome;
     
-    @OneToMany(mappedBy = "papel", fetch = FetchType.LAZY)
-    private List<Usuario> usuarios;
+    @ManyToMany(mappedBy = "papel")
+    private List<Usuario> usuario;
 
     public Long getId() {
         return id;
@@ -48,10 +47,10 @@ public class Papel implements Serializable {
     }
 
     public List<Usuario> getUsuario() {
-        return usuarios;
+        return usuario;
     }
 
     public void setUsuario(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
+        this.usuario = usuarios;
     }
 }

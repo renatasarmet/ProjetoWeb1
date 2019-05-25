@@ -45,7 +45,6 @@ public class TeatroDAO extends GenericDAO<Teatro> {
     @Override
     public void save(Teatro teatro) {
         PapelDAO papelDAO = new PapelDAO();
-        teatro.setPapel(papelDAO.get("TEATRO"));
         EntityManager em = this.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();

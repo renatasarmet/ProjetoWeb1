@@ -37,7 +37,6 @@ public class SiteVendaIngressoDAO extends GenericDAO<SiteVendaIngresso> {
     @Override
     public void save(SiteVendaIngresso siteVendaIngresso) {
         PapelDAO papelDAO = new PapelDAO();
-        siteVendaIngresso.setPapel(papelDAO.get("SITE"));
         EntityManager em = this.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();

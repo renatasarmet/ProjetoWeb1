@@ -70,7 +70,7 @@
                         <h:outputLabel for="telefone" class="control-label col-sm-4">#{msg['telefone']}</h:outputLabel>  
                         <div class="col-sm-4">  
                             <h:inputText id="telefone" value="#{siteVendaIngressoBean.siteVendaIngresso.telefone}" class="form-control"   
-                                         validatorMessage="#{msg['telefone_obrigatorio']}">
+                                         validatorMessage="#{msg['telefone_obrigatorio']}" >
                                 <f:validateRequired/>
                             </h:inputText>
                             <h:message for="telefone"/>

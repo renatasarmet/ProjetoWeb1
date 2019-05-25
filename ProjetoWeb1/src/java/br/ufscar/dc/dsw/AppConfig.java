@@ -60,26 +60,23 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/**").anonymous()
+
+        http.authorizeRequests()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .and()
-                .httpBasic()
-                .and()
-		.exceptionHandling().accessDeniedPage("/erro/403")
-                .and()
-                .logout()//.logoutSuccessHandler(logoutSuccessHandler())
+                .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+
+        http.csrf().disable();
     }
 
     public static DataSource getDataSource() throws ClassNotFoundException {
 
         if (dataSource == null) {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
-            String url = "jdbc:derby://localhost:1527/Login";
+            String url = "jdbc:derby://localhost:1527/ProjetoWeb1";
             String user = "root";
             String password = "root";
             dataSource = new DriverManagerDataSource(url, user, password);

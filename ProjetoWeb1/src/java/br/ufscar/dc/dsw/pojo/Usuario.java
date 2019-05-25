@@ -10,13 +10,14 @@ package br.ufscar.dc.dsw.pojo;
  * @author root
  */
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -25,11 +26,21 @@ public class Usuario implements Serializable{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+    
     private String email;
     private String senha;
+    private boolean ativo;
 
-    @ManyToOne
-    private Papel papel;
+    @ManyToMany
+    private List<Papel> papel;
+    
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public boolean getAtivo() {
+        return ativo;
+    }
 
     public Long getId() {
         return id;
@@ -56,7 +67,10 @@ public class Usuario implements Serializable{
         this.senha = senha;
     }
     
-    public void setPapel(Papel papel) {
+    public void setPapel(List<Papel> papel) {
         this.papel = papel;
+    }
+    public List<Papel> getPapel() {
+        return papel;
     }
 }

@@ -41,6 +41,7 @@ public class PromocaoDAO extends GenericDAO<Promocao> {
         em.close();
         return promocao;
     }
+    
     public List<Promocao> getAllTeatro(Long id) {
         EntityManager em = this.getEntityManager();
         Query q = em.createQuery("select p from Promocao p where p.teatro.id = '"+ String.valueOf(id) +"'", Promocao.class);

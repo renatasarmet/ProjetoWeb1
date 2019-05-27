@@ -1,9 +1,12 @@
 package br.ufscar.dc.dsw.bean;
 
 import br.ufscar.dc.dsw.dao.PromocaoDAO;
+import br.ufscar.dc.dsw.dao.TeatroDAO;
 import br.ufscar.dc.dsw.dao.UsuarioDAO;
 import br.ufscar.dc.dsw.pojo.Promocao;
+import br.ufscar.dc.dsw.pojo.Teatro;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -14,6 +17,8 @@ public class PromocaoBean {
 
     private Promocao promocao;
     private List<Promocao> listaPromocao;
+    
+    private List<Teatro> listaTeatro;
     
     private String nome;
     private static final String CONTEXT_URL = "/promocao/";
@@ -52,6 +57,16 @@ public class PromocaoBean {
         promocao = new Promocao();
         return CONTEXT_URL + "form.xhtml";
     }
+    
+    public String cadastra(String nomeTeatro) {
+        UsuarioDAO daoUsuario = new UsuarioDAO();
+        TeatroDAO daoTeatro = new TeatroDAO();
+        
+        listaTeatro = new ArrayList<>();
+        listaTeatro.add(daoTeatro.get(daoUsuario.get(nomeTeatro).getId()));
+        
+        return CONTEXT_URL + "form.xhtml";
+    }
 
     public String edita(Long id) {
         PromocaoDAO dao = new PromocaoDAO();
@@ -81,6 +96,10 @@ public class PromocaoBean {
 
     public List<Promocao> getPromocoes() throws SQLException {
         return listaPromocao;
+    }
+    
+    public List<Teatro> getTeatros() {
+        return listaTeatro;
     }
 
     public List<Promocao> getPromocoesURL(String email) throws SQLException {

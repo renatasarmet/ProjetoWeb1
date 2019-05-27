@@ -27,14 +27,14 @@
                             <li><h:commandLink action="#{siteVendaIngressoBean.lista()}">#{msg.lista_site_venda_ingresso}</h:commandLink></li>
                             <li><h:commandLink action="#{teatroBean.lista()}">#{msg.lista_de_teatros}</h:commandLink></li>
                             <!--<li><h:commandLink action="#{promocaoBean.cadastra()}">#{msg.cadastro_de_promocoes}</h:commandLink></li>-->
-                            <li><h:commandLink action="#{siteVendaIngressoBean.cadastra()}"></h:commandLink></li>
+                            <li><h:commandLink action="#{siteVendaIngressoBean.cadastra()}">#{msg.cadastrar_novo_site}</h:commandLink></li>
                             <li><h:commandLink action="#{teatroBean.cadastra()}">#{msg.cadastro_de_teatro}</h:commandLink></li>
                             <li id="item-delimitador"></li>
                         </sec:authorize>
 
                         <sec:authorize ifAllGranted="TEATRO">
                             <li><h:commandLink action="#{promocaoBean.lista(request.getUserPrincipal().getName(), 'Teatro')}">#{msg.lista_de_promocoes}</h:commandLink></li>
-                            <li><h:commandLink action="#{promocaoBean.cadastra()}">#{msg.cadastro_de_promocoes}</h:commandLink></li>
+                            <li><h:commandLink action="#{promocaoBean.cadastra(request.getUserPrincipal().getName())}">#{msg.cadastro_de_promocoes}</h:commandLink></li>
                             <li id="item-delimitador"></li>
                             <li><h:commandLink action="#{teatroBean.edita(request.getUserPrincipal().getName())}">#{msg.editar_minha_conf}</h:commandLink></li>
                         </sec:authorize>

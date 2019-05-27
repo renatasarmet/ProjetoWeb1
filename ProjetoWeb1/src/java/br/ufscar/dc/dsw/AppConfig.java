@@ -79,6 +79,10 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .and()
+                .httpBasic()
+                .and()
+                .exceptionHandling().accessDeniedPage("/error/403.ufscar")
+                .and()
                 .logout().logoutSuccessHandler(logoutSuccessHandler())
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 

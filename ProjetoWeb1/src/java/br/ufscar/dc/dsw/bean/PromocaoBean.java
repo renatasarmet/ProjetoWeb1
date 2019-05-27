@@ -25,7 +25,20 @@ public class PromocaoBean {
     private String nome;
     private static final String CONTEXT_URL = "/promocao/";
 
+    private Teatro teatro;
+
+    public Teatro getTeatro() {
+        return teatro;
+    }
+
+    public void setTeatro(Teatro teatro) {
+        this.teatro = teatro;
+    }
+    
+    
     public String listaBusca() {
+        PromocaoDAO dao = new PromocaoDAO();
+        listaPromocao = dao.getAllTeatro(teatro.getId());
         return CONTEXT_URL + "index.xhtml";
     }
 

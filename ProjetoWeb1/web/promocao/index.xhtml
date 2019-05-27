@@ -22,6 +22,10 @@
                 <h:form>  
                     <center>
                         <s:authorize access="!hasAnyRole('SITE')">
+                            <h:selectOneMenu id="site_venda_ingresso" value="#{promocaoBean.teatro}">
+                                <f:selectItems value="#{teatroBean.teatros}"/>
+                                <f:converter converterId="TeatroConverter" />
+                            </h:selectOneMenu>
                             <h:inputText id="teatroProcura" value="#{promocaoBean.nome}" class="form-control"   
                                          validatorMessage="#{msg['nome_obrigatoria']}">
                             </h:inputText>

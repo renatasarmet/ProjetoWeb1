@@ -88,8 +88,12 @@ public class PromocaoBean {
         promocao = dao.get(id);
         return CONTEXT_URL + "form.xhtml";
     }
-
-    public String salva() {
+    
+//    public String salva() {
+//        return salva("","");
+//    }
+    
+    public String salva(String nomeUsuario, String classe) {
         PromocaoDAO dao = new PromocaoDAO();
         
         for (Promocao promocao1 : dao.getAll()) {
@@ -108,8 +112,10 @@ public class PromocaoBean {
             dao.update(promocao);
         }
         
-        listaPromocao = dao.getAll();
-        return CONTEXT_URL + "index.xhtml";
+        if(nomeUsuario.equals("") && classe.equals(""))
+            return lista();
+        
+        return lista(nomeUsuario, classe);
     }
 
     public String delete(Promocao promocao) {

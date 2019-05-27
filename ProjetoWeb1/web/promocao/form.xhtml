@@ -104,9 +104,19 @@
                         <div class="form-group">  
                             <div class="col-sm-4"></div>  
                             <div class="col-sm-4">  
-                                <div class="col-sm-2">                        
-                                    <h:commandButton value="#{msg['salvar']}" action="#{promocaoBean.salva()}" class="btn btn-primary"   
-                                                     style="width: 80px;"></h:commandButton>  
+                                <div class="col-sm-2">
+                                    <sec:authorize access="hasRole('TEATRO')">
+                                        <h:commandButton value="#{msg['salvar']}" 
+                                                         action="#{promocaoBean.salva(request.getUserPrincipal().getName(), 'Teatro')}" 
+                                                         class="btn btn-primary"   
+                                                         style="width: 80px;"></h:commandButton>  
+                                    </sec:authorize>
+                                    <sec:authorize access="hasRole('SITE')">
+                                        <h:commandButton value="#{msg['salvar']}" 
+                                                         action="#{promocaoBean.salva(request.getUserPrincipal().getName(), 'Site')}" 
+                                                         class="btn btn-primary"   
+                                                         style="width: 80px;"></h:commandButton>  
+                                    </sec:authorize>
                                 </div>  
                                 <br/> 
                                 <div class="col-sm-2">  

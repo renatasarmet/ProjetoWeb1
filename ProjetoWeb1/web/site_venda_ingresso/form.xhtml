@@ -27,53 +27,49 @@
                     </div>  
                     <hr/> 
                     <div class="form-group">  
-                        <h:outputLabel for="url" class="control-label col-sm-4">#{msg['email']}</h:outputLabel>  
+                        <p:outputLabel for="email" class="control-label col-sm-4" value="#{msg['email']}"/>  
                         <div class="col-sm-4">  
-                            <h:inputText id="email" value="#{siteVendaIngressoBean.siteVendaIngresso.email}" class="form-control"   
-                                         validatorMessage="#{msg['email_obrigatoria']}">
+                            <p:inputText id="email" value="#{siteVendaIngressoBean.siteVendaIngresso.email}" class="form-control">
                                 <f:validateRequired/>
-                            </h:inputText>
-                            <h:message for="url"/>
+                            </p:inputText>
+                            <p:message for="email"/>
                         </div>  
                     </div>
                     <div class="form-group">  
-                        <h:outputLabel for="url" class="control-label col-sm-4">#{msg['senha']}</h:outputLabel>  
+                        <p:outputLabel for="senha" class="control-label col-sm-4" value="#{msg['senha']}"/>  
                         <div class="col-sm-4">  
                             <p:password id="senha" value="#{siteVendaIngressoBean.siteVendaIngresso.senha}" class="form-control"   
                                         validatorMessage="#{msg['senha_obrigatoria']}" feedback="true">
                                 <f:validateRequired/>
                             </p:password>
-                            <h:message for="senha"/>
+                            <p:message for="senha"/>
                         </div>  
                     </div>
                     <div class="form-group">  
-                        <h:outputLabel for="url" class="control-label col-sm-4">#{msg['url']}</h:outputLabel>  
+                        <p:outputLabel for="url" class="control-label col-sm-4" value="#{msg['url']}" />  
                         <div class="col-sm-4">  
-                            <h:inputText id="url" value="#{siteVendaIngressoBean.siteVendaIngresso.url}" class="form-control"   
-                                         validatorMessage="#{msg['url_obrigatoria']}">
+                            <p:inputText id="url" value="#{siteVendaIngressoBean.siteVendaIngresso.url}" class="form-control">
                                 <f:validateRequired/>
-                            </h:inputText>
-                            <h:message for="url"/>
+                            </p:inputText>
+                            <p:message for="url"/>
                         </div>  
                     </div>
                     <div class="form-group">  
-                        <h:outputLabel for="nome" class="control-label col-sm-4">#{msg['nome']}</h:outputLabel>  
+                        <p:outputLabel for="nome" class="control-label col-sm-4" value="#{msg['nome']}"/>
                         <div class="col-sm-4">  
-                            <h:inputText id="nome" value="#{siteVendaIngressoBean.siteVendaIngresso.nome}" class="form-control"   
-                                         validatorMessage="#{msg['nome_obrigatorio']}">
+                            <p:inputText id="nome" value="#{siteVendaIngressoBean.siteVendaIngresso.nome}" class="form-control">
                                 <f:validateRequired/>
-                            </h:inputText>
-                            <h:message for="nome"/>
+                            </p:inputText>
+                            <p:message for="nome"/>
                         </div>  
                     </div>
                     <div class="form-group">  
-                        <h:outputLabel for="telefone" class="control-label col-sm-4">#{msg['telefone']}</h:outputLabel>  
-                        <div class="col-sm-4">  
-                            <h:inputText id="telefone" value="#{siteVendaIngressoBean.siteVendaIngresso.telefone}" class="form-control"   
-                                         validatorMessage="#{msg['telefone_obrigatorio']}" >
+                        <p:outputLabel for="telefone" class="control-label col-sm-4" value="#{msg['telefone']}"/> 
+                        <div class="col-sm-4">
+                            <p:inputMask mask="(99) 9?9999-9999" id="telefone" value="#{siteVendaIngressoBean.siteVendaIngresso.telefone}" class="form-control">
                                 <f:validateRequired/>
-                            </h:inputText>
-                            <h:message for="telefone"/>
+                            </p:inputMask>
+                            <p:message for="telefone"/>
                         </div>  
                     </div>  
                     <div class="form-group">  

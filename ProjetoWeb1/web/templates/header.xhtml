@@ -36,13 +36,13 @@
                             <li><h:commandLink action="#{promocaoBean.lista(request.getUserPrincipal().getName(), 'Teatro')}">#{msg.lista_de_promocoes}</h:commandLink></li>
                             <li><h:commandLink action="#{promocaoBean.cadastra(request.getUserPrincipal().getName())}">#{msg.cadastro_de_promocoes}</h:commandLink></li>
                             <li id="item-delimitador"></li>
-                            <li><h:commandLink action="#{teatroBean.edita(request.getUserPrincipal().getName())}">#{msg.editar_minha_conf}</h:commandLink></li>
+<!--                            <li><h:commandLink action="#{teatroBean.edita(request.getUserPrincipal().getName())}">#{msg.editar_minha_conf}</h:commandLink></li>-->
                         </sec:authorize>
 
                         <sec:authorize ifAllGranted="SITE">
                             <li><h:commandLink action="#{promocaoBean.lista(request.getUserPrincipal().getName(), 'Site')}">#{msg.minhas_promocoes}</h:commandLink></li>
                             <li id="item-delimitador"></li>
-                            <li><h:commandLink action="#{siteVendaIngressoBean.edita(request.getUserPrincipal().getName())}">#{msg.editar_minha_conf}</h:commandLink></li>
+<!--                            <li><h:commandLink action="#{siteVendaIngressoBean.edita(request.getUserPrincipal().getName())}">#{msg.editar_minha_conf}</h:commandLink></li>-->
                         </sec:authorize>
                         <li>
                             <sec:authorize access="hasAnyRole('TEATRO', 'SITE', 'ADMIN')"><a href="/ProjetoWeb1/logout">#{msg.logout}</a></sec:authorize>

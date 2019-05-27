@@ -79,8 +79,13 @@
                             </h:commandButton> 
 
                         </s:authorize>
-                        <s:authorize access="hasAnyRole('ADMIN','TEATRO')">
+                        <s:authorize access="hasRole('ADMIN')">
                             <h:commandButton action = "#{promocaoBean.cadastra()}"   
+                                             value="#{msg['cadastrar_nova_promocao']}" class="btn btn-primary"></h:commandButton>
+                            <br/>
+                        </s:authorize>
+                        <s:authorize access="hasRole('TEATRO')">
+                            <h:commandButton action = "#{promocaoBean.cadastra(request.getUserPrincipal().getName())}"
                                              value="#{msg['cadastrar_nova_promocao']}" class="btn btn-primary"></h:commandButton>
                             <br/>
                         </s:authorize>

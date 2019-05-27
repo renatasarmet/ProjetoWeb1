@@ -61,7 +61,7 @@ public class PromocaoBean {
     public String cadastra(String nomeTeatro) {
         UsuarioDAO daoUsuario = new UsuarioDAO();
         TeatroDAO daoTeatro = new TeatroDAO();
-        
+        promocao = new Promocao();
         listaTeatro = new ArrayList<>();
         listaTeatro.add(daoTeatro.get(daoUsuario.get(nomeTeatro).getId()));
         
@@ -81,6 +81,8 @@ public class PromocaoBean {
         } else {
             dao.update(promocao);
         }
+        
+        listaPromocao = dao.getAll();
         return CONTEXT_URL + "index.xhtml";
     }
 

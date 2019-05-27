@@ -40,7 +40,7 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
         String roleSql = "SELECT u.email, p.nome FROM Usuario u, Papel p,"
                 + " Usuario_Papel up WHERE up.usuario_id = u.id and"
                 + " up.papel_id = p.id and u.email = ?";
-        
+
         builder.jdbcAuthentication().dataSource(dataSource)
                 .usersByUsernameQuery(userSql)
                 .authoritiesByUsernameQuery(roleSql)
@@ -67,13 +67,15 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
 //                .logout().logoutSuccessHandler(logoutSuccessHandler())
 //                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 //}
-    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/teatro/**").hasRole("ADMIN")
-//                .antMatchers("/ProjetoWeb1/login").not().hasAnyRole("SITE", "ADMIN", "TEATRO")
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/site_venda_ingresso/form.ufscar").hasRole("ADMIN")
+                .antMatchers("/promocao/filtrar_url").hasRole("SITE")
+                .antMatchers("/teatro_crud/form.ufscar").hasRole("ADMIN")
+                .antMatchers("/promocao/form.ufscar").hasAnyRole("TEATRO")
                 .and()
                 .formLogin()
                 .and()
@@ -82,12 +84,12 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
     }
-    
+
     private LogoutSuccessHandler logoutSuccessHandler() {
-            LogoutSuccessHandler lsh = (HttpServletRequest hsr, HttpServletResponse hsr1, Authentication a) -> {
-                hsr1.sendRedirect("/ProjetoWeb1");
-            };
-            return (lsh);
+        LogoutSuccessHandler lsh = (HttpServletRequest hsr, HttpServletResponse hsr1, Authentication a) -> {
+            hsr1.sendRedirect("/ProjetoWeb1");
+        };
+        return (lsh);
     }
 
     public static DataSource getDataSource() throws ClassNotFoundException {

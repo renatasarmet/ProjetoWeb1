@@ -20,7 +20,14 @@
     <h:body>
         <ui:composition template="/templates/common.xhtml">
             <ui:define name="content">
-                <h:form>  
+                <h:form>
+                    <center>
+                        <h:inputText id="cidadeProcura" value="#{teatroBean.cidade}" class="form-control"   >
+                        </h:inputText>
+                        <br />
+                        <h:commandButton action = "#{teatroBean.listaBusca()}" value="Procurar por cidade" class="btn btn-primary" >  
+                        </h:commandButton> 
+                    </center>
                     <center>  
                         <h2><h:outputText value="#{msg['lista_de_teatros']}"/></h2>  
                     </center>  
@@ -54,14 +61,7 @@
                             </h:column>
                         </sec:authorize>
                     </h:dataTable>
-                    <center>
-                        <h:inputText id="cidadeProcura" value="#{teatroBean.cidade}" class="form-control"   
-                                     validatorMessage="#{msg['email_obrigatoria']}">
-                        </h:inputText>
-                        <br />
-                        <h:commandButton action = "#{teatroBean.listaBusca()}" value="Procurar por cidade" class="btn btn-primary" >  
-                        </h:commandButton> 
-                    </center>
+                    
                     <br />
                     <center>
                         <sec:authorize access="hasRole('ADMIN')">

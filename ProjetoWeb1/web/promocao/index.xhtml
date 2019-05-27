@@ -79,15 +79,6 @@
                         </s:authorize>
                     </h:dataTable>
                     <center>
-                        <s:authorize access="!hasAnyRole('SITE')">
-                            <h:inputText id="teatroProcura" value="#{promocaoBean.nome}" class="form-control"   
-                                         validatorMessage="#{msg['nome_obrigatoria']}">
-                            </h:inputText>
-                            <br />
-                            <h:commandButton action = "#{promocaoBean.listaBusca()}" value="Procurar por cidade" class="btn btn-primary" >  
-                            </h:commandButton> 
-
-                        </s:authorize>
                         <s:authorize access="hasRole('ADMIN')">
                             <h:commandButton action = "#{promocaoBean.cadastra()}"   
                                              value="#{msg['cadastrar_nova_promocao']}" class="btn btn-primary"></h:commandButton>

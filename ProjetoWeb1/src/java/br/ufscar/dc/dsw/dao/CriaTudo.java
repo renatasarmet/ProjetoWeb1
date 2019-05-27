@@ -18,26 +18,26 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class CriaTudo{
     private static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     
-    private static Teatro criaTeatro(){
-        Teatro t = new Teatro();
-        t.setCnpj("87857036000174");
-        t.setNome("Teatro Municipal");
-        t.setCidade("Maceio");
-        t.setEmail("teatro@teatro");
-        t.setAtivo(true);
-        t.setSenha(encoder.encode("teatro"));
-        return t;
-    }
-    
-    private static SiteVendaIngresso criaSVI(){
-        SiteVendaIngresso svi = new SiteVendaIngresso();
-        svi.setUrl("https://ingresso.com");
-        svi.setNome("Ingresso ponto com");
-        svi.setEmail("site@site");
-        svi.setAtivo(true);
-        svi.setSenha(encoder.encode("site"));
-        return svi;
-    }
+//    private static Teatro criaTeatro(){
+//        Teatro t = new Teatro();
+//        t.setCnpj("87857036000174");
+//        t.setNome("Teatro Municipal");
+//        t.setCidade("Maceio");
+//        t.setEmail("teatro@teatro");
+//        t.setAtivo(true);
+//        t.setSenha(encoder.encode("teatro"));
+//        return t;
+//    }
+//    
+//    private static SiteVendaIngresso criaSVI(){
+//        SiteVendaIngresso svi = new SiteVendaIngresso();
+//        svi.setUrl("https://ingresso.com");
+//        svi.setNome("Ingresso ponto com");
+//        svi.setEmail("site@site");
+//        svi.setAtivo(true);
+//        svi.setSenha(encoder.encode("site"));
+//        return svi;
+//    }
     
     private static Usuario criaAdmin(){
         Usuario admin = new Usuario();
@@ -67,23 +67,23 @@ public class CriaTudo{
         papelDAO.save(p3);
         
         // Criar usuários de teste pra Teatro, Site e Admin
-        SiteVendaIngresso svi = criaSVI();
-        Teatro t = criaTeatro();
+//        SiteVendaIngresso svi = criaSVI();
+//        Teatro t = criaTeatro();
         Usuario admin = criaAdmin();
         
-        teatroDAO.save(t);
-        sviDAO.save(svi);
+//        teatroDAO.save(t);
+//        sviDAO.save(svi);
         userDAO.save(admin);
         
         // Atribuir papéis
-        t.getPapel().add(p1);
-        svi.getPapel().add(p2);
+//        t.getPapel().add(p1);
+//        svi.getPapel().add(p2);
         admin.getPapel().add(p3);
         
-        t.getPapel().add(p1);
-        teatroDAO.update(t);
-        svi.getPapel().add(p2);
-        sviDAO.update(svi);
+//        t.getPapel().add(p1);
+//        teatroDAO.update(t);
+//        svi.getPapel().add(p2);
+//        sviDAO.update(svi);
         admin.getPapel().add(p3);
         userDAO.update(admin);
     }

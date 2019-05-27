@@ -14,5 +14,326 @@
             <var>msg</var>
         </resource-bundle>
     </application>
+    <navigation-rule>  
+        <from-view-id>index.xhtml</from-view-id>  
+        <navigation-case>  
+            <from-outcome>/promocao/index.xhtml</from-outcome>  
+            <to-view-id>/promocao/index.xhtml</to-view-id>  
+            <redirect />  
+        </navigation-case>  
+    </navigation-rule>  
+    <navigation-rule>  
+        <from-view-id>index.xhtml</from-view-id>  
+        <navigation-case>  
+            <from-outcome>/site_venda_ingresso/index.xhtml</from-outcome>  
+            <to-view-id>/site_venda_ingresso/index.xhtml</to-view-id>  
+            <redirect />  
+        </navigation-case>  
+    </navigation-rule>  
+    <navigation-rule>  
+        <from-view-id>index.xhtml</from-view-id>  
+        <navigation-case>  
+            <from-outcome>/teatro/index.xhtml</from-outcome>  
+            <to-view-id>/teatro/index.xhtml</to-view-id>  
+            <redirect />  
+        </navigation-case>  
+    </navigation-rule>
+    <navigation-rule>  
+        <from-view-id>index.xhtml</from-view-id>  
+        <navigation-case>  
+            <from-outcome>/promocao/form.xhtml</from-outcome>  
+            <to-view-id>/promocao/form.xhtml</to-view-id>  
+            <redirect />  
+        </navigation-case>  
+    </navigation-rule>
+    
+    <navigation-rule>  
+        <from-view-id>/template/header.xhtml</from-view-id>  
+        <navigation-case>  
+            <from-outcome>/site_venda_ingresso/index.xhtml</from-outcome>  
+            <to-view-id>/site_venda_ingresso/index.xhtml</to-view-id>  
+            <redirect />  
+        </navigation-case>  
+    </navigation-rule>
+    
+    <navigation-rule>  
+        <from-view-id>/template/header.xhtml</from-view-id>  
+        <navigation-case>  
+            <from-outcome>/site_venda_ingresso/form.xhtml</from-outcome>  
+            <to-view-id>/site_venda_ingresso/form.xhtml</to-view-id>  
+            <redirect />  
+        </navigation-case>  
+    </navigation-rule>
+    
+    <navigation-rule>  
+        <from-view-id>/template/header.xhtml</from-view-id>  
+        <navigation-case>  
+            <from-outcome>/promocao/form.xhtml</from-outcome>  
+            <to-view-id>/promocao/form.xhtml</to-view-id>  
+            <redirect />  
+        </navigation-case>  
+    </navigation-rule>
+    <navigation-rule>  
+        <from-view-id>/template/header.xhtml</from-view-id>  
+        <navigation-case>  
+            <from-outcome>/promocao/index.xhtml</from-outcome>  
+            <to-view-id>/promocao/index.xhtml</to-view-id>  
+            <redirect />  
+        </navigation-case>  
+    </navigation-rule>
+    <navigation-rule>  
+        <from-view-id>/template/header.xhtml</from-view-id>  
+        <navigation-case>  
+            <from-outcome>/teatro/form.xhtml</from-outcome>  
+            <to-view-id>/teatro/form.xhtml</to-view-id>  
+            <redirect />  
+        </navigation-case>  
+    </navigation-rule>
+    
+     
+    <navigation-rule>  
+        <from-view-id>/template/header.xhtml</from-view-id>  
+        <navigation-case>  
+            <from-outcome>/teatro/index.xhtml</from-outcome>  
+            <to-view-id>/teatro/index.xhtml</to-view-id>  
+            <redirect />  
+        </navigation-case>  
+    </navigation-rule>
+    
+    <navigation-rule>  
+        <from-view-id>/teatro/form.xhtml</from-view-id>  
+        <navigation-case>  
+            <from-outcome>/teatro/index.xhtml</from-outcome>  
+            <to-view-id>/teatro/index.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/teatro/form.xhtml</from-outcome>  
+            <to-view-id>/teatro/form.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/promocao/index.xhtml</from-outcome>  
+            <to-view-id>/promocao/index.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/promocao/form.xhtml</from-outcome>  
+            <to-view-id>/promocao/form.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/site_venda_ingresso/index.xhtml</from-outcome>  
+            <to-view-id>/site_venda_ingresso/index.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/site_venda_ingresso/form.xhtml</from-outcome>  
+            <to-view-id>/site_venda_ingresso/form.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>       
+    </navigation-rule>
+    <navigation-rule>  
+        <from-view-id>/teatro/index.xhtml</from-view-id>  
+        <navigation-case>  
+            <from-outcome>/teatro/index.xhtml</from-outcome>  
+            <to-view-id>/teatro/index.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/teatro/form.xhtml</from-outcome>  
+            <to-view-id>/teatro/form.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/promocao/index.xhtml</from-outcome>  
+            <to-view-id>/promocao/index.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/promocao/form.xhtml</from-outcome>  
+            <to-view-id>/promocao/form.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/site_venda_ingresso/index.xhtml</from-outcome>  
+            <to-view-id>/site_venda_ingresso/index.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/site_venda_ingresso/form.xhtml</from-outcome>  
+            <to-view-id>/site_venda_ingresso/form.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>       
+    </navigation-rule>
+    
+    <navigation-rule>  
+        <from-view-id>/promocao/form.xhtml</from-view-id>  
+        <navigation-case>  
+            <from-outcome>/teatro/index.xhtml</from-outcome>  
+            <to-view-id>/teatro/index.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/teatro/form.xhtml</from-outcome>  
+            <to-view-id>/teatro/form.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/promocao/index.xhtml</from-outcome>  
+            <to-view-id>/promocao/index.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/promocao/form.xhtml</from-outcome>  
+            <to-view-id>/promocao/form.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/site_venda_ingresso/index.xhtml</from-outcome>  
+            <to-view-id>/site_venda_ingresso/index.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/site_venda_ingresso/form.xhtml</from-outcome>  
+            <to-view-id>/site_venda_ingresso/form.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>       
+    </navigation-rule>
+    <navigation-rule>  
+        <from-view-id>/promocao/index.xhtml</from-view-id>  
+        <navigation-case>  
+            <from-outcome>/teatro/index.xhtml</from-outcome>  
+            <to-view-id>/teatro/index.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/teatro/form.xhtml</from-outcome>  
+            <to-view-id>/teatro/form.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/promocao/index.xhtml</from-outcome>  
+            <to-view-id>/promocao/index.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/promocao/form.xhtml</from-outcome>  
+            <to-view-id>/promocao/form.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/site_venda_ingresso/index.xhtml</from-outcome>  
+            <to-view-id>/site_venda_ingresso/index.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/site_venda_ingresso/form.xhtml</from-outcome>  
+            <to-view-id>/site_venda_ingresso/form.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>       
+    </navigation-rule>
+    <navigation-rule>  
+        <from-view-id>/site_venda_ingresso/form.xhtml</from-view-id>  
+        <navigation-case>  
+            <from-outcome>/teatro/index.xhtml</from-outcome>  
+            <to-view-id>/teatro/index.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/teatro/form.xhtml</from-outcome>  
+            <to-view-id>/teatro/form.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/promocao/index.xhtml</from-outcome>  
+            <to-view-id>/promocao/index.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/promocao/form.xhtml</from-outcome>  
+            <to-view-id>/promocao/form.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/site_venda_ingresso/index.xhtml</from-outcome>  
+            <to-view-id>/site_venda_ingresso/index.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/site_venda_ingresso/form.xhtml</from-outcome>  
+            <to-view-id>/site_venda_ingresso/form.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>       
+    </navigation-rule>
+    <navigation-rule>  
+        <from-view-id>/site_venda_ingresso/index.xhtml</from-view-id>  
+        <navigation-case>  
+            <from-outcome>/teatro/index.xhtml</from-outcome>  
+            <to-view-id>/teatro/index.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/teatro/form.xhtml</from-outcome>  
+            <to-view-id>/teatro/form.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/promocao/index.xhtml</from-outcome>  
+            <to-view-id>/promocao/index.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/promocao/form.xhtml</from-outcome>  
+            <to-view-id>/promocao/form.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/site_venda_ingresso/index.xhtml</from-outcome>  
+            <to-view-id>/site_venda_ingresso/index.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/site_venda_ingresso/form.xhtml</from-outcome>  
+            <to-view-id>/site_venda_ingresso/form.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>       
+    </navigation-rule>
+    <navigation-rule>  
+        <from-view-id>index.xhtml</from-view-id>  
+        <navigation-case>  
+            <from-outcome>/teatro/index.xhtml</from-outcome>  
+            <to-view-id>/teatro/index.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/teatro/form.xhtml</from-outcome>  
+            <to-view-id>/teatro/form.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/promocao/index.xhtml</from-outcome>  
+            <to-view-id>/promocao/index.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/promocao/form.xhtml</from-outcome>  
+            <to-view-id>/promocao/form.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/site_venda_ingresso/index.xhtml</from-outcome>  
+            <to-view-id>/site_venda_ingresso/index.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>
+        <navigation-case>  
+            <from-outcome>/site_venda_ingresso/form.xhtml</from-outcome>  
+            <to-view-id>/site_venda_ingresso/form.xhtml</to-view-id>    
+            <redirect />  
+        </navigation-case>       
+    </navigation-rule>
+
+
+   
  
 </faces-config>

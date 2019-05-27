@@ -49,6 +49,7 @@ public class TeatroBean implements Serializable {
     public String edita(Long id) {
         TeatroDAO dao = new TeatroDAO();
         teatro = dao.get(id);
+        teatro.setSenha("");
         return CONTEXT_URL + "form.xhtml";
     }
     

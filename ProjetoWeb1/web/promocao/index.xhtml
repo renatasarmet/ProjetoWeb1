@@ -20,10 +20,20 @@
         <ui:composition template="/templates/common.xhtml">
             <ui:define name="content">
                 <h:form>  
-                    <center>  
+                    <center>
+                        <s:authorize access="!hasAnyRole('SITE')">
+                            <h:inputText id="teatroProcura" value="#{promocaoBean.nome}" class="form-control"   
+                                         validatorMessage="#{msg['nome_obrigatoria']}">
+                            </h:inputText>
+                            <br />
+                            <h:commandButton action = "#{promocaoBean.listaBusca()}" value="Procurar por cidade" class="btn btn-primary" >  
+                            </h:commandButton> 
+                        </s:authorize>
+                        
+                        <br/>
+                        <br/>
                         <h2><h:outputText value="#{msg['lista_de_promocoes']}"/></h2>  
                     </center>
-
                     <h:dataTable value="#{promocaoBean.promocoes}" var="promocao"   
                                  class="table table-striped table-hover table-bordered"> 
                         <h:column>  
@@ -70,15 +80,6 @@
                         </s:authorize>
                     </h:dataTable>
                     <center>
-                        <s:authorize access="!hasAnyRole('SITE')">
-                            <h:inputText id="teatroProcura" value="#{promocaoBean.nome}" class="form-control"   
-                                         validatorMessage="#{msg['nome_obrigatoria']}">
-                            </h:inputText>
-                            <br />
-                            <h:commandButton action = "#{promocaoBean.listaBusca()}" value="Procurar por cidade" class="btn btn-primary" >  
-                            </h:commandButton> 
-
-                        </s:authorize>
                         <s:authorize access="hasRole('ADMIN')">
                             <h:commandButton action = "#{promocaoBean.cadastra()}"   
                                              value="#{msg['cadastrar_nova_promocao']}" class="btn btn-primary"></h:commandButton>
@@ -89,8 +90,6 @@
                                              value="#{msg['cadastrar_nova_promocao']}" class="btn btn-primary"></h:commandButton>
                             <br/>
                         </s:authorize>
-                        <h:commandButton action = "#{promocaoBean.volta()}"   
-                                         value="#{msg['menu_principal']}" class="btn btn-success"></h:commandButton>
                     </center>
                     <br />
                 </h:form>  

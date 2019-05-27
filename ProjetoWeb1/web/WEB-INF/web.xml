@@ -25,16 +25,17 @@
             30
         </session-timeout>
     </session-config>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error/404.ufscar</location>
+    </error-page>
     
     <!--Nao sei se essas deveriam permanecer de alguma forma ou nao-->
 <!--     <serservlet-mapping>
         <servlet-name>ErrorController</servlet-name>
         <url-pattern>/erro/*</url-pattern>
     </serservlet-mapping>
-    <error-page>
-        <error-code>404</error-code>
-        <location>/erro/404</location>
-    </error-page>-->
+    -->
     
     <context-param>
         <param-name>javax.faces.VALIDATE_EMPTY_FIELDS</param-name>

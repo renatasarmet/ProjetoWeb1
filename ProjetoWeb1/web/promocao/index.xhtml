@@ -26,11 +26,10 @@
                                 <f:selectItems value="#{teatroBean.teatros}"/>
                                 <f:converter converterId="TeatroConverter" />
                             </h:selectOneMenu>
-                            <h:inputText id="teatroProcura" value="#{promocaoBean.nome}" class="form-control"   
-                                         validatorMessage="#{msg['nome_obrigatoria']}">
-                            </h:inputText>
+                            
+                            <br />                            
                             <br />
-                            <h:commandButton action = "#{promocaoBean.listaBusca()}" value="Procurar por cidade" class="btn btn-primary" >  
+                            <h:commandButton action = "#{promocaoBean.listaBusca()}" value="#{msg['procurar_por_teatro']}" class="btn btn-primary" >  
                             </h:commandButton> 
                         </s:authorize>
                         

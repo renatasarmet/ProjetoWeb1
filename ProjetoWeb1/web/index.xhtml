@@ -28,11 +28,6 @@
                 <s:authorize ifAllGranted="SITE">
                     #{msg.site_greet}
                 </s:authorize>
-                <h:form>
-                    <h:commandLink action="#{promocaoBean.lista()}">#{msg['promocoes']}: CRUD</h:commandLink><br/>
-                    <h:commandLink action="#{teatroBean.lista()}">#{msg['teatro']}: CRUD</h:commandLink><br/>
-                    <h:commandLink action="#{siteVendaIngressoBean.lista()}">#{msg['site']}: CRUD</h:commandLink><br/>
-                </h:form>
             </ui:define>
         </ui:composition>
     </h:body>

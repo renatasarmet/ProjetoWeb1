@@ -26,7 +26,7 @@ public class SiteVendaIngressoBean implements Serializable {
     private static final String CONTEXT_URL = "/site_venda_ingresso/";
  
     public String lista() {
-        return CONTEXT_URL + "site_venda_ingresso/index.xhtml";
+        return CONTEXT_URL + "index.xhtml";
     }
  
     public String cadastra() {

@@ -1,6 +1,9 @@
-# Trabalho disciplina Desenvolvimento de Software para Web
+# Trabalhos disciplina Desenvolvimento de Software para Web
 
-# Roteiro
+# OBS: O trabalho 1 está na branch master e o trabalho 2 está na branch Trabalho2
+### O Roteiro do trabalho 2 está no READ.ME da branch Trabalho2
+
+## Roteiro Trabalho 1
 
 ## SGBD utilizado, nome do banco, usuário e senha de acesso
 

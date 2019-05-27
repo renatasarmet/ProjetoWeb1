@@ -17,11 +17,9 @@
                         </sec:authorize>
                         <li><a href="/ProjetoWeb1"><b>Home</b></a></li>
                         <sec:authorize access="!hasAnyRole('ADMIN','SITE','TEATRO')">
-                            <h:form>
-                                <li><h:commandLink action="#{promocaoBean.lista()}">#{msg.lista_de_promocoes}</h:commandLink></li>
-                                <li><h:commandLink action="#{siteVendaIngressoBean.lista()}">#{msg.lista_site_venda_ingresso}</h:commandLink></li>
-                                <li><h:commandLink action="#{teatroBean.lista()}">#{msg.lista_de_teatros}</h:commandLink></li>
-                            </h:form>
+                            <li><h:commandLink action="#{promocaoBean.lista()}">#{msg.lista_de_promocoes}</h:commandLink></li>
+                            <li><h:commandLink action="#{siteVendaIngressoBean.lista()}">#{msg.lista_site_venda_ingresso}</h:commandLink></li>
+                            <li><h:commandLink action="#{teatroBean.lista()}">#{msg.lista_de_teatros}</h:commandLink></li>
                             <li id="item-delimitador"></li>
                         </sec:authorize>
                         <sec:authorize ifAllGranted="ADMIN">

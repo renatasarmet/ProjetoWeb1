@@ -5,13 +5,17 @@
  */
 package br.ufscar.dc.dsw;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
@@ -43,33 +47,47 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(new BCryptPasswordEncoder());
     }
 
-//    @Override
+//@Override
 //    protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests()
+//        http
+//                .csrf().disable()
+//                .authorizeRequests()
 //                .antMatchers("/admin/**").hasRole("ADMIN")
-//                .antMatchers("/user/**").hasRole("USER")
-//                .anyRequest().authenticated()
+//                .antMatchers("/site_venda_crud/cadastro").hasRole("ADMIN")
+//                .antMatchers("/promocao/filtrar_url").hasRole("SITE")
+//                .antMatchers("/teatro_crud/cadastro").hasRole("ADMIN")
+//                .antMatchers("/promocao/cadastro").hasAnyRole("TEATRO")
 //                .and()
 //                .formLogin()
 //                .and()
-//                .logout()
+//                .httpBasic()
+//                .and()
+//		.exceptionHandling().accessDeniedPage("/erro/403")
+//                .and()
+//                .logout().logoutSuccessHandler(logoutSuccessHandler())
 //                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
-//
-//        http.csrf().disable();
-//    }
+//}
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .anyRequest().authenticated()
+                .antMatchers("/teatro/**").hasRole("ADMIN")
+//                .antMatchers("/ProjetoWeb1/login").not().hasAnyRole("SITE", "ADMIN", "TEATRO")
                 .and()
                 .formLogin()
                 .and()
-                .logout()
+                .logout().logoutSuccessHandler(logoutSuccessHandler())
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 
         http.csrf().disable();
+    }
+    
+    private LogoutSuccessHandler logoutSuccessHandler() {
+            LogoutSuccessHandler lsh = (HttpServletRequest hsr, HttpServletResponse hsr1, Authentication a) -> {
+                hsr1.sendRedirect("/ProjetoWeb1");
+            };
+            return (lsh);
     }
 
     public static DataSource getDataSource() throws ClassNotFoundException {

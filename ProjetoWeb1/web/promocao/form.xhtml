@@ -48,7 +48,7 @@
                         <h:outputLabel for="data_sessao" class="control-label col-sm-4">#{msg['data_sessao']}</h:outputLabel>  
                         <div class="col-sm-4">  
                             <h:inputText id="data_sessao" value="#{promocaoBean.promocao.data_sessao}" class="form-control"   
-                                         validatorMessage="#{msg['data_sessao_obrigatorio']}">
+                                         validatorMessage="#{msg['data_sessao_obrigatorio']}" a:type="date">
                                 <f:validateRequired/>
                             </h:inputText>  
                         </div>  

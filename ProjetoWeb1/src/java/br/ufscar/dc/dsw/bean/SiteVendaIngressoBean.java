@@ -8,6 +8,7 @@ package br.ufscar.dc.dsw.bean;
  
 import br.ufscar.dc.dsw.dao.PapelDAO;
 import br.ufscar.dc.dsw.dao.SiteVendaIngressoDAO;
+import br.ufscar.dc.dsw.dao.UsuarioDAO;
 import br.ufscar.dc.dsw.pojo.SiteVendaIngresso;
 import java.io.Serializable;
 import java.sql.SQLException;
@@ -22,20 +23,26 @@ public class SiteVendaIngressoBean implements Serializable {
  
     private SiteVendaIngresso siteVendaIngresso;
     private static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    private static final String CONTEXT_URL = "/site_venda_ingresso/";
  
     public String lista() {
-        return "site_venda_ingresso/index.xhtml";
+        return CONTEXT_URL + "site_venda_ingresso/index.xhtml";
     }
  
     public String cadastra() {
         siteVendaIngresso = new SiteVendaIngresso();
-        return "form.xhtml";
+        return CONTEXT_URL + "form.xhtml";
     }
  
     public String edita(Long id) {
         SiteVendaIngressoDAO dao = new SiteVendaIngressoDAO();
         siteVendaIngresso = dao.get(id);
-        return "form.xhtml";
+        return CONTEXT_URL + "form.xhtml";
+    }
+    
+    public String edita(String nome) {
+        UsuarioDAO dao = new UsuarioDAO();
+        return edita(dao.get(nome).getId());
     }
  
     public String salva() {
@@ -50,17 +57,17 @@ public class SiteVendaIngressoBean implements Serializable {
         } else {
             dao.update(siteVendaIngresso);
         }
-        return "index.xhtml";
+        return CONTEXT_URL + "index.xhtml";
     }
  
     public String delete(SiteVendaIngresso siteVendaIngresso) {
         SiteVendaIngressoDAO dao = new SiteVendaIngressoDAO();
         dao.delete(siteVendaIngresso);
-        return "index.xhtml";
+        return CONTEXT_URL + "index.xhtml";
     }
  
     public String volta() {
-        return "/index.xhtml?faces-redirect=true";
+        return CONTEXT_URL + "index.xhtml?faces-redirect=true";
     }
     
     public List<SiteVendaIngresso> getSites() throws SQLException {

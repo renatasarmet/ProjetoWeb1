@@ -8,6 +8,7 @@ package br.ufscar.dc.dsw.bean;
  
 import br.ufscar.dc.dsw.dao.TeatroDAO;
 import br.ufscar.dc.dsw.dao.PapelDAO;
+import br.ufscar.dc.dsw.dao.UsuarioDAO;
 import br.ufscar.dc.dsw.pojo.Teatro;
 import java.io.Serializable;
 import java.sql.SQLException;
@@ -23,6 +24,7 @@ public class TeatroBean implements Serializable {
     private Teatro teatro;
     private String cidade;
     private static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    private static final String CONTEXT_URL = "/teatro/";
 
     public void setCidade(String cidade) {
         this.cidade = cidade;
@@ -33,21 +35,26 @@ public class TeatroBean implements Serializable {
     }
  
     public String lista() {
-        return "teatro/index.xhtml";
+        return CONTEXT_URL + "index.xhtml";
     }
     public String listaBusca(){
-        return "index.xhtml";
+        return CONTEXT_URL + "index.xhtml";
     }
  
     public String cadastra() {
         teatro = new Teatro();
-        return "form.xhtml";
+        return CONTEXT_URL + "form.xhtml";
     }
  
     public String edita(Long id) {
         TeatroDAO dao = new TeatroDAO();
         teatro = dao.get(id);
-        return "form.xhtml";
+        return CONTEXT_URL + "form.xhtml";
+    }
+    
+    public String edita(String nome) {
+        UsuarioDAO dao = new UsuarioDAO();
+        return edita(dao.get(nome).getId());
     }
  
     public String salva() {
@@ -62,17 +69,17 @@ public class TeatroBean implements Serializable {
         } else {
             dao.update(teatro);
         }
-        return "index.xhtml";
+        return CONTEXT_URL + "index.xhtml";
     }
  
     public String delete(Teatro teatro) {
         TeatroDAO dao = new TeatroDAO();
         dao.delete(teatro);
-        return "index.xhtml";
+        return CONTEXT_URL + "index.xhtml";
     }
  
     public String volta() {
-        return "/index.xhtml?faces-redirect=true";
+        return CONTEXT_URL + "index.xhtml?faces-redirect=true";
     }
     
     public List<Teatro> getTeatros() throws SQLException {

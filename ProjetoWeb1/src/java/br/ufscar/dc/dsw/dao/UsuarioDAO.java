@@ -24,6 +24,13 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
         em.close();
         return usuario;
     }
+    
+    public Usuario get(String nome) {
+        EntityManager em = this.getEntityManager();
+        Query q = em.createQuery("SELECT u.id FROM Usuario u WHERE u.email = \""+nome+"\"", Usuario.class);
+        List<Long> ids = q.getResultList();
+        return this.get(ids.get(0));
+    }
 
     @Override
     public List<Usuario> getAll() {

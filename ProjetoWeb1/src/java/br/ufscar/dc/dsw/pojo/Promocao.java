@@ -6,9 +6,7 @@
 
 package br.ufscar.dc.dsw.pojo;
 
-import br.ufscar.dc.dsw.dao.TeatroDAO;
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id; 
 import javax.persistence.GeneratedValue;

@@ -20,6 +20,8 @@ public class PromocaoBean {
     
     private List<Teatro> listaTeatro;
     
+    private String erro;
+
     private String nome;
     private static final String CONTEXT_URL = "/promocao/";
 
@@ -76,6 +78,16 @@ public class PromocaoBean {
 
     public String salva() {
         PromocaoDAO dao = new PromocaoDAO();
+        
+        for (Promocao promocao1 : dao.getAll()) {
+            if((promocao1.getData_sessao().equals(promocao.getData_sessao()))&&(promocao1.getHorario_sessao().equals(promocao.getHorario_sessao()))&&(promocao1.getTeatro().equals(promocao.getTeatro()))){
+                erro = "Horário conflitante";
+                return CONTEXT_URL + "form.xhtml";
+            }
+        }
+        
+        erro = "";
+        
         if (promocao.getId() == null) {
             dao.save(promocao);
         } else {
@@ -113,4 +125,13 @@ public class PromocaoBean {
     public Promocao getPromocao() {
         return promocao;
     }
+    
+    public String getErro() {
+        return erro;
+    }
+
+    public void setErro(String erro) {
+        this.erro = erro;
+    }
+    
 }

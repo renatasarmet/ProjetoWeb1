@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"  
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:ui = "http://java.sun.com/jsf/facelets">  
+      xmlns:ui = "http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">  
     <!--    <h:head>  
             <title>#{msg['cadastro_de_teatro']}</title>
             <link rel="stylesheet" 
@@ -20,7 +21,7 @@
     <h:body>
         <ui:composition template="/templates/common.xhtml">
             <ui:define name="content">
-                <h:form id="form" class="form-horizontal">  
+                <h:form id="form" class="form-horizontal">
                     <div class="form-group">  
                         <div class="col-sm-4"></div>  
                         <div  class="col-sm-4">  
@@ -29,53 +30,49 @@
                     </div>  
                     <hr/>
                     <div class="form-group">  
-                        <h:outputLabel for="url" class="control-label col-sm-4">#{msg['email']}</h:outputLabel>  
+                        <p:outputLabel for="email" class="control-label col-sm-4" value="#{msg['email']}"/>  
                         <div class="col-sm-4">  
-                            <h:inputText id="email" value="#{teatroBean.teatro.email}" class="form-control"   
-                                         validatorMessage="#{msg['email_obrigatoria']}">
+                            <p:inputText id="email" value="#{teatroBean.teatro.email}" class="form-control">
                                 <f:validateRequired/>
-                            </h:inputText>
-                            <h:message for="url"/>
+                            </p:inputText>
+                            <p:message for="email"/>
                         </div>  
                     </div>
                     <div class="form-group">  
-                        <h:outputLabel for="url" class="control-label col-sm-4">#{msg['senha']}</h:outputLabel>  
+                        <p:outputLabel for="senha" class="control-label col-sm-4" value="#{msg['senha']}"/>
                         <div class="col-sm-4">  
-                            <h:inputText id="senha" value="#{teatroBean.teatro.senha}" class="form-control"   
-                                         validatorMessage="#{msg['senha_obrigatoria']}">
+                            <p:password id="senha" value="#{teatroBean.teatro.senha}" class="form-control" feedback="true"
+                                        validatorMessage="#{msg['senha_obrigatoria']}">
                                 <f:validateRequired/>
-                            </h:inputText>
-                            <h:message for="url"/>
+                            </p:password>
+                            <p:message for="senha"/>
                         </div>  
                     </div>
                     <div class="form-group">  
-                        <h:outputLabel for="cnpj" class="control-label col-sm-4">#{msg['cnpj']}</h:outputLabel>  
-                        <div class="col-sm-4">  
-                            <h:inputText id="cnpj" value="#{teatroBean.teatro.cnpj}" class="form-control"   
-                                         validatorMessage="#{msg['cnpj_obrigatorio']}">
+                        <p:outputLabel for="cnpj" class="control-label col-sm-4" value="#{msg.cnpj}"/>
+                        <div class="col-sm-4">
+                            <p:inputMask id="cnpj" value="#{teatroBean.teatro.cnpj}" class="form-control" mask="99.999.999/9999-99">
                                 <f:validateRequired/>
-                            </h:inputText>
-                            <h:message for="cnpj"/>
+                            </p:inputMask>
+                            <p:message for="cnpj" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <p:outputLabel for="nome" class="control-label col-sm-4" value="#{msg['nome']}"/>  
+                        <div class="col-sm-4">  
+                            <p:inputText id="nome" value="#{teatroBean.teatro.nome}" class="form-control">
+                                <f:validateRequired/>
+                            </p:inputText>
+                            <p:message for="nome"/>
                         </div>  
                     </div>
                     <div class="form-group">  
-                        <h:outputLabel for="nome" class="control-label col-sm-4">#{msg['nome']}</h:outputLabel>  
+                        <p:outputLabel for="cidade" class="control-label col-sm-4" value="#{msg['cidade']}"/>  
                         <div class="col-sm-4">  
-                            <h:inputText id="nome" value="#{teatroBean.teatro.nome}" class="form-control"   
-                                         validatorMessage="#{msg['nome_obrigatorio']}">
+                            <p:inputText id="cidade" value="#{teatroBean.teatro.cidade}" class="form-control" validatorMessage="#{msg['cidade_obrigatoria']}">
                                 <f:validateRequired/>
-                            </h:inputText>
-                            <h:message for="nome"/>
-                        </div>  
-                    </div>
-                    <div class="form-group">  
-                        <h:outputLabel for="cidade" class="control-label col-sm-4">#{msg['cidade']}</h:outputLabel>  
-                        <div class="col-sm-4">  
-                            <h:inputText id="cidade" value="#{teatroBean.teatro.cidade}" class="form-control"   
-                                         validatorMessage="#{msg['cidade_obrigatoria']}">
-                                <f:validateRequired/>
-                            </h:inputText>
-                            <h:message for="cidade"/>
+                            </p:inputText>
+                            <p:message for="cidade"/>
                         </div>  
                     </div>  
                     <div class="form-group">  

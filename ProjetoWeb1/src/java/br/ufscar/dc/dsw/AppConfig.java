@@ -74,7 +74,7 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/site_venda_ingresso/form.ufscar").hasRole("ADMIN")
                 .antMatchers("/promocao/filtrar_url").hasRole("SITE")
-                .antMatchers("/teatro_crud/form.ufscar").hasRole("ADMIN")
+                .antMatchers("/teatro/form.ufscar").hasRole("ADMIN")
                 .antMatchers("/promocao/form.ufscar").hasAnyRole("TEATRO")
                 .and()
                 .formLogin()

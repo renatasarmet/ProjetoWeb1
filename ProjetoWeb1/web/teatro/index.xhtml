@@ -28,6 +28,7 @@
                         <h:commandButton action = "#{teatroBean.listaBusca()}" value="Procurar por cidade" class="btn btn-primary" >  
                         </h:commandButton> 
                     </center>
+                    <br/>
                     <center>  
                         <h2><h:outputText value="#{msg['lista_de_teatros']}"/></h2>  
                     </center>  
@@ -69,8 +70,7 @@
                                              value="#{msg['cadastrar_novo_teatro']}" class="btn btn-primary"></h:commandButton>
                             <br/>
                         </sec:authorize>
-                        <h:commandButton action = "#{teatroBean.volta()}"   
-                                         value="#{msg['menu_principal']}" class="btn btn-success"></h:commandButton>
+                        
                     </center>
                 </h:form>  
             </ui:define>

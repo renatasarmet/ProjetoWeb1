@@ -93,8 +93,9 @@ public class PromocaoBean {
         PromocaoDAO dao = new PromocaoDAO();
         
         for (Promocao promocao1 : dao.getAll()) {
-            if((promocao1.getData_sessao().equals(promocao.getData_sessao()))&&(promocao1.getHorario_sessao().equals(promocao.getHorario_sessao()))&&(promocao1.getTeatro().equals(promocao.getTeatro()))){
+            if((promocao1.getData_sessao().equals(promocao.getData_sessao()))&&(promocao1.getHorario_sessao().equals(promocao.getHorario_sessao()))&&(promocao1.getTeatro().equals(promocao.getTeatro()))&&!(promocao1.getId().equals(promocao.getId()))){
                 erro = "Horário conflitante";
+                System.out.println("Erro: horario conflitante");
                 return CONTEXT_URL + "form.xhtml";
             }
         }

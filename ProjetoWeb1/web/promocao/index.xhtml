@@ -21,7 +21,7 @@
             <ui:define name="content">
                 <h:form>  
                     <center>
-                        <s:authorize access="!hasAnyRole('SITE')">
+                        <s:authorize access="!hasAnyRole('SITE','TEATRO')">
                             <h:selectOneMenu id="site_venda_ingresso" value="#{promocaoBean.teatro}">
                                 <f:selectItems value="#{teatroBean.teatros}"/>
                                 <f:converter converterId="TeatroConverter" />
